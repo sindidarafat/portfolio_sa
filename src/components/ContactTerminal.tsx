@@ -1,0 +1,328 @@
+import React, { useState } from 'react';
+import { Mail, Phone, MapPin, Send, Copy, Check, Terminal as TerminalIcon, FileText, Sparkles } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from './Icons';
+import { portfolioData } from '../data/portfolioData';
+import { sound } from '../utils/audio';
+
+export const ContactTerminal: React.FC = () => {
+  const [copied, setCopied] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
+
+  // Mini interactive CLI state
+  const [terminalInput, setTerminalInput] = useState('');
+  const [terminalHistory, setTerminalHistory] = useState<Array<{ cmd: string; resp: string }>>([
+    { cmd: 'jarvis --status', resp: 'STARK PROTOCOL ONLINE // SINDID ARAFAT OPERATIONAL ARCHITECT' },
+    { cmd: 'help', resp: 'COMMANDS AVAILABLE: help | skills | projects | cv | contact | unibeam | clear' }
+  ]);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText(portfolioData.personal.email);
+    sound.playJarvisChirp();
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    sound.playRepulsorShot();
+    setSubmitted(true);
+    setTimeout(() => {
+      setSubmitted(false);
+      setFormData({ name: '', email: '', message: '' });
+    }, 4000);
+  };
+
+  const handleCommandSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cmd = terminalInput.trim().toLowerCase();
+    if (!cmd) return;
+
+    sound.playJarvisChirp();
+    let resp = '';
+
+    switch (cmd) {
+      case 'help':
+        resp = 'Available protocols: skills | projects | repos | awards | cv | unibeam | hire | clear';
+        break;
+      case 'skills':
+        resp = 'Core: Product/BA (PRD, UAT, Jira) | AI/ML (PyTorch, KAN, Scikit-learn) | Full-Stack (React, Node, PHP)';
+        break;
+      case 'projects':
+        resp = 'Flagships: SkillSwap (MERN) | Electrician Finder (PHP) | Bank Loan AI | KAT Transformer | MadMax OpenGL';
+        break;
+      case 'repos':
+        resp = '29 Public Repositories indexed on github.com/sindidarafat. Status: ACTIVE';
+        break;
+      case 'awards':
+        resp = 'National Winner: World Bank UIHP (ICT Division Bangladesh) | 4x Dean’s List Scholarships | Duke of Edinburgh Award';
+        break;
+      case 'cv':
+        window.open(portfolioData.personal.cvUrl, '_blank');
+        resp = 'Opening Sindid_Arafat_CV.pdf in secure window...';
+        break;
+      case 'unibeam':
+        sound.playUnibeamBlast();
+        resp = '⚡ UNIBEAM DISCHARGE EXECUTED! OVERHEATING DISSIPATED.';
+        break;
+      case 'hire':
+      case 'contact':
+        resp = `Direct Comm: ${portfolioData.personal.email} | Phone: ${portfolioData.personal.phone}`;
+        break;
+      case 'clear':
+        setTerminalHistory([]);
+        setTerminalInput('');
+        return;
+      default:
+        resp = `Command '${cmd}' not recognized. Type 'help' for available directives.`;
+    }
+
+    setTerminalHistory(prev => [...prev, { cmd: terminalInput, resp }]);
+    setTerminalInput('');
+  };
+
+  return (
+    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+      {/* Background radial */}
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-arc/5 rounded-full blur-[140px] pointer-events-none" />
+
+      {/* Header */}
+      <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-arc/30 text-xs font-mono text-arc mb-3">
+          <TerminalIcon className="w-3.5 h-3.5 text-arc" />
+          <span>TRANSMISSION CHANNEL // ENCRYPTED COMMS</span>
+        </div>
+        <h2 className="text-3xl sm:text-5xl font-black font-display text-white tracking-tight">
+          INITIALIZE DIRECT CONTACT PROTOCOL
+        </h2>
+        <p className="text-slate-400 text-sm sm:text-base mt-2 font-sans">
+          Have an engineering venture, product role, AI research partnership, or business analysis requirement? Send an encrypted transmission below.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        {/* Left Column: Direct Information & Social Cards (5 cols) */}
+        <div className="lg:col-span-5 space-y-6">
+          <div className="p-6 rounded-2xl bg-[#090e1c]/90 border border-slate-800 backdrop-blur-md hud-corner-box space-y-6">
+            <h3 className="text-xl font-bold font-display text-white border-b border-slate-800 pb-3 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-arc" />
+              <span>STARK COMMS DOSSIER</span>
+            </h3>
+
+            {/* Email item with copy button */}
+            <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-arc/40 transition-all">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-arc/10 border border-arc/30 flex items-center justify-center text-arc">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[10px] font-mono text-slate-400 uppercase">DIRECT EMAIL</div>
+                  <div className="text-xs sm:text-sm font-mono font-bold text-white select-all">
+                    {portfolioData.personal.email}
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={copyEmail}
+                className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-arc transition-all"
+                title="Copy email to clipboard"
+              >
+                {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+              </button>
+            </div>
+
+            {/* Phone item */}
+            <div className="flex items-center gap-3 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80">
+              <div className="w-9 h-9 rounded-lg bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400">
+                <Phone className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="text-[10px] font-mono text-slate-400 uppercase">TELEMETRY VOICE / WHATSAPP</div>
+                <div className="text-xs sm:text-sm font-mono font-bold text-white">
+                  {portfolioData.personal.phone}
+                </div>
+              </div>
+            </div>
+
+            {/* Coordinates / Location */}
+            <div className="flex items-center gap-3 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80">
+              <div className="w-9 h-9 rounded-lg bg-red-400/10 border border-red-400/30 flex items-center justify-center text-red-400">
+                <MapPin className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="text-[10px] font-mono text-slate-400 uppercase">LOCATION & BASE</div>
+                <div className="text-xs sm:text-sm font-mono font-bold text-white">
+                  {portfolioData.personal.location}
+                </div>
+                <div className="text-[10px] font-mono text-slate-500">
+                  {portfolioData.personal.coordinates}
+                </div>
+              </div>
+            </div>
+
+            {/* External Portals */}
+            <div className="grid grid-cols-3 gap-2 pt-2">
+              <a
+                href={portfolioData.personal.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sound.playJarvisChirp()}
+                className="p-3 rounded-xl bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-arc text-center flex flex-col items-center gap-1.5 transition-all text-slate-300 hover:text-white"
+              >
+                <GithubIcon className="w-5 h-5 text-arc" />
+                <span className="text-[11px] font-mono font-bold">GITHUB</span>
+              </a>
+
+              <a
+                href={portfolioData.personal.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sound.playJarvisChirp()}
+                className="p-3 rounded-xl bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-arc text-center flex flex-col items-center gap-1.5 transition-all text-slate-300 hover:text-white"
+              >
+                <LinkedinIcon className="w-5 h-5 text-arc" />
+                <span className="text-[11px] font-mono font-bold">LINKEDIN</span>
+              </a>
+
+              <a
+                href={portfolioData.personal.cvUrl}
+                download="Sindid_Arafat_CV.pdf"
+                onClick={() => sound.playJarvisChirp()}
+                className="p-3 rounded-xl bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-amber-400 text-center flex flex-col items-center gap-1.5 transition-all text-slate-300 hover:text-white"
+              >
+                <FileText className="w-5 h-5 text-amber-400" />
+                <span className="text-[11px] font-mono font-bold">CV (PDF)</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Interactive Stark CLI Terminal */}
+          <div className="p-4 rounded-2xl bg-black border border-arc/40 shadow-inner font-mono text-xs">
+            <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-[11px] text-slate-500">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                <span className="ml-2 text-slate-400">J.A.R.V.I.S. CLI TERMINAL</span>
+              </div>
+              <span className="text-arc">TYPE: 'help'</span>
+            </div>
+
+            <div className="h-32 overflow-y-auto space-y-1.5 text-[11px] text-slate-300 pr-1">
+              {terminalHistory.map((item, idx) => (
+                <div key={idx} className="space-y-0.5">
+                  <div className="text-arc">
+                    <span className="text-amber-400">stark@sa-hud:~$</span> {item.cmd}
+                  </div>
+                  <div className="text-slate-400 pl-2 border-l border-slate-800">
+                    {item.resp}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <form onSubmit={handleCommandSubmit} className="mt-2 pt-2 border-t border-slate-800 flex items-center gap-2">
+              <span className="text-amber-400">&gt;</span>
+              <input
+                type="text"
+                value={terminalInput}
+                onChange={(e) => setTerminalInput(e.target.value)}
+                placeholder="type a command (e.g. skills, projects, unibeam)..."
+                className="w-full bg-transparent text-white focus:outline-none placeholder-slate-600 text-xs"
+              />
+            </form>
+          </div>
+        </div>
+
+        {/* Right Column: Encrypted Transmission Form (7 cols) */}
+        <div className="lg:col-span-7">
+          <div className="p-6 sm:p-8 rounded-2xl bg-[#0b1021]/90 border border-arc/30 backdrop-blur-md hud-corner-box shadow-[0_0_30px_rgba(0,240,255,0.08)]">
+            <div className="flex items-center justify-between pb-4 mb-6 border-b border-slate-800">
+              <div>
+                <h3 className="text-2xl font-bold font-display text-white">
+                  TRANSMIT DIRECT MESSAGE
+                </h3>
+                <p className="text-xs font-mono text-slate-400 mt-0.5">
+                  DISPATCH PROTOCOL // DELIVERS DIRECTLY TO SINDID ARAFAT
+                </p>
+              </div>
+              <span className="text-xs font-mono px-2.5 py-1 rounded bg-slate-900 border border-arc/30 text-arc">
+                SECURE 256-BIT
+              </span>
+            </div>
+
+            {submitted ? (
+              <div className="py-12 text-center space-y-3 font-mono">
+                <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-400 text-emerald-400 mx-auto flex items-center justify-center">
+                  <Check className="w-6 h-6 animate-pulse" />
+                </div>
+                <h4 className="text-lg font-bold text-white">
+                  TRANSMISSION DISPATCHED SUCCESSFULLY!
+                </h4>
+                <p className="text-xs text-slate-400 max-w-md mx-auto">
+                  Thank you for reaching out. J.A.R.V.I.S. has routed your message to Sindid's primary communication channel. Expect a response shortly!
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-mono text-slate-300">
+                      IDENTIFIER / YOUR NAME *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="e.g. Tony Stark / Sarah Jenkins"
+                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-mono text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-mono text-slate-300">
+                      COMM CHANNEL / YOUR EMAIL *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="e.g. collaborator@enterprise.com"
+                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-mono text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-mono text-slate-300">
+                    TRANSMISSION PAYLOAD / MESSAGE *
+                  </label>
+                  <textarea
+                    required
+                    rows={5}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    placeholder="Describe your project, role, requirements, or proposed collaboration..."
+                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-mono text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-red-600 via-amber-600 to-cyan-500 hover:from-red-500 hover:to-cyan-400 text-white font-mono font-bold text-xs tracking-wider shadow-[0_0_25px_rgba(220,38,38,0.4)] flex items-center justify-center gap-2 transition-all transform hover:scale-[1.01] active:scale-[0.99] border border-amber-300/40"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>TRANSMIT ENCRYPTED MESSAGE // DISPATCH</span>
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+};
