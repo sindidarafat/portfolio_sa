@@ -54,7 +54,7 @@ export const Hero: React.FC = () => {
           </p>
 
           {/* Quick HUD Metrics */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
             {portfolioData.hudStats.map((stat, i) => (
               <div
                 key={i}

@@ -39,7 +39,6 @@ export const portfolioData = {
   },
 
   hudStats: [
-    { label: "ACADEMIC MERIT", value: "3.69 CGPA", detail: "BRAC University CSE", color: "arc" },
     { label: "GITHUB PROJECTS", value: "29 Repos", detail: "AI/ML, Web & Systems", color: "gold" },
     { label: "UIHP INNOVATION HUB", value: "Inter-Uni Winner", detail: "Ranked for National Round", color: "crimson" },
     { label: "SCHOLARSHIPS", value: "4x Dean's/VC", detail: "Merit-Based Honors", color: "arc" },
