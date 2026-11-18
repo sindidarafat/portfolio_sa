@@ -19,18 +19,18 @@ export const CrixusWelcomeModal: React.FC<CrixusWelcomeModalProps> = ({
     "Welcome to Sindid Arafat's portfolio! I'm Crixus, Sindid's personal assistant just like Jarvis for Iron-Man. You can find me at the very end of this website for queries and help for limited things. I will unleash my full ai potential once master Sindid approves.";
 
   const [landed, setLanded] = useState(false);
-  const [typedText, setTypedText] = useState('');
+  const [charIndex, setCharIndex] = useState(0);
 
   // Trigger fly-in landing sequence whenever opened
   useEffect(() => {
     if (!isOpen) {
       setLanded(false);
-      setTypedText('');
+      setCharIndex(0);
       return;
     }
 
     setLanded(false);
-    setTypedText('');
+    setCharIndex(0);
 
     const landTimer = setTimeout(() => {
       setLanded(true);
@@ -40,21 +40,25 @@ export const CrixusWelcomeModal: React.FC<CrixusWelcomeModalProps> = ({
     return () => clearTimeout(landTimer);
   }, [isOpen]);
 
-  // Start typing message right after Iron-Man lands on the bottom-left corner
+  // Silky smooth requestAnimationFrame reveal with zero layout shift / zero line-wrap jitter
   useEffect(() => {
     if (!isOpen || !landed) return;
-    let idx = 0;
-    const interval = setInterval(() => {
-      idx += 2;
-      if (idx >= fullGreeting.length) {
-        setTypedText(fullGreeting);
-        clearInterval(interval);
-      } else {
-        setTypedText(fullGreeting.slice(0, idx));
+    let rafId = 0;
+    const startTime = performance.now();
+    const charsPerSecond = 65;
+
+    const tick = (now: number) => {
+      const elapsedSec = (now - startTime) / 1000;
+      const nextIndex = Math.min(fullGreeting.length, Math.floor(elapsedSec * charsPerSecond));
+      setCharIndex(nextIndex);
+      if (nextIndex < fullGreeting.length) {
+        rafId = requestAnimationFrame(tick);
       }
-    }, 20);
-    return () => clearInterval(interval);
-  }, [isOpen, landed]);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, [isOpen, landed, fullGreeting.length]);
 
   // Minimized floating Iron-Man dock button in bottom-left when closed
   if (!isOpen) {
@@ -111,10 +115,27 @@ export const CrixusWelcomeModal: React.FC<CrixusWelcomeModalProps> = ({
               </span>
             </div>
 
-            {/* Typed Message */}
-            <p className="text-xs sm:text-[13px] font-sans text-slate-100 leading-relaxed min-h-[5.5rem]">
-              &ldquo;{typedText}&rdquo;
-              <span className="inline-block w-1.5 h-3.5 bg-arc ml-1 align-middle animate-pulse" />
+            {/* Smooth Zero-Jitter Holographic Text Reveal */}
+            <p className="text-xs sm:text-[13px] font-sans leading-relaxed">
+              <span className="text-slate-100">&ldquo;{fullGreeting.slice(0, charIndex)}</span>
+              {charIndex < fullGreeting.length && (
+                <span className="relative inline-block w-0 h-3.5 align-middle" aria-hidden="true">
+                  <span className="absolute left-0 top-0 w-1.5 h-3.5 bg-arc shadow-[0_0_8px_#00f0ff] animate-pulse" />
+                </span>
+              )}
+              <span className="text-transparent select-none" aria-hidden="true">
+                {fullGreeting.slice(charIndex)}
+              </span>
+              <span
+                className={
+                  charIndex >= fullGreeting.length
+                    ? 'text-slate-100 transition-opacity duration-300'
+                    : 'text-transparent select-none'
+                }
+                aria-hidden={charIndex < fullGreeting.length}
+              >
+                &rdquo;
+              </span>
             </p>
 
             {/* Compact Action Row */}
