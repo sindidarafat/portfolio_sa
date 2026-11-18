@@ -55,7 +55,7 @@ export const ContactTerminal: React.FC = () => {
         resp = '29 Public Repositories indexed on github.com/sindidarafat. Status: ACTIVE';
         break;
       case 'awards':
-        resp = 'UIHP National Innovation Hub Intra-Round Winner & National Round Qualifier (World Bank / ICT Div) | 4x Dean’s List | Duke of Edinburgh Bronze';
+        resp = 'UIHP Innovation Hub Inter-University Winner & National Round Qualifier (World Bank / ICT Div) | 4x Dean’s List | Duke of Edinburgh Bronze';
         break;
       case 'cv':
         window.open(portfolioData.personal.cvUrl, '_blank');

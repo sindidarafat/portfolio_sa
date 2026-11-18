@@ -17,7 +17,7 @@ Built for seamless deployment on **Vercel** and **Cloudflare Pages**.
 - **Complete Technical Arsenal:** Covering Product & Business Analysis (PRDs, UAT, Jira, Figma, Stakeholder syncs), AI/ML (PyTorch, KAN, Transformers, Scikit-learn), Web/Backend, Languages, and Creative Suite.
 - **29 GitHub Repositories Explorer:** Searchable, filterable repository index with direct links, star counters, and tags.
 - **Featured Project Case Studies:** SkillSwap (MERN), Electrician Finder (PHP), Bank Loan Approval AI, Kolmogorov-Arnold Transformer (KAT), MADMAX Fury Road (OpenGL), and Simon Says (Arduino IoT).
-- **Executive Dossier:** UIHP Innovation Hub Winner (ICT Division & The World Bank), 4x Dean's List scholarships, and The Duke of Edinburgh's International Award (Bronze).
+- **Executive Dossier:** UIHP Innovation Hub Inter-University Winner & National Round Qualifier (ICT Division & The World Bank), 4x Dean's List scholarships, and The Duke of Edinburgh's International Award (Bronze).
 - **Interactive Contact & CLI Terminal:** Direct message form and interactive CLI terminal.
 
 ---
