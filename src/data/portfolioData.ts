@@ -41,7 +41,7 @@ export const portfolioData = {
   hudStats: [
     { label: "ACADEMIC MERIT", value: "3.70 CGPA", detail: "BRAC University CSE", color: "arc" },
     { label: "GITHUB PROJECTS", value: "29 Repos", detail: "AI/ML, Web & Systems", color: "gold" },
-    { label: "WORLD BANK UIHP", value: "National Winner", detail: "ICT Division Bangladesh", color: "crimson" },
+    { label: "UIHP INNOVATION HUB", value: "Intra Winner", detail: "Ranked for National Round", color: "crimson" },
     { label: "SCHOLARSHIPS", value: "4x Dean's/VC", detail: "Merit-Based Honors", color: "arc" },
   ],
 
@@ -559,11 +559,11 @@ export const portfolioData = {
 
   awards: [
     {
-      title: "Innovation Hub Winner",
+      title: "UIHP National Innovation Hub Winner (Intra Round)",
       organization: "ICT Division, Government of Bangladesh & The World Bank",
       date: "Jul 2025",
-      description: "Won the prestigious UIHP program powered by The World Bank, advancing from BRAC IC6 to the national grand finals; engineered an impactful tech solution for the national service market of Bangladesh.",
-      type: "National Championship"
+      description: "Won the Intra Round of the UIHP National Innovation Hub program (BRAC IC6) powered by The World Bank & ICT Division, ranking to advance to the National Round with a tech solution for Bangladesh's service market.",
+      type: "Intra Winner • National Qualifier"
     },
     {
       title: "Dean's List & Vice Chancellor's List",

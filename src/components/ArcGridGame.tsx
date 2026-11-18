@@ -41,7 +41,7 @@ interface Particle {
 export const ArcGridGame: React.FC = () => {
   // Mode: 'matrix' (Heatmap viewer) or 'combat' (Arcade game)
   const [mode, setMode] = useState<'matrix' | 'combat'>('matrix');
-  const [selectedYear, setSelectedYear] = useState<'2026' | '2025' | '2024' | 'ALL'>('2026');
+  const [selectedYear, setSelectedYear] = useState<'2026' | '2025' | '2024' | 'ALL'>('ALL');
   const [colorTheme, setColorTheme] = useState<'cyan' | 'crimson' | 'matrix' | 'violet'>('cyan');
   
   // Custom cell hover
@@ -124,11 +124,22 @@ export const ArcGridGame: React.FC = () => {
             }
           }
         } else {
-          // ALL-TIME MATRIX (densely charged high-tech matrix)
-          const seed = Math.sin(w * 7 + d * 13) + Math.cos(w * 3 + d * 9);
-          if (seed > 0.2) {
-            level = Math.min(4, Math.floor(Math.abs(seed) * 2.2) + 1);
-            count = level * 3 + 1;
+          // ALL-TIME MATRIX (combines exact 2026 screenshot dots + 2025 + 2024 contributions)
+          const is2026Peak =
+            (w === 6 && d === 1) || (w === 5 && (d === 3 || d === 4)) || (w === 4 && d === 5) ||
+            (w === 9 && (d === 1 || d === 2)) || (w === 19 && (d === 3 || d === 5)) ||
+            (w === 42 && (d === 5 || d === 6)) || (w === 45 && (d === 1 || d === 2)) ||
+            (w === 44 && (d === 3 || d === 4 || d === 5)) || (w === 46 && (d === 0 || d === 1));
+
+          if (is2026Peak) {
+            level = 4;
+            count = 8;
+          } else {
+            const seed = Math.sin(w * 7 + d * 13) + Math.cos(w * 3 + d * 9);
+            if (seed > 0.25) {
+              level = Math.min(4, Math.floor(Math.abs(seed) * 2.1) + 1);
+              count = level * 3 + 1;
+            }
           }
         }
 
@@ -139,14 +150,16 @@ export const ArcGridGame: React.FC = () => {
           count = level * 3;
         }
 
-        const dateStr = `Sector ${w + 1}, Day ${d + 1} // Cycle ${year}`;
+        const dateStr = year === 'ALL'
+          ? `Week ${w + 1}, Day ${d + 1} // All-Time (2024–2026)`
+          : `Week ${w + 1}, Day ${d + 1} // ${year}`;
         cells.push({ week: w, day: d, date: dateStr, count, level });
       }
     }
     return cells;
   }, [customEdits]);
 
-  const [cells, setCells] = useState<Cell[]>(() => generateYearData('2026'));
+  const [cells, setCells] = useState<Cell[]>(() => generateYearData('ALL'));
 
   useEffect(() => {
     setCells(generateYearData(selectedYear));
@@ -522,7 +535,11 @@ export const ArcGridGame: React.FC = () => {
             <div className="flex items-center gap-2">
               <span className={`w-2 h-2 rounded-full ${mode === 'combat' ? 'bg-red-500 animate-ping' : 'bg-arc animate-pulse'}`} />
               <span className="font-bold text-white tracking-wider">
-                {mode === 'combat' ? 'COMBAT ENGAGEMENT // BUG SWARM' : `${selectedYear} CONTRIBUTION OVERVIEW`}
+                {mode === 'combat'
+                  ? 'COMBAT ENGAGEMENT // BUG SWARM'
+                  : selectedYear === 'ALL'
+                    ? 'ALL-TIME CONTRIBUTION OVERVIEW (2024 – 2026)'
+                    : `${selectedYear} CONTRIBUTION OVERVIEW`}
               </span>
             </div>
             <span className="hidden sm:inline text-slate-500">|</span>
@@ -531,29 +548,11 @@ export const ArcGridGame: React.FC = () => {
             </span>
           </div>
 
-          {/* Right side options: Year selector or Game Stats */}
+          {/* Right side options: Theme selector or Game Stats */}
           {mode === 'matrix' ? (
             <div className="flex items-center gap-2 flex-wrap">
-              {/* Year pills matching user screenshot */}
-              {(['2026', '2025', '2024', 'ALL'] as const).map(yr => (
-                <button
-                  key={yr}
-                  onClick={() => {
-                    setSelectedYear(yr);
-                    sound.playJarvisChirp();
-                  }}
-                  className={`px-3 py-1 rounded text-xs font-mono font-semibold transition-all ${
-                    selectedYear === yr
-                      ? 'bg-blue-600 text-white shadow-[0_0_12px_rgba(37,99,235,0.7)]'
-                      : 'bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800'
-                  }`}
-                >
-                  {yr === 'ALL' ? 'ALL-TIME' : yr}
-                </button>
-              ))}
-
               {/* Theme selector */}
-              <div className="flex items-center gap-1 ml-2 border-l border-slate-700 pl-3">
+              <div className="flex items-center gap-1.5">
                 <span className="text-slate-500 text-[10px]">THEME:</span>
                 {(['cyan', 'crimson', 'matrix', 'violet'] as const).map(theme => (
                   <button
@@ -637,88 +636,134 @@ export const ArcGridGame: React.FC = () => {
           </div>
 
           <div className="text-slate-400 text-[11px]">
-            {selectedYear === '2026' ? '60 contributions in 2026' : selectedYear === '2025' ? '184 contributions in 2025' : selectedYear === '2024' ? '92 contributions in 2024' : '336 contributions Total'}
+            {selectedYear === 'ALL'
+              ? '336+ contributions across 2024–2026 (All-Time)'
+              : selectedYear === '2026'
+                ? '60 contributions in 2026'
+                : selectedYear === '2025'
+                  ? '184 contributions in 2025'
+                  : '92 contributions in 2024'}
           </div>
         </div>
 
-        {/* The GitHub Matrix Canvas / Grid Area */}
-        <div className="p-4 md:p-6 overflow-x-auto relative" ref={gridContainerRef}>
-          {/* Laser beam overlay effect */}
-          {laserEffect && (
-            <div 
-              className="absolute pointer-events-none z-30 transition-opacity duration-150"
-              style={{
-                left: `${(laserEffect.targetWeek / 53) * 100}%`,
-                top: `${(laserEffect.targetDay / 7) * 100}%`,
-              }}
-            >
-              <div className="w-12 h-12 -ml-6 -mt-6 rounded-full bg-cyan-400/40 animate-ping border border-white" />
-              <div className="w-4 h-4 -ml-2 -mt-2 rounded-full bg-white shadow-[0_0_20px_#00f0ff]" />
+        {/* The GitHub Matrix Canvas / Grid Area + Compact Right-Side Year Strip */}
+        <div className="p-4 md:p-6 relative" ref={gridContainerRef}>
+          <div className="flex flex-col lg:flex-row gap-4 items-stretch">
+            {/* Main Scrollable Contribution Grid */}
+            <div className="flex-1 overflow-x-auto relative">
+              {/* Laser beam overlay effect */}
+              {laserEffect && (
+                <div 
+                  className="absolute pointer-events-none z-30 transition-opacity duration-150"
+                  style={{
+                    left: `${(laserEffect.targetWeek / 53) * 100}%`,
+                    top: `${(laserEffect.targetDay / 7) * 100}%`,
+                  }}
+                >
+                  <div className="w-12 h-12 -ml-6 -mt-6 rounded-full bg-cyan-400/40 animate-ping border border-white" />
+                  <div className="w-4 h-4 -ml-2 -mt-2 rounded-full bg-white shadow-[0_0_20px_#00f0ff]" />
+                </div>
+              )}
+
+              {/* Month labels header */}
+              <div className="flex justify-between text-[11px] font-mono text-slate-500 mb-2 pl-8 min-w-[740px]">
+                {monthLabels.map(m => (
+                  <span key={m} className="w-12 text-left">{m}</span>
+                ))}
+              </div>
+
+              <div className="flex gap-2 min-w-[740px]">
+                {/* Day labels column */}
+                <div className="flex flex-col justify-between text-[10px] font-mono text-slate-500 pr-2 select-none h-[116px]">
+                  {dayLabels.map((d, i) => (
+                    <span key={i} className="h-3 leading-3">{d}</span>
+                  ))}
+                </div>
+
+                {/* 53 Columns of 7 Days */}
+                <div className="grid grid-flow-col grid-rows-7 gap-[3px] flex-1">
+                  {cells.map((cell) => {
+                    const isEnemy = enemies.find(e => e.week === cell.week && e.day === cell.day);
+                    const isPowerUp = powerUps.find(p => p.week === cell.week && p.day === cell.day);
+                    const isReticle = mode === 'combat' && reticle.week === cell.week && reticle.day === cell.day;
+
+                    return (
+                      <div
+                        key={`${cell.week}-${cell.day}`}
+                        onClick={() => handleCellClick(cell.week, cell.day)}
+                        onMouseEnter={(e) => {
+                          if (mode === 'combat') {
+                            setReticle({ week: cell.week, day: cell.day });
+                          } else {
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            setHoveredCell({ cell, x: rect.left, y: rect.top });
+                          }
+                        }}
+                        onMouseLeave={() => setHoveredCell(null)}
+                        className={`w-[13px] h-[13px] rounded-[2px] transition-all cursor-pointer relative ${getCellColor(
+                          cell.level,
+                          Boolean(isEnemy),
+                          isReticle,
+                          Boolean(isPowerUp)
+                        )}`}
+                      >
+                        {/* Enemy icon */}
+                        {isEnemy && (
+                          <span className="absolute inset-0 flex items-center justify-center text-[9px] text-white font-bold animate-spin-slow">
+                            ⚡
+                          </span>
+                        )}
+                        {/* Power up icon */}
+                        {isPowerUp && (
+                          <span className="absolute inset-0 flex items-center justify-center text-[9px] text-black font-extrabold animate-bounce">
+                            ★
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
-          )}
 
-          {/* Month labels header */}
-          <div className="flex justify-between text-[11px] font-mono text-slate-500 mb-2 pl-8 min-w-[760px]">
-            {monthLabels.map(m => (
-              <span key={m} className="w-12 text-left">{m}</span>
-            ))}
-          </div>
-
-          <div className="flex gap-2 min-w-[760px]">
-            {/* Day labels column */}
-            <div className="flex flex-col justify-between text-[10px] font-mono text-slate-500 pr-2 select-none h-[116px]">
-              {dayLabels.map((d, i) => (
-                <span key={i} className="h-3 leading-3">{d}</span>
-              ))}
-            </div>
-
-            {/* 53 Columns of 7 Days */}
-            <div className="grid grid-flow-col grid-rows-7 gap-[3px] flex-1">
-              {cells.map((cell) => {
-                const isEnemy = enemies.find(e => e.week === cell.week && e.day === cell.day);
-                const isPowerUp = powerUps.find(p => p.week === cell.week && p.day === cell.day);
-                const isReticle = mode === 'combat' && reticle.week === cell.week && reticle.day === cell.day;
-
-                return (
-                  <div
-                    key={`${cell.week}-${cell.day}`}
-                    onClick={() => handleCellClick(cell.week, cell.day)}
-                    onMouseEnter={(e) => {
-                      if (mode === 'combat') {
-                        setReticle({ week: cell.week, day: cell.day });
-                      } else {
-                        const rect = e.currentTarget.getBoundingClientRect();
-                        setHoveredCell({ cell, x: rect.left, y: rect.top });
-                      }
+            {/* Very Small Right-Side Year Strip inside Box */}
+            <div className="flex lg:flex-col items-center lg:items-stretch justify-end lg:justify-center gap-1 lg:pl-3 lg:border-l border-slate-800/80 shrink-0 pt-2 lg:pt-4">
+              <button
+                onClick={() => {
+                  setSelectedYear('ALL');
+                  sound.playJarvisChirp();
+                }}
+                className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold tracking-wider transition-all ${
+                  selectedYear === 'ALL'
+                    ? 'bg-blue-600 text-white shadow-[0_0_8px_rgba(37,99,235,0.6)]'
+                    : 'bg-slate-900/80 text-slate-400 hover:text-white'
+                }`}
+              >
+                ALL-TIME
+              </button>
+              <div className="flex lg:flex-col gap-1 items-center lg:items-stretch">
+                {(['2026', '2025', '2024'] as const).map(yr => (
+                  <button
+                    key={yr}
+                    onClick={() => {
+                      setSelectedYear(yr);
+                      sound.playJarvisChirp();
                     }}
-                    onMouseLeave={() => setHoveredCell(null)}
-                    className={`w-[13px] h-[13px] rounded-[2px] transition-all cursor-pointer relative ${getCellColor(
-                      cell.level,
-                      Boolean(isEnemy),
-                      isReticle,
-                      Boolean(isPowerUp)
-                    )}`}
+                    className={`px-2 py-0.5 rounded text-[9px] font-mono transition-all ${
+                      selectedYear === yr
+                        ? 'bg-cyan-500/25 text-arc border border-arc/50 font-semibold'
+                        : 'text-slate-500 hover:text-slate-300 hover:bg-slate-900/60'
+                    }`}
                   >
-                    {/* Enemy icon */}
-                    {isEnemy && (
-                      <span className="absolute inset-0 flex items-center justify-center text-[9px] text-white font-bold animate-spin-slow">
-                        ⚡
-                      </span>
-                    )}
-                    {/* Power up icon */}
-                    {isPowerUp && (
-                      <span className="absolute inset-0 flex items-center justify-center text-[9px] text-black font-extrabold animate-bounce">
-                        ★
-                      </span>
-                    )}
-                  </div>
-                );
-              })}
+                    {yr}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Bottom legend & controls */}
-          <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 mt-4 pt-3 border-t border-slate-800/80 min-w-[760px]">
+          <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-slate-400 mt-4 pt-3 border-t border-slate-800/80">
             <a
               href="https://github.com/sindidarafat"
               target="_blank"

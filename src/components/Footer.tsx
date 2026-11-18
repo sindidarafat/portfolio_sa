@@ -29,39 +29,39 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Center Links */}
-        <div className="flex items-center gap-4 text-xs">
+        {/* Center Links — Large & Visible */}
+        <div className="flex flex-wrap items-center justify-center gap-3 text-xs">
           <a
             href={portfolioData.personal.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-arc transition-colors flex items-center gap-1"
+            className="px-3.5 py-2 rounded-xl bg-slate-900/90 border border-slate-700 hover:border-arc text-white hover:text-arc transition-all flex items-center gap-2 font-semibold"
           >
-            <GithubIcon className="w-3.5 h-3.5" />
+            <GithubIcon className="w-5 h-5" />
             <span>GitHub</span>
           </a>
           <a
             href={portfolioData.personal.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-arc transition-colors flex items-center gap-1"
+            className="px-3.5 py-2 rounded-xl bg-[#0a192f]/90 border border-[#0a66c2]/70 hover:border-[#38bdf8] text-white hover:text-[#38bdf8] transition-all flex items-center gap-2 font-semibold"
           >
-            <LinkedinIcon className="w-3.5 h-3.5" />
+            <LinkedinIcon className="w-5 h-5 text-[#38bdf8]" />
             <span>LinkedIn</span>
           </a>
           <a
             href={`mailto:${portfolioData.personal.email}`}
-            className="hover:text-arc transition-colors flex items-center gap-1"
+            className="px-3.5 py-2 rounded-xl bg-slate-900/90 border border-slate-700 hover:border-arc text-white hover:text-arc transition-all flex items-center gap-2 font-semibold"
           >
-            <Mail className="w-3.5 h-3.5" />
+            <Mail className="w-5 h-5 text-arc" />
             <span>Email</span>
           </a>
           <a
             href={portfolioData.personal.cvUrl}
             download="Sindid_Arafat_CV.pdf"
-            className="hover:text-amber-400 transition-colors flex items-center gap-1"
+            className="px-3.5 py-2 rounded-xl bg-slate-900/90 border border-amber-500/50 hover:border-amber-400 text-amber-300 hover:text-amber-200 transition-all flex items-center gap-2 font-semibold"
           >
-            <FileText className="w-3.5 h-3.5" />
+            <FileText className="w-5 h-5 text-amber-400" />
             <span>CV</span>
           </a>
         </div>

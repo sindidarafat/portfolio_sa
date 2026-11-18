@@ -101,36 +101,55 @@ export const Hero: React.FC = () => {
             </a>
           </div>
 
-          {/* Social Comms links */}
-          <div className="flex items-center gap-4 pt-2 text-xs font-mono text-slate-400">
-            <span>COMM LINKS:</span>
-            <a
-              href={portfolioData.personal.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 hover:text-arc border border-slate-800 transition-all"
-              title="GitHub Profile"
-            >
-              <GithubIcon className="w-4 h-4" />
-            </a>
-            <a
-              href={portfolioData.personal.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 hover:text-arc border border-slate-800 transition-all"
-              title="LinkedIn Profile"
-            >
-              <LinkedinIcon className="w-4 h-4" />
-            </a>
-            <a
-              href={`mailto:${portfolioData.personal.email}`}
-              className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 hover:text-arc border border-slate-800 transition-all"
-              title="Direct Email"
-            >
-              <Mail className="w-4 h-4" />
-            </a>
-            <span className="text-slate-600">|</span>
-            <span className="text-[11px] text-slate-400">{portfolioData.personal.email}</span>
+          {/* Social & Direct Links — Large & Highly Visible */}
+          <div className="pt-4 space-y-2.5">
+            <div className="text-xs font-mono text-slate-400 tracking-wider uppercase font-semibold">
+              CONNECT DIRECTLY
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={portfolioData.personal.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sound.playJarvisChirp()}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white border-2 border-slate-700 hover:border-arc shadow-[0_0_15px_rgba(0,240,255,0.12)] hover:shadow-[0_0_24px_rgba(0,240,255,0.4)] transition-all transform hover:-translate-y-0.5 group"
+                title="GitHub Profile"
+              >
+                <GithubIcon className="w-7 h-7 text-white group-hover:text-arc transition-colors" />
+                <div className="text-left">
+                  <div className="text-xs font-mono font-bold tracking-wide text-white group-hover:text-arc">GITHUB</div>
+                  <div className="text-[11px] font-sans text-slate-400">29 Repos</div>
+                </div>
+              </a>
+
+              <a
+                href={portfolioData.personal.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sound.playJarvisChirp()}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#0a192f]/90 hover:bg-[#0d2547] text-white border-2 border-[#0a66c2]/70 hover:border-[#38bdf8] shadow-[0_0_18px_rgba(10,102,194,0.28)] hover:shadow-[0_0_28px_rgba(56,189,248,0.45)] transition-all transform hover:-translate-y-0.5 group"
+                title="LinkedIn Profile"
+              >
+                <LinkedinIcon className="w-7 h-7 text-[#38bdf8] group-hover:text-white transition-colors" />
+                <div className="text-left">
+                  <div className="text-xs font-mono font-bold tracking-wide text-white group-hover:text-[#7dd3fc]">LINKEDIN</div>
+                  <div className="text-[11px] font-sans text-slate-300">Connect</div>
+                </div>
+              </a>
+
+              <a
+                href={`mailto:${portfolioData.personal.email}`}
+                onClick={() => sound.playJarvisChirp()}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white border-2 border-amber-500/50 hover:border-amber-400 shadow-[0_0_15px_rgba(251,191,36,0.18)] hover:shadow-[0_0_24px_rgba(251,191,36,0.4)] transition-all transform hover:-translate-y-0.5 group"
+                title="Direct Email"
+              >
+                <Mail className="w-7 h-7 text-amber-400 group-hover:text-amber-300 transition-colors" />
+                <div className="text-left">
+                  <div className="text-xs font-mono font-bold tracking-wide text-white group-hover:text-amber-300">EMAIL</div>
+                  <div className="text-[11px] font-sans text-slate-300">{portfolioData.personal.email}</div>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
 

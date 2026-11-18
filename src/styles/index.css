@@ -16,10 +16,10 @@ body {
     linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
   background-attachment: fixed;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
-/* Custom Iron Man HUD Glows */
+/* Custom Cyber HUD Glows */
 .hud-glow-cyan {
   box-shadow: 0 0 15px rgba(0, 240, 255, 0.25), inset 0 0 15px rgba(0, 240, 255, 0.1);
 }

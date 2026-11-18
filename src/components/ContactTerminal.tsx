@@ -55,7 +55,7 @@ export const ContactTerminal: React.FC = () => {
         resp = '29 Public Repositories indexed on github.com/sindidarafat. Status: ACTIVE';
         break;
       case 'awards':
-        resp = 'National Winner: World Bank UIHP (ICT Division Bangladesh) | 4x Dean’s List Scholarships | Duke of Edinburgh Award';
+        resp = 'UIHP National Innovation Hub Intra-Round Winner & National Round Qualifier (World Bank / ICT Div) | 4x Dean’s List | Duke of Edinburgh Bronze';
         break;
       case 'cv':
         window.open(portfolioData.personal.cvUrl, '_blank');
@@ -161,17 +161,17 @@ export const ContactTerminal: React.FC = () => {
               </div>
             </div>
 
-            {/* External Portals */}
-            <div className="grid grid-cols-3 gap-2 pt-2">
+            {/* External Portals — Prominent Icons */}
+            <div className="grid grid-cols-3 gap-3 pt-2">
               <a
                 href={portfolioData.personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playJarvisChirp()}
-                className="p-3 rounded-xl bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-arc text-center flex flex-col items-center gap-1.5 transition-all text-slate-300 hover:text-white"
+                className="p-4 rounded-xl bg-slate-950 hover:bg-slate-900 border-2 border-slate-700 hover:border-arc shadow-[0_0_12px_rgba(0,240,255,0.1)] hover:shadow-[0_0_20px_rgba(0,240,255,0.35)] text-center flex flex-col items-center gap-2 transition-all text-white group"
               >
-                <GithubIcon className="w-5 h-5 text-arc" />
-                <span className="text-[11px] font-mono font-bold">GITHUB</span>
+                <GithubIcon className="w-8 h-8 text-white group-hover:text-arc transition-colors" />
+                <span className="text-xs font-mono font-bold tracking-wider">GITHUB</span>
               </a>
 
               <a
@@ -179,20 +179,20 @@ export const ContactTerminal: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playJarvisChirp()}
-                className="p-3 rounded-xl bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-arc text-center flex flex-col items-center gap-1.5 transition-all text-slate-300 hover:text-white"
+                className="p-4 rounded-xl bg-[#0a192f] hover:bg-[#0d2547] border-2 border-[#0a66c2]/70 hover:border-[#38bdf8] shadow-[0_0_12px_rgba(10,102,194,0.2)] hover:shadow-[0_0_20px_rgba(56,189,248,0.4)] text-center flex flex-col items-center gap-2 transition-all text-white group"
               >
-                <LinkedinIcon className="w-5 h-5 text-arc" />
-                <span className="text-[11px] font-mono font-bold">LINKEDIN</span>
+                <LinkedinIcon className="w-8 h-8 text-[#38bdf8] group-hover:text-white transition-colors" />
+                <span className="text-xs font-mono font-bold tracking-wider">LINKEDIN</span>
               </a>
 
               <a
                 href={portfolioData.personal.cvUrl}
                 download="Sindid_Arafat_CV.pdf"
                 onClick={() => sound.playJarvisChirp()}
-                className="p-3 rounded-xl bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-amber-400 text-center flex flex-col items-center gap-1.5 transition-all text-slate-300 hover:text-white"
+                className="p-4 rounded-xl bg-slate-950 hover:bg-slate-900 border-2 border-amber-500/50 hover:border-amber-400 shadow-[0_0_12px_rgba(251,191,36,0.12)] hover:shadow-[0_0_20px_rgba(251,191,36,0.35)] text-center flex flex-col items-center gap-2 transition-all text-white group"
               >
-                <FileText className="w-5 h-5 text-amber-400" />
-                <span className="text-[11px] font-mono font-bold">CV (PDF)</span>
+                <FileText className="w-8 h-8 text-amber-400 group-hover:text-amber-300 transition-colors" />
+                <span className="text-xs font-mono font-bold tracking-wider">CV (PDF)</span>
               </a>
             </div>
           </div>

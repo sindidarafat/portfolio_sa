@@ -27,9 +27,9 @@ export default {
         }
       },
       fontFamily: {
-        mono: ['"JetBrains Mono"', 'Consolas', 'Menlo', 'monospace'],
-        display: ['"Rajdhani"', '"Orbitron"', 'system-ui', 'sans-serif'],
-        sans: ['"Inter"', 'system-ui', 'sans-serif'],
+        display: ['"Orbitron"', 'sans-serif'],
+        sans: ['"Roboto"', 'sans-serif'],
+        mono: ['"Barlow"', 'sans-serif'],
       },
       keyframes: {
         'spin-reverse': {
