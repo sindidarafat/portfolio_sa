@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { SkillsSection } from './components/SkillsSection';
+import { ThesisResearchSection } from './components/ThesisResearchSection';
 import { ArcGridGame } from './components/ArcGridGame';
 import { FeaturedProjects } from './components/FeaturedProjects';
 import { GithubReposExplorer } from './components/GithubReposExplorer';
@@ -21,7 +22,7 @@ export function App() {
 
   const [welcomeOpen, setWelcomeOpen] = useState<boolean>(() => {
     if (typeof window === 'undefined') return false;
-    return !localStorage.getItem('crixus_welcomed_v1');
+    return !localStorage.getItem('crixus_welcomed_v2');
   });
 
   // Sync browser back/forward navigation
@@ -63,12 +64,12 @@ export function App() {
   }, []);
 
   const dismissWelcome = () => {
-    localStorage.setItem('crixus_welcomed_v1', 'true');
+    localStorage.setItem('crixus_welcomed_v2', 'true');
     setWelcomeOpen(false);
   };
 
   const handleJumpToCrixus = () => {
-    localStorage.setItem('crixus_welcomed_v1', 'true');
+    localStorage.setItem('crixus_welcomed_v2', 'true');
     setWelcomeOpen(false);
     navigateTo('home', '#crixus-terminal');
   };
@@ -78,11 +79,12 @@ export function App() {
       {/* Sci-fi Scanline Overlay */}
       <div className="fixed inset-0 scanlines pointer-events-none z-40 opacity-30" />
 
-      {/* First-Time Visitor Iron-Man Crixus Welcome Modal */}
+      {/* Compact Bottom-Left Flying Iron-Man Crixus Assistant */}
       <CrixusWelcomeModal
         isOpen={welcomeOpen}
         onClose={dismissWelcome}
         onJumpToCrixus={handleJumpToCrixus}
+        onReopen={() => setWelcomeOpen(true)}
       />
 
       {/* Navigation HUD */}
@@ -97,6 +99,7 @@ export function App() {
         <main className="flex-1 space-y-8 sm:space-y-12">
           <Hero />
           <SkillsSection />
+          <ThesisResearchSection />
           <ArcGridGame />
           <FeaturedProjects />
           <GithubReposExplorer />

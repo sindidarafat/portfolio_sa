@@ -23,6 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
+# Nested local reference repositories
+spark/
+
 # Environment variables
 .env
 .env.local

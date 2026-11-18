@@ -122,7 +122,7 @@ export const Hero: React.FC = () => {
                 <GithubIcon className="w-7 h-7 text-white group-hover:text-arc transition-colors" />
                 <div className="text-left">
                   <div className="text-xs font-mono font-bold tracking-wide text-white group-hover:text-arc">GITHUB</div>
-                  <div className="text-[11px] font-sans text-slate-400">29 Repos</div>
+                  <div className="text-[11px] font-sans text-slate-400">30 Repos</div>
                 </div>
               </a>
 

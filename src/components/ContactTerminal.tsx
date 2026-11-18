@@ -218,6 +218,18 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
         ],
         accent: 'amber',
       };
+    } else if (cmd === 'thesis' || cmd === 'spark' || cmd.includes('research') || cmd.includes('kan')) {
+      entry = {
+        cmd: rawInput,
+        title: 'SPARK THESIS — TABULAR SELF-SUPERVISED LEARNING WITH KAN',
+        lines: [
+          'Repository: https://github.com/sindidarafat/Spark',
+          'Focus: Parameter-matched comparison of Kolmogorov-Arnold Networks (KAN) vs MLP & Fixed Spline-Basis MLP (BEMLP) on multi-label tabular data.',
+          'Frameworks: SCARF Contrastive Learning, VIME, SubTab + 12 Benchmark Suites (2,600+ runs across 10+ datasets).',
+          'Key Results: KAN achieves 0.8856 Macro-AUROC on BibTeX (+3.04% vs MLP-2x), 7/7 wins on SubTab, and 1.90x higher Effective Rank (33.89 vs 17.82).',
+        ],
+        accent: 'cyan',
+      };
     } else if (cmd === 'projects') {
       entry = {
         cmd: rawInput,
@@ -317,8 +329,8 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
         cmd: rawInput,
         title: 'CRIXUS — PERSONAL ASSISTANT',
         lines: [
-          'Hello! I’m Crixus, Sindid Arafat’s Iron-Man personal assistant (also named after Sindid’s CUET Datathon squad, Team Crixus!).',
-          'Ask me anything about Sindid’s experience, skills, projects, BIZCEPTION, UIHP, certificates, or how to hire him.',
+          "Welcome to Sindid Arafat's portfolio! I'm Crixus, Sindid's personal assistant just like Jarvis for Iron-Man.",
+          'You can ask me here for queries and help on limited topics — and I will unleash my full AI potential once Master Sindid approves!',
         ],
         accent: 'cyan',
       };
@@ -370,6 +382,7 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
 
   const quickCommands = [
     'about',
+    'thesis',
     'experience',
     'education',
     'skills',

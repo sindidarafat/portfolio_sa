@@ -52,7 +52,7 @@ export const portfolioData = {
 
   hudStats: [
     { label: "LEADERSHIP", value: "Assistant Director", detail: "BRAC University Computer Club", color: "arc" },
-    { label: "GITHUB PROJECTS", value: "29 Repos", detail: "AI/ML, Web & Systems", color: "gold" },
+    { label: "GITHUB PROJECTS", value: "30 Repos", detail: "SPARK Thesis, AI/ML & Web", color: "gold" },
     { label: "UIHP INNOVATION HUB", value: "Inter-Uni Winner", detail: "Ranked for National Round", color: "crimson" },
     { label: "SCHOLARSHIPS", value: "4x Dean's/VC", detail: "Merit-Based Honors", color: "arc" },
   ],
@@ -266,8 +266,16 @@ export const portfolioData = {
     }
   ] as Project[],
 
-  // All 29 real repositories fetched from sindidarafat's GitHub
+  // All 30 real repositories from sindidarafat's GitHub (including SPARK Thesis)
   allGithubRepos: [
+    {
+      name: "Spark (Thesis Reproduction)",
+      description: "Undergraduate thesis comparing parameter-matched KAN, MLP & BEMLP encoders for self-supervised multi-label tabular learning across SCARF, VIME & SubTab.",
+      language: "Python",
+      stars: 0,
+      url: "https://github.com/sindidarafat/Spark",
+      category: "Research"
+    },
     {
       name: "SkillSwap",
       description: "Platform where users showcase skills, connect, discuss, and barter skills without cash barriers.",

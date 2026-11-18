@@ -33,20 +33,20 @@ export const GithubReposExplorer: React.FC = () => {
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-arc/30 text-xs font-mono text-arc mb-3">
             <GitBranch className="w-3.5 h-3.5 text-arc" />
-            <span>GITHUB REPO REGISTRY // 29 PUBLIC REPOSITORIES</span>
+            <span>GITHUB REPO REGISTRY // {repos.length} PUBLIC REPOSITORIES</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black font-display text-white tracking-tight">
             COMPLETE GITHUB CODE REPOSITORY
           </h2>
           <p className="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl font-sans">
-            Every repository, research notebook, and system architecture authored on <a href="https://github.com/sindidarafat" target="_blank" rel="noopener noreferrer" className="text-arc underline">github.com/sindidarafat</a>.
+            Every repository, thesis research codebase, and system architecture authored on <a href="https://github.com/sindidarafat" target="_blank" rel="noopener noreferrer" className="text-arc underline">github.com/sindidarafat</a>.
           </p>
         </div>
 
         {/* Total stats pill */}
         <div className="flex items-center gap-4 text-xs font-mono">
           <div className="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300">
-            TOTAL REPOSITORIES: <strong className="text-white text-sm">29</strong>
+            TOTAL REPOSITORIES: <strong className="text-white text-sm">{repos.length}</strong>
           </div>
           <div className="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300">
             PUBLIC STATUS: <strong className="text-emerald-400 text-sm">ACTIVE</strong>

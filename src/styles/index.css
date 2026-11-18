@@ -105,3 +105,74 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #00f0ffaa;
 }
+
+/* Crixus Flying Iron-Man Landing & Hover Animations */
+@keyframes ironman-fly-in {
+  0% {
+    transform: translate(75vw, -75vh) scale(0.45) rotate(-32deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  65% {
+    transform: translate(12vw, -18vh) scale(1.05) rotate(-14deg);
+    opacity: 1;
+  }
+  88% {
+    transform: translate(-6px, 6px) scale(0.98) rotate(3deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes ironman-hover {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes thruster-flicker {
+  0%, 100% {
+    opacity: 0.95;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scaleY(1.25);
+  }
+}
+
+@keyframes bubble-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-ironman-fly {
+  animation: ironman-fly-in 1.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-ironman-hover {
+  animation: ironman-hover 3.2s ease-in-out infinite;
+}
+
+.animate-thruster {
+  transform-origin: top center;
+  animation: thruster-flicker 0.25s ease-in-out infinite;
+}
+
+.animate-bubble-pop {
+  animation: bubble-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+

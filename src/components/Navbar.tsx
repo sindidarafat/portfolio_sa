@@ -31,6 +31,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   const navLinks = [
     { label: 'ABOUT', href: '#protocol' },
     { label: 'SKILLS', href: '#skills' },
+    { label: 'THESIS', href: '#thesis' },
     { label: 'PROJECTS', href: '#projects' },
     { label: 'REPOS', href: '#repos' },
     { label: 'GRID GAME', href: '#arc-matrix' },
@@ -95,14 +96,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
         {/* Desktop Nav Items */}
         <nav className="hidden xl:flex items-center gap-0.5">
-          {navLinks.map((link, idx) => (
+          {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="px-2 py-1.5 text-xs font-mono text-slate-300 hover:text-arc hover:bg-arc/10 rounded transition-all border border-transparent hover:border-arc/30 whitespace-nowrap"
+              className="px-2.5 py-1.5 text-xs font-mono font-semibold text-slate-300 hover:text-arc hover:bg-arc/10 rounded transition-all border border-transparent hover:border-arc/30 whitespace-nowrap"
             >
-              <span className="text-arc/60 text-[10px] mr-1">0{idx + 1}.</span>
               {link.label}
             </a>
           ))}
@@ -176,14 +176,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
       {/* Tablet & Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="xl:hidden bg-[#050811] border-b border-arc/30 px-4 pt-2 pb-6 space-y-2 font-mono text-xs animate-in slide-in-from-top-4">
-          {navLinks.map((link, idx) => (
+          {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="block px-3 py-2.5 text-slate-200 hover:text-arc hover:bg-arc/10 rounded border border-transparent hover:border-arc/20"
+              className="block px-3 py-2.5 text-slate-200 hover:text-arc hover:bg-arc/10 rounded border border-transparent hover:border-arc/20 font-semibold"
             >
-              <span className="text-arc mr-2">0{idx + 1}.</span>
               {link.label}
             </a>
           ))}
@@ -194,7 +193,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             className="w-full text-left px-3 py-2.5 text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 rounded border border-amber-500/40 font-bold flex items-center gap-2"
           >
             <Award className="w-4 h-4" />
-            <span>08. CERTIFICATES & RECOGNITIONS PAGE</span>
+            <span>CERTIFICATES &amp; RECOGNITIONS</span>
           </button>
 
           <div className="pt-2">
