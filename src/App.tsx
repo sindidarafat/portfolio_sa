@@ -22,7 +22,7 @@ export function App() {
 
   const [welcomeOpen, setWelcomeOpen] = useState<boolean>(() => {
     if (typeof window === 'undefined') return false;
-    return !localStorage.getItem('crixus_welcomed_v2');
+    return !sessionStorage.getItem('crixus_welcomed_session');
   });
 
   // Sync browser back/forward navigation
@@ -64,22 +64,19 @@ export function App() {
   }, []);
 
   const dismissWelcome = () => {
-    localStorage.setItem('crixus_welcomed_v2', 'true');
+    sessionStorage.setItem('crixus_welcomed_session', 'true');
     setWelcomeOpen(false);
   };
 
   const handleJumpToCrixus = () => {
-    localStorage.setItem('crixus_welcomed_v2', 'true');
+    sessionStorage.setItem('crixus_welcomed_session', 'true');
     setWelcomeOpen(false);
     navigateTo('home', '#crixus-terminal');
   };
 
   return (
-    <div className="relative min-h-screen text-slate-100 flex flex-col font-sans selection:bg-arc selection:text-black overflow-x-hidden">
-      {/* Sci-fi Scanline Overlay */}
-      <div className="fixed inset-0 scanlines pointer-events-none z-40 opacity-30" />
-
-      {/* Compact Bottom-Left Flying Iron-Man Crixus Assistant */}
+    <>
+      {/* Compact Bottom-Left Flying Iron-Man Crixus Assistant (outside overflow-x-hidden so full flight path is never clipped!) */}
       <CrixusWelcomeModal
         isOpen={welcomeOpen}
         onClose={dismissWelcome}
@@ -87,33 +84,38 @@ export function App() {
         onReopen={() => setWelcomeOpen(true)}
       />
 
-      {/* Navigation HUD */}
-      <Navbar currentPage={currentPage} onNavigate={navigateTo} />
+      <div className="relative min-h-screen text-slate-100 flex flex-col font-sans selection:bg-arc selection:text-black overflow-x-hidden">
+        {/* Sci-fi Scanline Overlay */}
+        <div className="fixed inset-0 scanlines pointer-events-none z-40 opacity-30" />
 
-      {/* Main Content Switcher */}
-      {currentPage === 'certificates' ? (
-        <main className="flex-1">
-          <CertificatesPage onBack={() => navigateTo('home', '#experience')} />
-        </main>
-      ) : (
-        <main className="flex-1 space-y-8 sm:space-y-12">
-          <Hero />
-          <SkillsSection />
-          <ThesisResearchSection />
-          <ArcGridGame />
-          <FeaturedProjects />
-          <GithubReposExplorer />
-          <ExperienceAndHonors onOpenCertificates={() => navigateTo('certificates')} />
-          <ContactTerminal
-            onOpenCertificates={() => navigateTo('certificates')}
-            onReplayWelcome={() => setWelcomeOpen(true)}
-          />
-        </main>
-      )}
+        {/* Navigation HUD */}
+        <Navbar currentPage={currentPage} onNavigate={navigateTo} />
 
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Main Content Switcher */}
+        {currentPage === 'certificates' ? (
+          <main className="flex-1">
+            <CertificatesPage onBack={() => navigateTo('home', '#experience')} />
+          </main>
+        ) : (
+          <main className="flex-1 space-y-8 sm:space-y-12">
+            <Hero />
+            <SkillsSection />
+            <ThesisResearchSection />
+            <ArcGridGame />
+            <FeaturedProjects />
+            <GithubReposExplorer />
+            <ExperienceAndHonors onOpenCertificates={() => navigateTo('certificates')} />
+            <ContactTerminal
+              onOpenCertificates={() => navigateTo('certificates')}
+              onReplayWelcome={() => setWelcomeOpen(true)}
+            />
+          </main>
+        )}
+
+        {/* Footer */}
+        <Footer />
+      </div>
+    </>
   );
 }
 

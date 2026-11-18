@@ -109,18 +109,19 @@ body {
 /* Crixus Flying Iron-Man Landing & Hover Animations */
 @keyframes ironman-fly-in {
   0% {
-    transform: translate(75vw, -75vh) scale(0.45) rotate(-32deg);
+    transform: translate(55vw, -55vh) scale(0.55) rotate(-28deg);
     opacity: 0;
   }
-  20% {
+  15% {
     opacity: 1;
   }
-  65% {
-    transform: translate(12vw, -18vh) scale(1.05) rotate(-14deg);
+  70% {
+    transform: translate(10vw, -12vh) scale(1.06) rotate(-10deg);
     opacity: 1;
   }
-  88% {
-    transform: translate(-6px, 6px) scale(0.98) rotate(3deg);
+  90% {
+    transform: translate(-3px, 4px) scale(0.98) rotate(2deg);
+    opacity: 1;
   }
   100% {
     transform: translate(0, 0) scale(1) rotate(0deg);
