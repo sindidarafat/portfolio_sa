@@ -20,6 +20,18 @@ export interface SkillCategory {
   skills: { name: string; level: number; tag: string }[];
 }
 
+export interface CertificateItem {
+  id: string;
+  title: string;
+  issuer: string;
+  date: string;
+  category: 'Innovation & Business' | 'Data & Technical' | 'Leadership & Service';
+  credentialId?: string;
+  image: string;
+  description: string;
+  badge: string;
+}
+
 export const portfolioData = {
   personal: {
     name: "SINDID ARAFAT",
@@ -576,6 +588,13 @@ export const portfolioData = {
       type: "Inter-University Winner • National Qualifier"
     },
     {
+      title: "BIZCEPTION — Semi-Finalist",
+      organization: "Business Case Competition",
+      date: "Business Case Track",
+      description: "Regular business case competition participant who advanced to the Semi-Finals of BIZCEPTION—delivering structured market strategy, financial analysis, and data-backed executive case solutions under competitive judging.",
+      type: "Business Case • Semi-Finalist"
+    },
+    {
       title: "Dean's List & Vice Chancellor's List",
       organization: "BRAC University",
       date: "2022 – 2026",
@@ -585,16 +604,96 @@ export const portfolioData = {
     {
       title: "Bronze Awardee",
       organization: "The Duke of Edinburgh's International Award",
-      date: "May 2024",
-      description: "Completed rigorous international standards across community volunteering, personal physical recreation, and exploratory expedition programs.",
+      date: "Mar 2024",
+      description: "Attained the Bronze Standard (No. 12818) completing international benchmarks across community volunteering, physical recreation, skill development, and adventurous journey.",
       type: "International Honor"
     },
     {
-      title: "Official Volunteer Distinction",
+      title: "Official Volunteer Distinction (16th Convocation)",
       organization: "BRAC University",
       date: "2022 – 2025 (3 Years)",
-      description: "Honored for 3 years of dedication coordinating international academic conferences, orientations, and student welfare initiatives.",
+      description: "Recognized with Certificate of Recognition (16CN072) for outstanding volunteer contribution at the 16th Convocation of BRAC University alongside 3 years of official university volunteer service.",
       type: "Leadership Service"
     }
-  ]
+  ],
+
+  certificates: [
+    {
+      id: "uihp-cohort-6",
+      title: "University Innovation Hub Program (UIHP)",
+      issuer: "DEIED Project, Bangladesh Hi-Tech Park Authority, ICT Division & The World Bank",
+      date: "31 Jul 2025",
+      category: "Innovation & Business",
+      credentialId: "ID: 0201063329",
+      image: "/certificates/uihp-innovation-hub.jpg",
+      badge: "INNOVATION COHORT 6",
+      description: "Completed the BRAC Innovation Cohort 6 under the University Innovation Hub Program organized by BHTPA & ICT Division (powered by The World Bank), demonstrating excellence in innovation, entrepreneurship, and business transformation."
+    },
+    {
+      id: "cuet-datathon-2025",
+      title: "Datathon | CUET CSE Fest 2025 (Team Crixus)",
+      issuer: "Department of CSE, CUET • Presented by Azim Group & Delineate",
+      date: "2025",
+      category: "Data & Technical",
+      credentialId: "Team: Crixus",
+      image: "/certificates/cuet-datathon-2025.jpg",
+      badge: "NATIONAL DATATHON",
+      description: "Represented Team Crixus in the CUET CSE Fest 2025 Datathon—applying data analysis, predictive modeling, problem-solving, and data-driven solution engineering under competitive time constraints."
+    },
+    {
+      id: "hackerrank-python",
+      title: "Python (Basic) Skill Certification",
+      issuer: "HackerRank",
+      date: "20 Jan 2025",
+      category: "Data & Technical",
+      credentialId: "ID: FAF13CDEF274",
+      image: "/certificates/hackerrank-python-basic.jpg",
+      badge: "VERIFIED SKILL",
+      description: "Passed the official HackerRank Python (Basic) technical certification assessment verifying core Python proficiency, data structures, scalar types, operators, and algorithmic problem solving."
+    },
+    {
+      id: "vitalizers-2-0",
+      title: "VITALIZERS 2.0 — Intra-University Business Case Competition",
+      issuer: "BRAC University Business & Economics Forum (BUBEF) • Bridge Pharmaceuticals Ltd.",
+      date: "2024",
+      category: "Innovation & Business",
+      credentialId: "Club Partner",
+      image: "/certificates/vitalizers-2-0.jpg",
+      badge: "BUSINESS CASE PARTNER",
+      description: "Awarded Certificate of Appreciation for invaluable contribution as a Club Partner in Bridge Pharmaceuticals Ltd. presents 'VITALIZERS 2.0' intra-university business case competition."
+    },
+    {
+      id: "duke-of-edinburgh-bronze",
+      title: "The Duke of Edinburgh's International Award — Bronze Standard",
+      issuer: "The Duke of Edinburgh's International Award Foundation (Bangladesh)",
+      date: "28 Mar 2024",
+      category: "Leadership & Service",
+      credentialId: "No. 12818",
+      image: "/certificates/duke-of-edinburgh-bronze.jpg",
+      badge: "INTERNATIONAL AWARD",
+      description: "Attained the internationally recognized Bronze Standard signed by HRH The Earl of Wessex and the National Award Operator for excellence across voluntary service, physical recreation, skills, and expedition."
+    },
+    {
+      id: "brac-16th-convocation",
+      title: "16th Convocation of BRAC University — Certificate of Recognition",
+      issuer: "BRAC University (Registrar & CSE Department)",
+      date: "2025",
+      category: "Leadership & Service",
+      credentialId: "ID: 16CN072",
+      image: "/certificates/brac-16th-convocation.jpg",
+      badge: "CONVOCATION VOLUNTEER",
+      description: "Recognized by Dr. David Dowland (Registrar) and Dr. Sadia Hamid Kazi (Chair, CSE) for outstanding contribution and operational leadership as an official volunteer at the 16th Convocation of BRAC University."
+    },
+    {
+      id: "srhr-youth-camp-2024",
+      title: "Empowering Tomorrow's Leaders — Youth Camp Bangladesh 2024",
+      issuer: "CEE SRHR Innovation Hub • Community Engagement Exchange Program & AALAPON",
+      date: "01 Mar 2024",
+      category: "Leadership & Service",
+      credentialId: "Dhaka Cohort",
+      image: "/certificates/srhr-youth-camp-2024.jpg",
+      badge: "LEADERSHIP WORKSHOP",
+      description: "Successfully completed the 'Empowering Tomorrow's Leaders' leadership & civic awareness workshop at the Amader Bonera SRHR Youth Camp Bangladesh 2024 in Dhaka."
+    }
+  ] as CertificateItem[]
 };

@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX, Shield, Terminal, Download, Menu, X, Cpu } from 'lucide-react';
+import { Volume2, VolumeX, Download, Menu, X, Award } from 'lucide-react';
 import { sound } from '../utils/audio';
 import { portfolioData } from '../data/portfolioData';
 
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  currentPage: 'home' | 'certificates';
+  onNavigate: (page: 'home' | 'certificates', anchor?: string) => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   const [audioActive, setAudioActive] = useState(sound.enabled);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState('');
@@ -33,8 +38,21 @@ export const Navbar: React.FC = () => {
     { label: 'CONTACT', href: '#contact' },
   ];
 
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    sound.playJarvisChirp();
+    setMobileMenuOpen(false);
+    onNavigate('home', href);
+  };
+
+  const handleCertClick = () => {
+    sound.playJarvisChirp();
+    setMobileMenuOpen(false);
+    onNavigate('certificates');
+  };
+
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#050811]/85 border-b border-arc/20">
+    <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#050811]/90 border-b border-arc/20">
       {/* Top micro telemetry bar */}
       <div className="hidden lg:flex items-center justify-between px-6 py-1 bg-slate-950/80 border-b border-slate-800 text-[10px] font-mono text-slate-400">
         <div className="flex items-center gap-4">
@@ -42,7 +60,7 @@ export const Navbar: React.FC = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-arc animate-ping" />
             SYSTEM OS v4.2 ONLINE
           </span>
-          <span>BUILD: PRODUCTION v2.8</span>
+          <span>ASSISTANT: CRIXUS ACTIVE</span>
           <span>STATUS: 100% OPERATIONAL</span>
         </div>
         <div className="flex items-center gap-4">
@@ -54,44 +72,73 @@ export const Navbar: React.FC = () => {
       {/* Main navigation row */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
         {/* Brand Logo */}
-        <a 
-          href="#protocol" 
-          onClick={() => sound.playJarvisChirp()}
-          className="flex items-center gap-3 group cursor-pointer shrink-0"
+        <a
+          href="#protocol"
+          onClick={(e) => handleNavClick(e, '#protocol')}
+          className="flex items-center gap-2.5 sm:gap-3 group cursor-pointer shrink-0"
         >
           {/* Glowing Reactor Emblem */}
-          <div className="w-10 h-10 rounded-full border border-arc/60 bg-slate-950 flex items-center justify-center relative shadow-[0_0_15px_rgba(0,240,255,0.4)] group-hover:shadow-[0_0_25px_rgba(0,240,255,0.8)] transition-all shrink-0">
-            <div className="w-6 h-6 rounded-full border border-dashed border-amber-400 animate-spin-slow absolute" />
-            <div className="w-3 h-3 rounded-full bg-arc shadow-[0_0_10px_#00f0ff] animate-pulse" />
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-arc/60 bg-slate-950 flex items-center justify-center relative shadow-[0_0_15px_rgba(0,240,255,0.4)] group-hover:shadow-[0_0_25px_rgba(0,240,255,0.8)] transition-all shrink-0">
+            <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full border border-dashed border-amber-400 animate-spin-slow absolute" />
+            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-arc shadow-[0_0_10px_#00f0ff] animate-pulse" />
           </div>
           <div>
-            <div className="font-display font-black text-lg tracking-wider text-white group-hover:text-arc transition-colors flex items-center gap-1 whitespace-nowrap">
+            <div className="font-display font-black text-base sm:text-lg tracking-wider text-white group-hover:text-arc transition-colors flex items-center gap-1 whitespace-nowrap">
               <span>SINDID ARAFAT</span>
               <span className="text-xs font-mono text-amber-400 font-semibold">[SA]</span>
             </div>
-            <div className="text-[10px] font-mono text-slate-400 tracking-widest uppercase whitespace-nowrap">
+            <div className="text-[9px] sm:text-[10px] font-mono text-slate-400 tracking-widest uppercase whitespace-nowrap">
               PRODUCT, BA & AI ENGINEER
             </div>
           </div>
         </a>
 
         {/* Desktop Nav Items */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden xl:flex items-center gap-0.5">
           {navLinks.map((link, idx) => (
             <a
               key={link.label}
               href={link.href}
-              onClick={() => sound.playJarvisChirp()}
-              className="px-2.5 py-1.5 text-xs font-mono text-slate-300 hover:text-arc hover:bg-arc/10 rounded transition-all border border-transparent hover:border-arc/30 whitespace-nowrap"
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="px-2 py-1.5 text-xs font-mono text-slate-300 hover:text-arc hover:bg-arc/10 rounded transition-all border border-transparent hover:border-arc/30 whitespace-nowrap"
             >
               <span className="text-arc/60 text-[10px] mr-1">0{idx + 1}.</span>
               {link.label}
             </a>
           ))}
+
+          {/* Dedicated Certificates Page Tab */}
+          <button
+            type="button"
+            onClick={handleCertClick}
+            className={`ml-1 px-2.5 py-1.5 text-xs font-mono font-bold rounded transition-all border flex items-center gap-1.5 whitespace-nowrap ${
+              currentPage === 'certificates'
+                ? 'bg-amber-500/20 text-amber-300 border-amber-400 shadow-[0_0_14px_rgba(251,191,36,0.35)]'
+                : 'bg-slate-900/80 text-amber-300 border-amber-500/40 hover:border-amber-400 hover:bg-amber-500/15'
+            }`}
+          >
+            <Award className="w-3.5 h-3.5" />
+            <span>CERTIFICATES</span>
+          </button>
         </nav>
 
         {/* Right Actions: Sound FX Toggle & CV Download */}
-        <div className="flex items-center gap-2.5 shrink-0">
+        <div className="flex items-center gap-2 shrink-0">
+          {/* Quick Certificates Pill on Tablet/Mobile before Hamburger */}
+          <button
+            type="button"
+            onClick={handleCertClick}
+            className={`xl:hidden px-2.5 py-1.5 rounded-lg border font-mono text-[11px] font-bold flex items-center gap-1 transition-all whitespace-nowrap ${
+              currentPage === 'certificates'
+                ? 'bg-amber-500/25 border-amber-400 text-amber-200'
+                : 'bg-slate-900 border-amber-500/40 text-amber-300'
+            }`}
+          >
+            <Award className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">CERTIFICATES</span>
+            <span className="sm:hidden">CERTS</span>
+          </button>
+
           <button
             onClick={toggleSound}
             title={audioActive ? 'Mute Interface Audio' : 'Enable Interface Sound Effects'}
@@ -102,46 +149,54 @@ export const Navbar: React.FC = () => {
             }`}
           >
             {audioActive ? <Volume2 className="w-4 h-4 animate-pulse" /> : <VolumeX className="w-4 h-4" />}
-            <span className="hidden sm:inline text-[11px]">{audioActive ? 'SFX ON' : 'SFX OFF'}</span>
+            <span className="hidden md:inline text-[11px]">{audioActive ? 'SFX ON' : 'SFX OFF'}</span>
           </button>
 
           <a
             href={portfolioData.personal.cvUrl}
             download="Sindid_Arafat_CV.pdf"
             onClick={() => sound.playRepulsorShot()}
-            className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-mono font-bold text-xs tracking-wider shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all transform hover:scale-105 active:scale-95 whitespace-nowrap"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-mono font-bold text-xs tracking-wider shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all transform hover:scale-105 active:scale-95 whitespace-nowrap"
           >
             <Download className="w-3.5 h-3.5" />
             <span>DOWNLOAD CV</span>
           </a>
 
-          {/* Mobile hamburger */}
+          {/* Tablet / Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg border border-slate-700 text-slate-300 hover:text-white"
+            aria-label="Toggle navigation menu"
+            className="xl:hidden p-2 rounded-lg border border-slate-700 text-slate-300 hover:text-white"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Tablet & Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#050811] border-b border-arc/30 px-4 pt-2 pb-6 space-y-2 font-mono text-xs animate-in slide-in-from-top-4">
+        <div className="xl:hidden bg-[#050811] border-b border-arc/30 px-4 pt-2 pb-6 space-y-2 font-mono text-xs animate-in slide-in-from-top-4">
           {navLinks.map((link, idx) => (
             <a
               key={link.label}
               href={link.href}
-              onClick={() => {
-                sound.playJarvisChirp();
-                setMobileMenuOpen(false);
-              }}
-              className="block px-3 py-2 text-slate-300 hover:text-arc hover:bg-arc/10 rounded border border-transparent hover:border-arc/20"
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="block px-3 py-2.5 text-slate-200 hover:text-arc hover:bg-arc/10 rounded border border-transparent hover:border-arc/20"
             >
               <span className="text-arc mr-2">0{idx + 1}.</span>
               {link.label}
             </a>
           ))}
+
+          <button
+            type="button"
+            onClick={handleCertClick}
+            className="w-full text-left px-3 py-2.5 text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 rounded border border-amber-500/40 font-bold flex items-center gap-2"
+          >
+            <Award className="w-4 h-4" />
+            <span>08. CERTIFICATES & RECOGNITIONS PAGE</span>
+          </button>
+
           <div className="pt-2">
             <a
               href={portfolioData.personal.cvUrl}

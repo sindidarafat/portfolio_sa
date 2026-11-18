@@ -144,13 +144,13 @@ export const Hero: React.FC = () => {
               <a
                 href={`mailto:${portfolioData.personal.email}?subject=Email%20from%20Portfolio`}
                 onClick={() => sound.playJarvisChirp()}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white border-2 border-amber-500/50 hover:border-amber-400 shadow-[0_0_15px_rgba(251,191,36,0.18)] hover:shadow-[0_0_24px_rgba(251,191,36,0.4)] transition-all transform hover:-translate-y-0.5 group"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white border-2 border-amber-500/50 hover:border-amber-400 shadow-[0_0_15px_rgba(251,191,36,0.18)] hover:shadow-[0_0_24px_rgba(251,191,36,0.4)] transition-all transform hover:-translate-y-0.5 group max-w-full"
                 title="Direct Email"
               >
-                <Mail className="w-7 h-7 text-amber-400 group-hover:text-amber-300 transition-colors" />
-                <div className="text-left">
+                <Mail className="w-7 h-7 text-amber-400 group-hover:text-amber-300 transition-colors shrink-0" />
+                <div className="text-left min-w-0">
                   <div className="text-xs font-mono font-bold tracking-wide text-white group-hover:text-amber-300">EMAIL</div>
-                  <div className="text-[11px] font-sans text-slate-300">{portfolioData.personal.email}</div>
+                  <div className="text-[11px] font-sans text-slate-300 truncate">{portfolioData.personal.email}</div>
                 </div>
               </a>
             </div>
@@ -159,7 +159,7 @@ export const Hero: React.FC = () => {
 
         {/* Right Column: Interactive 3D Energy Core */}
         <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
-          <div className="relative w-72 h-72 sm:w-88 sm:h-88 flex items-center justify-center">
+          <div className="relative w-64 h-64 sm:w-[340px] sm:h-[340px] flex items-center justify-center">
             
             {/* Outer Tech Ring with Markers */}
             <div className={`absolute inset-0 rounded-full border-2 border-dashed transition-all duration-700 ${

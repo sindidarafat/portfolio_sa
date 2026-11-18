@@ -1,8 +1,13 @@
 import React from 'react';
-import { Award, Briefcase, GraduationCap, Trophy, Medal, CheckCircle, Calendar, MapPin, Sparkles } from 'lucide-react';
+import { Award, Briefcase, GraduationCap, Trophy, Medal, Calendar, MapPin, Sparkles, ArrowRight } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { sound } from '../utils/audio';
 
-export const ExperienceAndHonors: React.FC = () => {
+interface ExperienceAndHonorsProps {
+  onOpenCertificates: () => void;
+}
+
+export const ExperienceAndHonors: React.FC<ExperienceAndHonorsProps> = ({ onOpenCertificates }) => {
   return (
     <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
       {/* Ambient background */}
@@ -158,12 +163,71 @@ export const ExperienceAndHonors: React.FC = () => {
               <Sparkles className="w-4 h-4 text-arc" />
               <span>COMMUNITY & LEADERSHIP IMPACT</span>
             </div>
-            <p className="text-slate-400 leading-relaxed">
-              3 consecutive years of volunteer coordination at BRAC University and recipient of The Duke of Edinburgh's International Award (Bronze, May 2024), demonstrating perseverance, community engagement, and team discipline.
+            <p className="text-slate-400 leading-relaxed font-sans">
+              3 consecutive years of volunteer coordination at BRAC University (including 16th Convocation Recognition) and recipient of The Duke of Edinburgh&apos;s International Award (Bronze Standard, No. 12818), demonstrating perseverance, community engagement, and team discipline.
             </p>
           </div>
         </div>
 
+      </div>
+
+      {/* Dedicated Certificates & Recognitions Showcase Banner */}
+      <div
+        onClick={() => {
+          sound.playRepulsorShot();
+          onOpenCertificates();
+        }}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            sound.playRepulsorShot();
+            onOpenCertificates();
+          }
+        }}
+        className="mt-12 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#0b1328] via-[#111936] to-[#0b1328] border-2 border-amber-400/50 hover:border-arc shadow-[0_0_35px_rgba(251,191,36,0.14)] hover:shadow-[0_0_45px_rgba(0,240,255,0.25)] transition-all cursor-pointer group hud-corner-box"
+      >
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/40 text-xs font-mono text-amber-300 font-bold">
+              <Award className="w-4 h-4" />
+              <span>VERIFIED GALLERY • {portfolioData.certificates.length} OFFICIAL CREDENTIALS</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-black font-display text-white group-hover:text-arc transition-colors">
+              CERTIFICATES &amp; RECOGNITIONS
+            </h3>
+            <p className="text-sm font-sans text-slate-300 leading-relaxed">
+              Explore the dedicated page showcasing all verified certificates — UIHP Innovation Hub (World Bank / ICT Division), CUET CSE Fest 2025 Datathon (Team Crixus), HackerRank Python, VITALIZERS 2.0 Business Case Competition, Duke of Edinburgh Bronze Award, BRAC 16th Convocation, and SRHR Youth Camp.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 shrink-0">
+            {/* Mini Thumbnail Stack */}
+            <div className="flex -space-x-3">
+              {portfolioData.certificates.slice(0, 4).map((cert) => (
+                <div
+                  key={cert.id}
+                  className="w-14 h-10 sm:w-16 sm:h-12 rounded-lg overflow-hidden border-2 border-slate-900 bg-slate-950 shadow-md group-hover:border-arc/70 transition-all"
+                >
+                  <img
+                    src={cert.image}
+                    alt={cert.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+              <div className="w-12 h-10 sm:w-14 sm:h-12 rounded-lg bg-slate-900 border-2 border-amber-400/60 flex items-center justify-center text-xs font-mono font-bold text-amber-300">
+                +{portfolioData.certificates.length - 4}
+              </div>
+            </div>
+
+            <span className="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-cyan-400 group-hover:from-amber-400 group-hover:to-cyan-300 text-slate-950 font-mono font-extrabold text-xs tracking-wider shadow-[0_0_20px_rgba(251,191,36,0.35)] flex items-center gap-2 transition-transform group-hover:scale-105 whitespace-nowrap">
+              <span>OPEN CERTIFICATES PAGE</span>
+              <ArrowRight className="w-4 h-4" />
+            </span>
+          </div>
+        </div>
       </div>
     </section>
   );

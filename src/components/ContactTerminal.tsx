@@ -1,22 +1,77 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Copy, Check, Terminal as TerminalIcon, FileText, Sparkles, Loader2, AlertCircle } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  Copy,
+  Check,
+  Terminal as TerminalIcon,
+  FileText,
+  Sparkles,
+  Loader2,
+  AlertCircle,
+  Award,
+  RotateCcw,
+} from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { portfolioData } from '../data/portfolioData';
 import { sound } from '../utils/audio';
 
-export const ContactTerminal: React.FC = () => {
+interface TerminalEntry {
+  cmd: string;
+  title?: string;
+  lines: string[];
+  accent?: 'cyan' | 'amber' | 'emerald';
+}
+
+interface ContactTerminalProps {
+  onOpenCertificates?: () => void;
+  onReplayWelcome?: () => void;
+}
+
+export const ContactTerminal: React.FC<ContactTerminalProps> = ({
+  onOpenCertificates,
+  onReplayWelcome,
+}) => {
   const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [sending, setSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // Mini interactive CLI state
+  const terminalScrollRef = useRef<HTMLDivElement>(null);
+
+  // Upgraded Crixus Interactive CLI state
   const [terminalInput, setTerminalInput] = useState('');
-  const [terminalHistory, setTerminalHistory] = useState<Array<{ cmd: string; resp: string }>>([
-    { cmd: 'system --status', resp: 'PORTFOLIO OS ONLINE // SINDID ARAFAT — SYSTEM ARCHITECT' },
-    { cmd: 'help', resp: 'COMMANDS AVAILABLE: help | skills | projects | cv | contact | overdrive | clear' }
+  const [terminalHistory, setTerminalHistory] = useState<TerminalEntry[]>([
+    {
+      cmd: 'system --status',
+      title: 'CRIXUS ASSISTANT ONLINE // PORTFOLIO OS v4.2',
+      lines: [
+        'Welcome! I am Crixus — Sindid Arafat’s personal assistant.',
+        'Subject: Sindid Arafat | Product & Business Analyst | Data & Strategy Intern @ CAP (Dhaka)',
+        'LinkedIn: linkedin.com/in/sindid-arafat-1a593233b | GitHub: github.com/sindidarafat (29 Repos)',
+      ],
+      accent: 'cyan',
+    },
+    {
+      cmd: 'help',
+      title: 'AVAILABLE COMMANDS (CLICK A CHIP OR TYPE ANY QUESTION)',
+      lines: [
+        'Core: about | experience | education | skills | strengths | projects | repos',
+        'Honors & Links: awards | bizception | certificates | linkedin | contact | hire | cv',
+        'System: crixus | all | overdrive | clear',
+      ],
+      accent: 'amber',
+    },
   ]);
+
+  useEffect(() => {
+    if (terminalScrollRef.current) {
+      terminalScrollRef.current.scrollTop = terminalScrollRef.current.scrollHeight;
+    }
+  }, [terminalHistory]);
 
   const copyEmail = () => {
     navigator.clipboard.writeText(portfolioData.personal.email);
@@ -68,130 +123,344 @@ export const ContactTerminal: React.FC = () => {
     }
   };
 
-  const handleCommandSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const cmd = terminalInput.trim().toLowerCase();
+  const runCommand = (rawInput: string) => {
+    const cmd = rawInput.trim().toLowerCase();
     if (!cmd) return;
 
     sound.playJarvisChirp();
-    let resp = '';
 
-    switch (cmd) {
-      case 'help':
-        resp = 'Available commands: skills | projects | repos | awards | cv | overdrive | hire | clear';
-        break;
-      case 'skills':
-        resp = 'Core: Product/BA (PRD, UAT, Jira) | AI/ML (PyTorch, KAN, Scikit-learn) | Full-Stack (React, Node, PHP)';
-        break;
-      case 'projects':
-        resp = 'Flagships: SkillSwap (MERN) | Electrician Finder (PHP) | Bank Loan AI | KAT Transformer | MadMax OpenGL';
-        break;
-      case 'repos':
-        resp = '29 Public Repositories indexed on github.com/sindidarafat. Status: ACTIVE';
-        break;
-      case 'awards':
-        resp = 'UIHP Innovation Hub Inter-University Winner & National Round Qualifier (World Bank / ICT Div) | 4x Dean’s List | Duke of Edinburgh Bronze';
-        break;
-      case 'cv':
-        window.open(portfolioData.personal.cvUrl, '_blank');
-        resp = 'Opening Sindid_Arafat_CV.pdf in secure window...';
-        break;
-      case 'overdrive':
-        sound.playUnibeamBlast();
-        resp = '⚡ OVERDRIVE PULSE EXECUTED! SYSTEM RUNNING AT PEAK OUTPUT.';
-        break;
-      case 'hire':
-      case 'contact':
-        resp = `Direct Comm: ${portfolioData.personal.email} | Phone: ${portfolioData.personal.phone}`;
-        break;
-      case 'clear':
-        setTerminalHistory([]);
-        setTerminalInput('');
-        return;
-      default:
-        resp = `Command '${cmd}' not recognized. Type 'help' for available directives.`;
+    if (cmd === 'clear') {
+      setTerminalHistory([]);
+      setTerminalInput('');
+      return;
     }
 
-    setTerminalHistory(prev => [...prev, { cmd: terminalInput, resp }]);
+    let entry: TerminalEntry;
+
+    if (cmd === 'help' || cmd.includes('command')) {
+      entry = {
+        cmd: rawInput,
+        title: 'CRIXUS COMMAND DIRECTORY',
+        lines: [
+          '• about / bio        — Full profile summary, current role & background',
+          '• experience / cap   — CAP Internship, BRAC Computer Club (BUCC) & One Academy',
+          '• education / cgpa   — BRAC University CSE (3.69/4.00), HSC & SSC (5.00/5.00)',
+          '• skills / strengths — SQL, Excel, Power BI, Python, AI/ML, MERN, Figma, BA & Leadership',
+          '• projects / repos   — Featured builds & all 29 GitHub repositories',
+          '• awards / bizception— UIHP Inter-Uni Winner, BIZCEPTION Semi-Finalist, Scholarships',
+          '• certificates       — View all 7 verified certificates & recognitions',
+          '• linkedin / contact — Direct LinkedIn, GitHub, Email, Phone & CV download',
+          '• overdrive / clear  — Trigger system overdrive pulse or clear console',
+        ],
+        accent: 'amber',
+      };
+    } else if (cmd === 'about' || cmd === 'bio' || cmd.includes('who is') || cmd === 'who') {
+      entry = {
+        cmd: rawInput,
+        title: 'EXECUTIVE PROFILE — SINDID ARAFAT',
+        lines: [
+          'Role Focus: Product and Business Analyst | Full-Stack Engineer | AI/ML Researcher',
+          'Current Position: Data and Strategy Intern at CAP (Content, Analytics & Production Ltd.), Dhaka (Nov 2026 – Present)',
+          'Education: BSc in Computer Science & Engineering, BRAC University (Sep 2022 – Sep 2026 | CGPA 3.69/4.00)',
+          'Location: Dhaka, Bangladesh | Phone: +880 1735807816 | Email: sindidarafat275@gmail.com',
+          'Summary: Combines analytical depth (SQL, Excel, Power BI, AI/ML) with full-stack engineering, PRD/requirements gathering, and proven cross-functional team leadership.',
+        ],
+        accent: 'cyan',
+      };
+    } else if (cmd === 'experience' || cmd === 'work' || cmd.includes('cap') || cmd.includes('intern') || cmd.includes('bucc')) {
+      entry = {
+        cmd: rawInput,
+        title: 'LEADERSHIP & WORK EXPERIENCE (CV + LINKEDIN)',
+        lines: [
+          '1. CAP (Content, Analytics & Production Ltd.), Dhaka — Data & Strategy Intern (Nov 2026 – Present)',
+          '   → Analyzes audience & campaign performance data for media planning, optimization & client reporting.',
+          '2. BRAC University Computer Club (BUCC) — Assistant Director (Dec 2022 – Dec 2025)',
+          '   → Led 10+ member team for IntraHacktive 1.0 (250+ participants); ran 3 design/motion workshops training 60+ members.',
+          '3. One Academy — Content Head & Strategy Officer, Part-Time (Sep 2024 – Mar 2025)',
+          '   → Managed 5 contributors & content calendar; grew social engagement by ~30% over 6 months.',
+          '4. Faridpur Debate Forum — ICT Coordinator & Active Debater (Mar 2021 – Apr 2024)',
+        ],
+        accent: 'emerald',
+      };
+    } else if (cmd === 'education' || cmd.includes('cgpa') || cmd.includes('brac') || cmd.includes('school') || cmd.includes('college')) {
+      entry = {
+        cmd: rawInput,
+        title: 'ACADEMIC CREDENTIALS',
+        lines: [
+          '• BRAC University, Dhaka — BSc in Computer Science & Engineering (Sep 2022 – Sep 2026)',
+          '  CGPA: 3.69 / 4.00 | Dean’s List & VC’s List | Merit-based scholarship for 4 semesters.',
+          '• Govt. Rajendra College, Faridpur — HSC Science (2021) | GPA: 5.00 / 5.00',
+          '• Faridpur Zilla School, Faridpur — SSC Science (2019) | GPA: 5.00 / 5.00',
+        ],
+        accent: 'cyan',
+      };
+    } else if (cmd === 'skills' || cmd.includes('power bi') || cmd.includes('python') || cmd.includes('sql') || cmd.includes('excel')) {
+      entry = {
+        cmd: rawInput,
+        title: 'COMPLETE SKILLS MATRIX',
+        lines: [
+          '• Data & Business: SQL, Excel, Power BI, Python (Pandas, NumPy, Scikit-learn), Jira, Google Workspace, PowerPoint, Word, PRDs, UAT',
+          '• AI / ML & Research: PyTorch, TensorFlow, Scikit-learn, Matplotlib, Seaborn, KAN (Kolmogorov-Arnold Networks), Transformers',
+          '• Technical & Web: JavaScript, TypeScript, React, Node.js, Express, PHP, C#, .NET, C/C++, Java, MongoDB, MySQL, REST APIs, Git, Docker',
+          '• Design & Motion: Figma, Adobe Photoshop, Illustrator, After Effects, Premiere Pro',
+        ],
+        accent: 'cyan',
+      };
+    } else if (cmd === 'strengths') {
+      entry = {
+        cmd: rawInput,
+        title: 'CORE PROFESSIONAL STRENGTHS',
+        lines: [
+          '• Problem Solving & Structured Analytical Thinking',
+          '• Requirements Gathering, PRD Authoring & Business Analysis',
+          '• Cross-Functional Stakeholder Coordination & Executive Presentation',
+          '• Team Leadership (Led 10+ creative team & 5-contributor content team)',
+        ],
+        accent: 'amber',
+      };
+    } else if (cmd === 'projects') {
+      entry = {
+        cmd: rawInput,
+        title: 'FLAGSHIP PROJECTS',
+        lines: [
+          '• Bank Loan Approval Prediction (Python, Scikit-learn) — ~85% accuracy classification model & key factor analysis',
+          '• SkillSwap (MERN Stack, TypeScript) — Peer skill-exchange platform with profiles, matching & messaging',
+          '• Electrician Finder (PHP, MySQL) — On-demand nearby electrician booking app modeled on ride-hailing apps',
+          '• Kolmogorov-Arnold Transformer (KAT) & HybridCLKAN — Deep learning research in PyTorch',
+          '• Weather Predictor AI & Heart Disease Predictor AI — Predictive ML models',
+          '• MADMAX Fury Road (3D OpenGL) & Simon Says 3x3 LED Arduino Matrix',
+        ],
+        accent: 'cyan',
+      };
+    } else if (cmd === 'repos' || cmd === 'github') {
+      entry = {
+        cmd: rawInput,
+        title: 'GITHUB REPOSITORY REGISTRY',
+        lines: [
+          '29 Public Repositories live at: https://github.com/sindidarafat',
+          'Coverage: TypeScript, Python, Jupyter Notebooks, PHP, C/C++, Assembly & Systems.',
+          'Contributions: 336+ All-Time commits across 2024–2026.',
+        ],
+        accent: 'emerald',
+      };
+    } else if (cmd === 'bizception' || cmd.includes('case')) {
+      entry = {
+        cmd: rawInput,
+        title: 'BUSINESS CASE COMPETITIONS & INNOVATION TRACK',
+        lines: [
+          '• BIZCEPTION — Semi-Finalist (National Business Case Competition)',
+          '• UIHP Innovation Hub — Inter-University Winner (BRAC IC6) & Ranked for National Round (ICT Div & World Bank)',
+          '• VITALIZERS 2.0 (2024) — Club Partner Recognition (BRAC University Business & Economics Forum — BUBEF)',
+          '• CUET CSE Fest 2025 Datathon — Team Crixus (Data Analysis & Solution Engineering)',
+          'Regular participant in competitive business strategy, product pitch, and data case competitions.',
+        ],
+        accent: 'amber',
+      };
+    } else if (cmd === 'awards') {
+      entry = {
+        cmd: rawInput,
+        title: 'HONORS, AWARDS & RECOGNITIONS',
+        lines: [
+          '• UIHP Innovation Hub Inter-University Winner & National Round Qualifier (ICT Division & The World Bank, Jul 2025)',
+          '• BIZCEPTION Business Case Competition — Semi-Finalist',
+          '• Dean’s List & Vice Chancellor’s List — 4 Semesters Merit-Based Scholarships (BRAC University)',
+          '• Bronze Standard Awardee — The Duke of Edinburgh’s International Award (No. 12818, Mar 2024)',
+          '• 16th Convocation Volunteer Recognition (16CN072) & 3-Year Official Volunteer, BRAC University',
+        ],
+        accent: 'amber',
+      };
+    } else if (cmd === 'certificates' || cmd === 'certs' || cmd.includes('cert')) {
+      entry = {
+        cmd: rawInput,
+        title: '7 VERIFIED CERTIFICATES & CREDENTIALS',
+        lines: [
+          '1. University Innovation Hub Program (UIHP) — Cohort 6 Completion (ID: 0201063329, Jul 2025)',
+          '2. Datathon | CUET CSE Fest 2025 — Team Crixus',
+          '3. HackerRank — Python (Basic) Skill Certification (ID: FAF13CDEF274, Jan 2025)',
+          '4. VITALIZERS 2.0 — Business Case Competition Club Partner (BUBEF, 2024)',
+          '5. Duke of Edinburgh’s International Award — Bronze Standard (No. 12818, Mar 2024)',
+          '6. BRAC University 16th Convocation — Certificate of Recognition (16CN072, 2025)',
+          '7. Empowering Tomorrow’s Leaders — SRHR Youth Camp Bangladesh (Mar 2024)',
+          '→ Click "OPEN CERTIFICATES PAGE" below or in the top navbar to inspect every certificate visually!',
+        ],
+        accent: 'emerald',
+      };
+    } else if (cmd === 'linkedin') {
+      entry = {
+        cmd: rawInput,
+        title: 'LINKEDIN PROFILE SHOWCASE',
+        lines: [
+          'URL: https://www.linkedin.com/in/sindid-arafat-1a593233b/',
+          'Headline: Product & Business Analyst | Data & Strategy Intern @ CAP | BRAC University CSE',
+          'Highlights: Data & Campaign Analytics at CAP Agency, Assistant Director at BUCC, UIHP Innovation Hub Winner, BIZCEPTION Semi-Finalist, HackerRank Certified.',
+        ],
+        accent: 'cyan',
+      };
+    } else if (cmd === 'cv' || cmd === 'resume') {
+      window.open(portfolioData.personal.cvUrl, '_blank');
+      entry = {
+        cmd: rawInput,
+        title: 'CV DOCUMENT DISPATCHED',
+        lines: ['Opening Sindid_Arafat_CV.pdf in a new tab...'],
+        accent: 'emerald',
+      };
+    } else if (cmd === 'overdrive') {
+      sound.playUnibeamBlast();
+      entry = {
+        cmd: rawInput,
+        title: '⚡ OVERDRIVE PULSE EXECUTED',
+        lines: ['System energy at 300% peak output. All portfolio diagnostics nominal!'],
+        accent: 'amber',
+      };
+    } else if (cmd === 'crixus' || cmd === 'hi' || cmd === 'hello') {
+      entry = {
+        cmd: rawInput,
+        title: 'CRIXUS — PERSONAL ASSISTANT',
+        lines: [
+          'Hello! I’m Crixus, Sindid Arafat’s Iron-Man personal assistant (also named after Sindid’s CUET Datathon squad, Team Crixus!).',
+          'Ask me anything about Sindid’s experience, skills, projects, BIZCEPTION, UIHP, certificates, or how to hire him.',
+        ],
+        accent: 'cyan',
+      };
+    } else if (cmd === 'hire' || cmd === 'contact' || cmd.includes('email') || cmd.includes('phone')) {
+      entry = {
+        cmd: rawInput,
+        title: 'DIRECT CONTACT CHANNELS',
+        lines: [
+          `• Email: ${portfolioData.personal.email} (Form above delivers straight to inbox with subject "Email from Portfolio")`,
+          `• Phone / WhatsApp: ${portfolioData.personal.phone}`,
+          `• LinkedIn: ${portfolioData.personal.linkedin}`,
+          `• GitHub: ${portfolioData.personal.github}`,
+        ],
+        accent: 'emerald',
+      };
+    } else if (cmd === 'all' || cmd === 'profile') {
+      entry = {
+        cmd: rawInput,
+        title: 'FULL DOSSIER SNAPSHOT — SINDID ARAFAT',
+        lines: [
+          'Current Role: Data & Strategy Intern @ CAP (Nov 2026 – Present)',
+          'Education: BSc CSE, BRAC University (CGPA 3.69/4.00 | 4x Dean’s/VC List)',
+          'Top Honors: UIHP Innovation Hub Inter-Uni Winner (National Qualifier) | BIZCEPTION Semi-Finalist | Duke of Edinburgh Bronze',
+          'Core Stack: SQL, Excel, Power BI, Python, Scikit-learn, PyTorch, React, Node.js, PHP, Figma, Jira',
+          'Portfolio: 29 GitHub Repos | 7 Verified Certificates | Direct Email: sindidarafat275@gmail.com',
+        ],
+        accent: 'cyan',
+      };
+    } else {
+      entry = {
+        cmd: rawInput,
+        title: 'CRIXUS QUERY HINT',
+        lines: [
+          `I didn't recognize "${rawInput}". Try typing or tapping one of these:`,
+          'about | experience | education | skills | projects | bizception | awards | certificates | linkedin | contact | cv | overdrive',
+        ],
+        accent: 'amber',
+      };
+    }
+
+    setTerminalHistory(prev => [...prev, entry]);
     setTerminalInput('');
   };
 
+  const handleCommandSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    runCommand(terminalInput);
+  };
+
+  const quickCommands = [
+    'about',
+    'experience',
+    'education',
+    'skills',
+    'projects',
+    'bizception',
+    'awards',
+    'certificates',
+    'linkedin',
+    'contact',
+    'cv',
+    'overdrive',
+  ];
+
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+    <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
       {/* Background radial */}
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-arc/5 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Header */}
-      <div className="text-center max-w-3xl mx-auto mb-16">
+      <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-arc/30 text-xs font-mono text-arc mb-3">
           <TerminalIcon className="w-3.5 h-3.5 text-arc" />
-          <span>TRANSMISSION CHANNEL // ENCRYPTED COMMS</span>
+          <span>TRANSMISSION CHANNEL // DIRECT CONTACT & CRIXUS AI</span>
         </div>
         <h2 className="text-3xl sm:text-5xl font-black font-display text-white tracking-tight">
           INITIALIZE DIRECT CONTACT PROTOCOL
         </h2>
         <p className="text-slate-400 text-sm sm:text-base mt-2 font-sans">
-          Have an engineering venture, product role, AI research partnership, or business analysis requirement? Send an encrypted transmission below.
+          Have an engineering venture, product/analyst role, AI research partnership, or collaboration? Send a direct email below or ask <strong>Crixus</strong> at the terminal!
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
+      {/* Row 1: Direct Info + Email Form */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
         {/* Left Column: Direct Information & Social Cards (5 cols) */}
-        <div className="lg:col-span-5 space-y-6">
-          <div className="p-6 rounded-2xl bg-[#090e1c]/90 border border-slate-800 backdrop-blur-md hud-corner-box space-y-6">
-            <h3 className="text-xl font-bold font-display text-white border-b border-slate-800 pb-3 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-arc" />
-              <span>DIRECT CONTACT DOSSIER</span>
-            </h3>
+        <div className="lg:col-span-5 flex flex-col">
+          <div className="p-6 rounded-2xl bg-[#090e1c]/90 border border-slate-800 backdrop-blur-md hud-corner-box space-y-5 flex-1 flex flex-col justify-between">
+            <div className="space-y-5">
+              <h3 className="text-xl font-bold font-display text-white border-b border-slate-800 pb-3 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-arc" />
+                <span>DIRECT CONTACT DOSSIER</span>
+              </h3>
 
-            {/* Email item with copy button */}
-            <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-arc/40 transition-all">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-arc/10 border border-arc/30 flex items-center justify-center text-arc">
-                  <Mail className="w-4 h-4" />
+              {/* Email item with copy button */}
+              <div className="flex items-center justify-between gap-2 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-arc/40 transition-all">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-10 h-10 rounded-lg bg-arc/10 border border-arc/30 flex items-center justify-center text-arc shrink-0">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-[10px] font-mono text-slate-400 uppercase">DIRECT EMAIL</div>
+                    <div className="text-xs sm:text-sm font-mono font-bold text-white select-all truncate">
+                      {portfolioData.personal.email}
+                    </div>
+                  </div>
+                </div>
+                <button
+                  onClick={copyEmail}
+                  className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-arc transition-all shrink-0"
+                  title="Copy email to clipboard"
+                >
+                  {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
+
+              {/* Phone item */}
+              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80">
+                <div className="w-10 h-10 rounded-lg bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
+                  <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[10px] font-mono text-slate-400 uppercase">DIRECT EMAIL</div>
-                  <div className="text-xs sm:text-sm font-mono font-bold text-white select-all">
-                    {portfolioData.personal.email}
+                  <div className="text-[10px] font-mono text-slate-400 uppercase">TELEMETRY VOICE / WHATSAPP</div>
+                  <div className="text-xs sm:text-sm font-mono font-bold text-white">
+                    {portfolioData.personal.phone}
                   </div>
                 </div>
               </div>
-              <button
-                onClick={copyEmail}
-                className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-arc transition-all"
-                title="Copy email to clipboard"
-              >
-                {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-              </button>
-            </div>
 
-            {/* Phone item */}
-            <div className="flex items-center gap-3 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80">
-              <div className="w-9 h-9 rounded-lg bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400">
-                <Phone className="w-4 h-4" />
-              </div>
-              <div>
-                <div className="text-[10px] font-mono text-slate-400 uppercase">TELEMETRY VOICE / WHATSAPP</div>
-                <div className="text-xs sm:text-sm font-mono font-bold text-white">
-                  {portfolioData.personal.phone}
+              {/* Coordinates / Location */}
+              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80">
+                <div className="w-10 h-10 rounded-lg bg-red-400/10 border border-red-400/30 flex items-center justify-center text-red-400 shrink-0">
+                  <MapPin className="w-5 h-5" />
                 </div>
-              </div>
-            </div>
-
-            {/* Coordinates / Location */}
-            <div className="flex items-center gap-3 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80">
-              <div className="w-9 h-9 rounded-lg bg-red-400/10 border border-red-400/30 flex items-center justify-center text-red-400">
-                <MapPin className="w-4 h-4" />
-              </div>
-              <div>
-                <div className="text-[10px] font-mono text-slate-400 uppercase">LOCATION & BASE</div>
-                <div className="text-xs sm:text-sm font-mono font-bold text-white">
-                  {portfolioData.personal.location}
-                </div>
-                <div className="text-[10px] font-mono text-slate-500">
-                  {portfolioData.personal.coordinates}
+                <div>
+                  <div className="text-[10px] font-mono text-slate-400 uppercase">LOCATION & BASE</div>
+                  <div className="text-xs sm:text-sm font-mono font-bold text-white">
+                    {portfolioData.personal.location}
+                  </div>
+                  <div className="text-[10px] font-mono text-slate-500">
+                    {portfolioData.personal.coordinates}
+                  </div>
                 </div>
               </div>
             </div>
@@ -231,51 +500,14 @@ export const ContactTerminal: React.FC = () => {
               </a>
             </div>
           </div>
-
-          {/* Interactive CLI Terminal */}
-          <div className="p-4 rounded-2xl bg-black border border-arc/40 shadow-inner font-mono text-xs">
-            <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-[11px] text-slate-500">
-              <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                <span className="ml-2 text-slate-400">INTERACTIVE CLI TERMINAL</span>
-              </div>
-              <span className="text-arc">TYPE: 'help'</span>
-            </div>
-
-            <div className="h-32 overflow-y-auto space-y-1.5 text-[11px] text-slate-300 pr-1">
-              {terminalHistory.map((item, idx) => (
-                <div key={idx} className="space-y-0.5">
-                  <div className="text-arc">
-                    <span className="text-amber-400">sindid@portfolio:~$</span> {item.cmd}
-                  </div>
-                  <div className="text-slate-400 pl-2 border-l border-slate-800">
-                    {item.resp}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <form onSubmit={handleCommandSubmit} className="mt-2 pt-2 border-t border-slate-800 flex items-center gap-2">
-              <span className="text-amber-400">&gt;</span>
-              <input
-                type="text"
-                value={terminalInput}
-                onChange={(e) => setTerminalInput(e.target.value)}
-                placeholder="type a command (e.g. skills, projects, overdrive)..."
-                className="w-full bg-transparent text-white focus:outline-none placeholder-slate-600 text-xs"
-              />
-            </form>
-          </div>
         </div>
 
         {/* Right Column: Encrypted Transmission Form (7 cols) */}
-        <div className="lg:col-span-7">
-          <div className="p-6 sm:p-8 rounded-2xl bg-[#0b1021]/90 border border-arc/30 backdrop-blur-md hud-corner-box shadow-[0_0_30px_rgba(0,240,255,0.08)]">
-            <div className="flex items-center justify-between pb-4 mb-6 border-b border-slate-800">
+        <div className="lg:col-span-7 flex flex-col">
+          <div className="p-6 sm:p-8 rounded-2xl bg-[#0b1021]/90 border border-arc/30 backdrop-blur-md hud-corner-box shadow-[0_0_30px_rgba(0,240,255,0.08)] flex-1 flex flex-col justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-4 mb-6 border-b border-slate-800">
               <div>
-                <h3 className="text-2xl font-bold font-display text-white">
+                <h3 className="text-xl sm:text-2xl font-bold font-display text-white">
                   TRANSMIT DIRECT MESSAGE
                 </h3>
                 <p className="text-xs font-mono text-slate-400 mt-0.5">
@@ -337,7 +569,7 @@ export const ContactTerminal: React.FC = () => {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g. Alex Rahman / Sarah Jenkins"
-                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-sans text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors disabled:opacity-50"
+                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm font-sans text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors disabled:opacity-50"
                     />
                   </div>
 
@@ -353,7 +585,7 @@ export const ContactTerminal: React.FC = () => {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="e.g. collaborator@enterprise.com"
-                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-sans text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors disabled:opacity-50"
+                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm font-sans text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors disabled:opacity-50"
                     />
                   </div>
                 </div>
@@ -370,7 +602,7 @@ export const ContactTerminal: React.FC = () => {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Describe your project, role, requirements, or proposed collaboration..."
-                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-sans text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors resize-none disabled:opacity-50"
+                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm font-sans text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors resize-none disabled:opacity-50"
                   />
                 </div>
 
@@ -395,7 +627,134 @@ export const ContactTerminal: React.FC = () => {
             )}
           </div>
         </div>
+      </div>
 
+      {/* Row 2: BIGGER, VISUALLY APPEALING CRIXUS INTERACTIVE CLI TERMINAL (AT THE VERY END OF THE WEBSITE) */}
+      <div id="crixus-terminal" className="mt-12 rounded-2xl bg-[#040711] border-2 border-arc/50 shadow-[0_0_45px_rgba(0,240,255,0.16)] overflow-hidden hud-corner-box">
+        {/* Terminal Header Bar */}
+        <div className="px-5 py-3.5 bg-gradient-to-r from-slate-950 via-[#0a1328] to-slate-950 border-b border-arc/30 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444]" />
+              <span className="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_8px_#fbbf24]" />
+              <span className="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+            </div>
+            <div className="h-4 w-px bg-slate-700 hidden sm:block" />
+            <div>
+              <div className="text-sm sm:text-base font-display font-bold text-white tracking-wider flex items-center gap-2">
+                <span className="text-arc">CRIXUS</span>
+                <span className="text-slate-400 text-xs font-mono">// INTERACTIVE ASSISTANT CLI</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 flex-wrap">
+            {onOpenCertificates && (
+              <button
+                type="button"
+                onClick={() => {
+                  sound.playJarvisChirp();
+                  onOpenCertificates();
+                }}
+                className="px-3 py-1.5 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/50 text-amber-300 text-xs font-mono font-bold flex items-center gap-1.5 transition-all"
+              >
+                <Award className="w-3.5 h-3.5" />
+                <span>OPEN CERTIFICATES PAGE</span>
+              </button>
+            )}
+            {onReplayWelcome && (
+              <button
+                type="button"
+                onClick={() => {
+                  sound.playJarvisChirp();
+                  onReplayWelcome();
+                }}
+                className="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-arc/40 text-arc text-xs font-mono font-bold flex items-center gap-1.5 transition-all"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>CRIXUS INTRO</span>
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Quick-Tap Command Bar */}
+        <div className="px-5 py-3 bg-slate-950/90 border-b border-slate-800/90 flex items-center gap-2 flex-wrap">
+          <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider mr-1">
+            QUICK QUERIES:
+          </span>
+          {quickCommands.map(cmd => (
+            <button
+              key={cmd}
+              type="button"
+              onClick={() => runCommand(cmd)}
+              className="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-arc/20 border border-slate-700 hover:border-arc text-xs font-mono text-slate-200 hover:text-arc transition-all"
+            >
+              {cmd}
+            </button>
+          ))}
+        </div>
+
+        {/* Expanded Scrollable Terminal Output Area */}
+        <div
+          ref={terminalScrollRef}
+          className="h-[340px] sm:h-[400px] overflow-y-auto p-5 sm:p-6 space-y-4 bg-[radial-gradient(ellipse_at_top,rgba(0,240,255,0.05),transparent_70%)]"
+        >
+          {terminalHistory.map((item, idx) => (
+            <div
+              key={idx}
+              className="rounded-xl bg-slate-950/80 border border-slate-800/90 p-4 space-y-2 shadow-sm"
+            >
+              <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-mono">
+                <span className="text-amber-400 font-bold">crixus@sindid-portfolio:~$</span>
+                <span className="text-arc font-semibold break-all">{item.cmd}</span>
+              </div>
+
+              {item.title && (
+                <div
+                  className={`text-xs sm:text-sm font-display font-bold tracking-wide pt-1 ${
+                    item.accent === 'amber'
+                      ? 'text-amber-400'
+                      : item.accent === 'emerald'
+                        ? 'text-emerald-400'
+                        : 'text-arc'
+                  }`}
+                >
+                  {item.title}
+                </div>
+              )}
+
+              <div className="pl-3 border-l-2 border-arc/40 space-y-1.5 text-xs sm:text-sm font-sans text-slate-200 leading-relaxed break-words">
+                {item.lines.map((line, i) => (
+                  <div key={i}>{line}</div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Command Input Row */}
+        <form
+          onSubmit={handleCommandSubmit}
+          className="px-5 py-4 bg-slate-950 border-t border-arc/30 flex items-center gap-3"
+        >
+          <span className="text-amber-400 font-mono font-bold text-sm shrink-0">
+            crixus &gt;
+          </span>
+          <input
+            type="text"
+            value={terminalInput}
+            onChange={(e) => setTerminalInput(e.target.value)}
+            placeholder="Ask Crixus anything or type a command (e.g. about, experience, bizception, certificates, linkedin)..."
+            className="w-full bg-transparent text-white focus:outline-none placeholder-slate-500 text-sm font-sans"
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 rounded-lg bg-arc hover:bg-cyan-300 text-slate-950 font-mono font-bold text-xs tracking-wider transition-all shrink-0"
+          >
+            RUN
+          </button>
+        </form>
       </div>
     </section>
   );
