@@ -54,17 +54,17 @@ export const Hero: React.FC = () => {
           </p>
 
           {/* Quick HUD Metrics */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
             {portfolioData.hudStats.map((stat, i) => (
               <div
                 key={i}
-                className="p-3 rounded-lg bg-[#0c1324]/80 border border-slate-800 hover:border-arc/40 transition-all group hud-corner-box"
+                className="p-3 rounded-lg bg-[#0c1324]/80 border border-slate-800 hover:border-arc/40 transition-all group hud-corner-box flex flex-col justify-between"
               >
                 <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">{stat.label}</div>
-                <div className="text-lg sm:text-xl font-display font-extrabold text-white group-hover:text-arc transition-colors">
+                <div className="text-sm sm:text-base font-display font-extrabold text-white group-hover:text-arc transition-colors leading-snug my-1">
                   {stat.value}
                 </div>
-                <div className="text-[10px] font-mono text-amber-400/90 truncate">{stat.detail}</div>
+                <div className="text-[11px] font-mono text-amber-400/90 leading-tight">{stat.detail}</div>
               </div>
             ))}
           </div>
