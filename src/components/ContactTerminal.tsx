@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Copy, Check, Terminal as TerminalIcon, FileText, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Copy, Check, Terminal as TerminalIcon, FileText, Sparkles, Loader2, AlertCircle } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { portfolioData } from '../data/portfolioData';
 import { sound } from '../utils/audio';
@@ -7,7 +7,9 @@ import { sound } from '../utils/audio';
 export const ContactTerminal: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [sending, setSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   // Mini interactive CLI state
   const [terminalInput, setTerminalInput] = useState('');
@@ -23,14 +25,47 @@ export const ContactTerminal: React.FC = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSending(true);
+    setErrorMsg(null);
     sound.playRepulsorShot();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 4000);
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${portfolioData.personal.email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: 'Email from Portfolio',
+          _replyto: formData.email,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && (data.success === 'true' || data.success === true)) {
+        sound.playJarvisChirp();
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error(data.message || 'Email gateway returned an error.');
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Unable to reach email service.';
+      setErrorMsg(
+        `Transmission issue (${message}). You can click below to send directly via your email app.`
+      );
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleCommandSubmit = (e: React.FormEvent) => {
@@ -253,19 +288,42 @@ export const ContactTerminal: React.FC = () => {
             </div>
 
             {submitted ? (
-              <div className="py-12 text-center space-y-3 font-mono">
-                <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-400 text-emerald-400 mx-auto flex items-center justify-center">
-                  <Check className="w-6 h-6 animate-pulse" />
+              <div className="py-12 text-center space-y-4 font-mono">
+                <div className="w-14 h-14 rounded-full bg-emerald-500/20 border-2 border-emerald-400 text-emerald-400 mx-auto flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                  <Check className="w-7 h-7 animate-pulse" />
                 </div>
-                <h4 className="text-lg font-bold text-white">
-                  TRANSMISSION DISPATCHED SUCCESSFULLY!
+                <h4 className="text-lg font-bold font-display text-white">
+                  EMAIL SENT TO SINDID ARAFAT!
                 </h4>
-                <p className="text-xs text-slate-400 max-w-md mx-auto">
-                  Thank you for reaching out. Your message has been routed to Sindid's primary communication channel. Expect a response shortly!
+                <p className="text-xs font-sans text-slate-300 max-w-md mx-auto leading-relaxed">
+                  Your message has been delivered to <strong className="text-arc">{portfolioData.personal.email}</strong> with subject <strong>&ldquo;Email from Portfolio&rdquo;</strong>. Thank you for reaching out!
                 </p>
+                <button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                  className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-arc/40 text-arc text-xs font-mono font-bold transition-all"
+                >
+                  SEND ANOTHER MESSAGE
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                {errorMsg && (
+                  <div className="p-3.5 rounded-xl bg-red-950/60 border border-red-500/50 text-xs font-sans text-red-200 space-y-2">
+                    <div className="flex items-start gap-2">
+                      <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                      <span>{errorMsg}</span>
+                    </div>
+                    <a
+                      href={`mailto:${portfolioData.personal.email}?subject=${encodeURIComponent('Email from Portfolio')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-mono text-xs font-bold"
+                    >
+                      <Mail className="w-3.5 h-3.5" />
+                      OPEN IN EMAIL APP INSTEAD
+                    </a>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-mono text-slate-300">
@@ -273,11 +331,13 @@ export const ContactTerminal: React.FC = () => {
                     </label>
                     <input
                       type="text"
+                      name="name"
                       required
+                      disabled={sending}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g. Alex Rahman / Sarah Jenkins"
-                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-mono text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors"
+                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-sans text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors disabled:opacity-50"
                     />
                   </div>
 
@@ -287,11 +347,13 @@ export const ContactTerminal: React.FC = () => {
                     </label>
                     <input
                       type="email"
+                      name="email"
                       required
+                      disabled={sending}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="e.g. collaborator@enterprise.com"
-                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-mono text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors"
+                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-sans text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors disabled:opacity-50"
                     />
                   </div>
                 </div>
@@ -301,21 +363,33 @@ export const ContactTerminal: React.FC = () => {
                     TRANSMISSION PAYLOAD / MESSAGE *
                   </label>
                   <textarea
+                    name="message"
                     required
+                    disabled={sending}
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Describe your project, role, requirements, or proposed collaboration..."
-                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-mono text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors resize-none"
+                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-sans text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors resize-none disabled:opacity-50"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-red-600 via-amber-600 to-cyan-500 hover:from-red-500 hover:to-cyan-400 text-white font-mono font-bold text-xs tracking-wider shadow-[0_0_25px_rgba(220,38,38,0.4)] flex items-center justify-center gap-2 transition-all transform hover:scale-[1.01] active:scale-[0.99] border border-amber-300/40"
+                  disabled={sending}
+                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-red-600 via-amber-600 to-cyan-500 hover:from-red-500 hover:to-cyan-400 text-white font-mono font-bold text-xs tracking-wider shadow-[0_0_25px_rgba(220,38,38,0.4)] flex items-center justify-center gap-2 transition-all transform hover:scale-[1.01] active:scale-[0.99] border border-amber-300/40 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>TRANSMIT ENCRYPTED MESSAGE // DISPATCH</span>
+                  {sending ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>SENDING TO {portfolioData.personal.email.toUpperCase()}...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>TRANSMIT ENCRYPTED MESSAGE // DISPATCH</span>
+                    </>
+                  )}
                 </button>
               </form>
             )}

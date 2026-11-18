@@ -50,7 +50,7 @@ export const Footer: React.FC = () => {
             <span>LinkedIn</span>
           </a>
           <a
-            href={`mailto:${portfolioData.personal.email}`}
+            href={`mailto:${portfolioData.personal.email}?subject=Email%20from%20Portfolio`}
             className="px-3.5 py-2 rounded-xl bg-slate-900/90 border border-slate-700 hover:border-arc text-white hover:text-arc transition-all flex items-center gap-2 font-semibold"
           >
             <Mail className="w-5 h-5 text-arc" />

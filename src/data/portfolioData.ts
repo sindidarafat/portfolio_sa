@@ -27,19 +27,19 @@ export const portfolioData = {
     tagline: "Product & Business Analyst | AI/ML & Full-Stack Engineer",
     location: "Dhaka, Bangladesh",
     coordinates: "23.8103° N, 90.4125° E",
-    status: "AVAILABLE // OPEN TO OPPORTUNITIES",
-    cgpa: "3.70 / 4.00",
+    status: "DATA & STRATEGY INTERN @ CAP",
+    cgpa: "3.69 / 4.00",
     email: "sindidarafat275@gmail.com",
     phone: "+880 1735807816",
     linkedin: "https://linkedin.com/in/sindid-arafat-1a593233b",
     github: "https://github.com/sindidarafat",
     cvUrl: "/Sindid_Arafat_CV.pdf",
     summary:
-      "Computer Science and Engineering graduate with a technical foundation in AI/ML and full-stack development, bringing a Business Analyst's eye for requirements gathering, PRD documentation, and translating user pain points into actionable features. Experienced in UAT support, wireframing, and cross-functional coordination between technical and non-technical teams using Jira, Figma, and Google Workspace. Combines strong analytical and problem-solving skills with proven stakeholder communication to support data-informed, technically grounded business decisions."
+      "Computer Science and Engineering graduate and UIHP Innovation Hub Inter-University winner combining analytical thinking, technical depth, and proven leadership. Hands-on experience in data analysis, campaign strategy, AI/ML, and full-stack development, paired with a Business Analyst's strength in requirements gathering, PRD documentation, stakeholder coordination, and turning user needs into measurable, practical solutions."
   },
 
   hudStats: [
-    { label: "ACADEMIC MERIT", value: "3.70 CGPA", detail: "BRAC University CSE", color: "arc" },
+    { label: "ACADEMIC MERIT", value: "3.69 CGPA", detail: "BRAC University CSE", color: "arc" },
     { label: "GITHUB PROJECTS", value: "29 Repos", detail: "AI/ML, Web & Systems", color: "gold" },
     { label: "UIHP INNOVATION HUB", value: "Inter-Uni Winner", detail: "Ranked for National Round", color: "crimson" },
     { label: "SCHOLARSHIPS", value: "4x Dean's/VC", detail: "Merit-Based Honors", color: "arc" },
@@ -48,19 +48,19 @@ export const portfolioData = {
   skillCategories: [
     {
       id: "product-ba",
-      title: "Product & Business Analysis",
+      title: "Data, Product & Business Analysis",
       code: "PROTOCOL-BA-77",
       icon: "Briefcase",
-      description: "Translating human complexity into clear technical specifications, user stories, and high-impact PRDs.",
+      description: "Turning audience data, business requirements, and user pain points into actionable insights, dashboards, and PRDs.",
       skills: [
-        { name: "Requirements Gathering & Discovery", level: 96, tag: "Core" },
+        { name: "SQL, Microsoft Excel & Power BI", level: 95, tag: "Data & BI" },
+        { name: "Audience & Campaign Performance Analytics", level: 94, tag: "Analytics" },
+        { name: "Requirements Gathering & Discovery", level: 96, tag: "Core BA" },
         { name: "PRD & Functional Specifications", level: 94, tag: "Documentation" },
-        { name: "User Pain Point Analysis & Mapping", level: 95, tag: "Strategy" },
-        { name: "UAT (User Acceptance Testing) Support", level: 90, tag: "Quality" },
-        { name: "Wireframing & Prototyping (Figma)", level: 92, tag: "UX/UI" },
-        { name: "Agile Workflow / Jira & Sprints", level: 93, tag: "Management" },
-        { name: "Cross-Functional Team Coordination", level: 98, tag: "Leadership" },
-        { name: "Stakeholder Technical Communication", level: 95, tag: "Execution" },
+        { name: "Agile Workflow / Jira & Google Workspace", level: 93, tag: "Management" },
+        { name: "PowerPoint, Word & Executive Presentation", level: 95, tag: "Reporting" },
+        { name: "Stakeholder Coordination & Team Leadership", level: 97, tag: "Leadership" },
+        { name: "UAT Support & Wireframing (Figma)", level: 91, tag: "Product" },
       ]
     },
     {
@@ -166,8 +166,8 @@ export const portfolioData = {
       title: "Bank Loan Approval Prediction Engine",
       category: "AI / ML" as const,
       markLevel: "MODEL v3.7",
-      tagline: "Predictive Risk Analytics & Automated Credit Underwriting Classifier",
-      description: "An AI/ML machine learning pipeline that evaluates applicant income, credit score histories, asset ratios, and demographic variables to predict loan default risks with high statistical precision.",
+      tagline: "Predictive Risk Analytics & Automated Credit Underwriting Classifier (~85% Accuracy)",
+      description: "An AI/ML classification pipeline on applicant data that evaluates income, credit score histories, asset ratios, and demographic variables to predict bank loan approvals—reaching ~85% accuracy while identifying key decision factors.",
       businessImpact: "Reduces manual credit assessment cycle time and mitigates loan default exposure through automated decision trees and ensemble modeling.",
       tech: ["Python", "Scikit-learn", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
       githubUrl: "https://github.com/sindidarafat/AI-ML-project-Bank-Loan-Approval-Prediction-",
@@ -492,27 +492,37 @@ export const portfolioData = {
 
   experience: [
     {
-      role: "Assistant Director",
-      organization: "BRAC University Computer Club",
-      period: "Feb 2022 – Dec 2025",
+      role: "Data and Strategy Intern",
+      organization: "CAP (Content, Analytics & Production Ltd.)",
+      period: "Nov 2026 – Present",
       location: "Dhaka, Bangladesh",
-      badge: "CREATIVE & STRATEGY LEAD",
+      badge: "CURRENT ROLE • ANALYTICS",
       achievements: [
-        "Led creative direction for flagship national university events including IntraHacktive 1.0, covering branding posters, motion graphics, and high-impact promotional videos.",
-        "Designed and conducted hands-on graphic design and motion graphics workshops for 200+ club members.",
-        "Collaborated across executive bodies to organize hackathons, coding contests, and tech symposiums."
+        "Analyze audience and campaign performance data to support media planning and campaign optimization.",
+        "Work with the data and strategy teams to turn insights into campaign recommendations and clear reporting for client projects."
       ]
     },
     {
-      role: "Content Head & Strategy Officer",
+      role: "Assistant Director (Volunteer)",
+      organization: "BRAC University Computer Club",
+      period: "Dec 2022 – Dec 2025",
+      location: "Dhaka, Bangladesh",
+      badge: "CREATIVE & STRATEGY LEAD",
+      achievements: [
+        "Led a team of 10+ members to plan and deliver the creative and promotional strategy for IntraHacktive 1.0, which drew 250+ participants.",
+        "Directed posters, motion graphics, and the promo video, coordinating deadlines across design, events, and sponsorship teams.",
+        "Designed and ran 3 graphic design and motion graphics workshops, training 60+ members."
+      ]
+    },
+    {
+      role: "Content Head and Strategy Officer (Part-Time)",
       organization: "One Academy",
       period: "Sep 2024 – Mar 2025",
       location: "Dhaka, Bangladesh",
-      badge: "TACTICAL PLANNER",
+      badge: "STRATEGY & GROWTH",
       achievements: [
-        "Served as Strategy Officer and Content Planner, shaping the overarching content direction of the educational platform.",
-        "Formulated tactical marketing campaigns that substantially increased reach and audience engagement across digital channels.",
-        "Synchronized curriculum content with digital delivery channels to optimize learning conversion."
+        "Built the content strategy and monthly content calendar for the organization, managing a team of 5 contributors.",
+        "Used audience data and tactical campaign planning to raise social media engagement by about 30% over 6 months."
       ]
     },
     {
@@ -535,7 +545,7 @@ export const portfolioData = {
       institution: "BRAC University",
       period: "Sep 2022 – Sep 2026",
       location: "Dhaka, Bangladesh",
-      score: "CGPA: 3.70 / 4.00",
+      score: "CGPA: 3.69 / 4.00",
       honors: "Earned Merit-Based Scholarship for 4 consecutive semesters (Dean's List & VC's List)",
       courses: "Data Structures, Algorithms, AI/ML, Operating Systems, Database Systems, Software Engineering, Computer Networks"
     },

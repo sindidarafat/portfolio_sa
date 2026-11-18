@@ -138,7 +138,7 @@ export const Hero: React.FC = () => {
               </a>
 
               <a
-                href={`mailto:${portfolioData.personal.email}`}
+                href={`mailto:${portfolioData.personal.email}?subject=Email%20from%20Portfolio`}
                 onClick={() => sound.playJarvisChirp()}
                 className="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white border-2 border-amber-500/50 hover:border-amber-400 shadow-[0_0_15px_rgba(251,191,36,0.18)] hover:shadow-[0_0_24px_rgba(251,191,36,0.4)] transition-all transform hover:-translate-y-0.5 group"
                 title="Direct Email"
