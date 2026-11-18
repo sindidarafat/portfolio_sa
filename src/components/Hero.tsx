@@ -29,7 +29,7 @@ export const Hero: React.FC = () => {
           {/* Tactical Status Tag */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-arc/40 text-xs font-mono text-arc shadow-[0_0_15px_rgba(0,240,255,0.2)]">
             <span className="w-2 h-2 rounded-full bg-arc animate-ping" />
-            <span>STARK INDUSTRIES // SYSTEM ARCHITECT</span>
+            <span>PORTFOLIO OS // SYSTEM ARCHITECT</span>
             <span className="text-slate-500">|</span>
             <span className="text-amber-400 font-semibold">{portfolioData.personal.status}</span>
           </div>
@@ -77,7 +77,7 @@ export const Hero: React.FC = () => {
               className="px-6 py-3 rounded-xl bg-gradient-to-r from-red-600 via-red-500 to-amber-500 hover:from-red-500 hover:to-amber-400 text-white font-mono font-bold text-xs tracking-wider shadow-[0_0_25px_rgba(220,38,38,0.5)] flex items-center gap-2.5 transition-all transform hover:scale-105 active:scale-95 border border-amber-300/40"
             >
               <Zap className="w-4 h-4 fill-current" />
-              <span>PLAY ARC DEFENDER (GAME)</span>
+              <span>PLAY GRID DEFENDER (GAME)</span>
               <ArrowRight className="w-4 h-4" />
             </a>
 
@@ -87,7 +87,7 @@ export const Hero: React.FC = () => {
               className="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-white font-mono text-xs border border-arc/40 hover:border-arc transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(0,240,255,0.15)]"
             >
               <Terminal className="w-4 h-4 text-arc" />
-              <span>EXPLORE MISSIONS</span>
+              <span>EXPLORE PROJECTS</span>
             </a>
 
             <a
@@ -134,11 +134,11 @@ export const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Column: Interactive 3D Arc Reactor Core */}
+        {/* Right Column: Interactive 3D Energy Core */}
         <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
           <div className="relative w-72 h-72 sm:w-88 sm:h-88 flex items-center justify-center">
             
-            {/* Outer Armor Ring with Tech Markers */}
+            {/* Outer Tech Ring with Markers */}
             <div className={`absolute inset-0 rounded-full border-2 border-dashed transition-all duration-700 ${
               pulseActive 
                 ? 'border-white scale-110 shadow-[0_0_60px_#00f0ff]' 
@@ -148,10 +148,10 @@ export const Hero: React.FC = () => {
             {/* Reverse Titanium Gear Ring */}
             <div className="absolute inset-4 rounded-full border border-amber-400/40 animate-spin-reverse border-t-transparent border-b-transparent" />
 
-            {/* Glowing Stark Repulsor Housing */}
+            {/* Glowing Interactive Core Housing */}
             <div 
               onClick={triggerArcOverload}
-              title="Click Arc Reactor to Channel Energy"
+              title="Click Energy Core to Discharge Pulse"
               className={`relative z-20 w-52 h-52 sm:w-64 sm:h-64 rounded-full bg-slate-950 border-4 border-arc/60 flex items-center justify-center cursor-pointer transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(0,240,255,0.4)] ${
                 pulseActive ? 'shadow-[0_0_90px_#00f0ff] ring-8 ring-cyan-300/40' : ''
               }`}
@@ -167,7 +167,7 @@ export const Hero: React.FC = () => {
                 ))}
               </div>
 
-              {/* Inner Triangle Palladium Lattice */}
+              {/* Inner Geometric Lattice */}
               <div className="relative w-36 h-36 rounded-full border-2 border-arc/80 flex items-center justify-center bg-cyan-950/30">
                 <div className="w-24 h-24 rounded-full border border-dashed border-white/60 animate-spin" />
                 

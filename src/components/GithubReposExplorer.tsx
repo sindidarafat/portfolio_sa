@@ -33,7 +33,7 @@ export const GithubReposExplorer: React.FC = () => {
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-arc/30 text-xs font-mono text-arc mb-3">
             <GitBranch className="w-3.5 h-3.5 text-arc" />
-            <span>STARK REPO REGISTRY // 29 PUBLIC REPOSITORIES</span>
+            <span>GITHUB REPO REGISTRY // 29 PUBLIC REPOSITORIES</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black font-display text-white tracking-tight">
             COMPLETE GITHUB CODE REPOSITORY

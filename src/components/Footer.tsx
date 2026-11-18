@@ -21,10 +21,10 @@ export const Footer: React.FC = () => {
           </div>
           <div>
             <div className="font-display font-bold text-white text-sm tracking-wider">
-              SINDID ARAFAT // STARK ARCHITECTURE
+              SINDID ARAFAT // PORTFOLIO
             </div>
             <div className="text-[10px] text-slate-500">
-              ENGINEERED FOR PRODUCTION & VERCEL DEPLOYMENT &bull; 2026
+              PRODUCT, BUSINESS ANALYSIS & AI ENGINEERING &bull; 2026
             </div>
           </div>
         </div>
@@ -66,13 +66,13 @@ export const Footer: React.FC = () => {
           </a>
         </div>
 
-        {/* Right Scroll to Top Repulsor Button */}
+        {/* Right Scroll to Top Button */}
         <button
           onClick={scrollToTop}
           className="px-3 py-2 rounded-xl bg-slate-900 border border-arc/30 hover:border-arc text-slate-300 hover:text-white flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(0,240,255,0.1)] group"
           title="Return to top"
         >
-          <span className="text-[11px] group-hover:text-arc">TOP PROTOCOL</span>
+          <span className="text-[11px] group-hover:text-arc">BACK TO TOP</span>
           <ArrowUp className="w-4 h-4 text-arc group-hover:-translate-y-0.5 transition-transform" />
         </button>
 

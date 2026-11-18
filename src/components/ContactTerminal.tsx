@@ -12,8 +12,8 @@ export const ContactTerminal: React.FC = () => {
   // Mini interactive CLI state
   const [terminalInput, setTerminalInput] = useState('');
   const [terminalHistory, setTerminalHistory] = useState<Array<{ cmd: string; resp: string }>>([
-    { cmd: 'jarvis --status', resp: 'STARK PROTOCOL ONLINE // SINDID ARAFAT OPERATIONAL ARCHITECT' },
-    { cmd: 'help', resp: 'COMMANDS AVAILABLE: help | skills | projects | cv | contact | unibeam | clear' }
+    { cmd: 'system --status', resp: 'PORTFOLIO OS ONLINE // SINDID ARAFAT — SYSTEM ARCHITECT' },
+    { cmd: 'help', resp: 'COMMANDS AVAILABLE: help | skills | projects | cv | contact | overdrive | clear' }
   ]);
 
   const copyEmail = () => {
@@ -43,7 +43,7 @@ export const ContactTerminal: React.FC = () => {
 
     switch (cmd) {
       case 'help':
-        resp = 'Available protocols: skills | projects | repos | awards | cv | unibeam | hire | clear';
+        resp = 'Available commands: skills | projects | repos | awards | cv | overdrive | hire | clear';
         break;
       case 'skills':
         resp = 'Core: Product/BA (PRD, UAT, Jira) | AI/ML (PyTorch, KAN, Scikit-learn) | Full-Stack (React, Node, PHP)';
@@ -61,9 +61,9 @@ export const ContactTerminal: React.FC = () => {
         window.open(portfolioData.personal.cvUrl, '_blank');
         resp = 'Opening Sindid_Arafat_CV.pdf in secure window...';
         break;
-      case 'unibeam':
+      case 'overdrive':
         sound.playUnibeamBlast();
-        resp = '⚡ UNIBEAM DISCHARGE EXECUTED! OVERHEATING DISSIPATED.';
+        resp = '⚡ OVERDRIVE PULSE EXECUTED! SYSTEM RUNNING AT PEAK OUTPUT.';
         break;
       case 'hire':
       case 'contact':
@@ -107,7 +107,7 @@ export const ContactTerminal: React.FC = () => {
           <div className="p-6 rounded-2xl bg-[#090e1c]/90 border border-slate-800 backdrop-blur-md hud-corner-box space-y-6">
             <h3 className="text-xl font-bold font-display text-white border-b border-slate-800 pb-3 flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-arc" />
-              <span>STARK COMMS DOSSIER</span>
+              <span>DIRECT CONTACT DOSSIER</span>
             </h3>
 
             {/* Email item with copy button */}
@@ -197,14 +197,14 @@ export const ContactTerminal: React.FC = () => {
             </div>
           </div>
 
-          {/* Interactive Stark CLI Terminal */}
+          {/* Interactive CLI Terminal */}
           <div className="p-4 rounded-2xl bg-black border border-arc/40 shadow-inner font-mono text-xs">
             <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-[11px] text-slate-500">
               <div className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                <span className="ml-2 text-slate-400">J.A.R.V.I.S. CLI TERMINAL</span>
+                <span className="ml-2 text-slate-400">INTERACTIVE CLI TERMINAL</span>
               </div>
               <span className="text-arc">TYPE: 'help'</span>
             </div>
@@ -213,7 +213,7 @@ export const ContactTerminal: React.FC = () => {
               {terminalHistory.map((item, idx) => (
                 <div key={idx} className="space-y-0.5">
                   <div className="text-arc">
-                    <span className="text-amber-400">stark@sa-hud:~$</span> {item.cmd}
+                    <span className="text-amber-400">sindid@portfolio:~$</span> {item.cmd}
                   </div>
                   <div className="text-slate-400 pl-2 border-l border-slate-800">
                     {item.resp}
@@ -228,7 +228,7 @@ export const ContactTerminal: React.FC = () => {
                 type="text"
                 value={terminalInput}
                 onChange={(e) => setTerminalInput(e.target.value)}
-                placeholder="type a command (e.g. skills, projects, unibeam)..."
+                placeholder="type a command (e.g. skills, projects, overdrive)..."
                 className="w-full bg-transparent text-white focus:outline-none placeholder-slate-600 text-xs"
               />
             </form>
@@ -261,7 +261,7 @@ export const ContactTerminal: React.FC = () => {
                   TRANSMISSION DISPATCHED SUCCESSFULLY!
                 </h4>
                 <p className="text-xs text-slate-400 max-w-md mx-auto">
-                  Thank you for reaching out. J.A.R.V.I.S. has routed your message to Sindid's primary communication channel. Expect a response shortly!
+                  Thank you for reaching out. Your message has been routed to Sindid's primary communication channel. Expect a response shortly!
                 </p>
               </div>
             ) : (
@@ -276,7 +276,7 @@ export const ContactTerminal: React.FC = () => {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. Tony Stark / Sarah Jenkins"
+                      placeholder="e.g. Alex Rahman / Sarah Jenkins"
                       className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-mono text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors"
                     />
                   </div>

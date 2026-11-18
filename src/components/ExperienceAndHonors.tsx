@@ -156,7 +156,7 @@ export const ExperienceAndHonors: React.FC = () => {
           <div className="p-5 rounded-2xl bg-cyan-950/20 border border-arc/30 text-xs font-mono text-slate-300 space-y-2">
             <div className="flex items-center gap-2 text-arc font-bold">
               <Sparkles className="w-4 h-4 text-arc" />
-              <span>STARK CITIZENSHIP & SOCIAL INITIATIVE</span>
+              <span>COMMUNITY & LEADERSHIP IMPACT</span>
             </div>
             <p className="text-slate-400 leading-relaxed">
               3 consecutive years of volunteer coordination at BRAC University and recipient of The Duke of Edinburgh's International Award (Bronze, May 2024), demonstrating perseverance, community engagement, and team discipline.

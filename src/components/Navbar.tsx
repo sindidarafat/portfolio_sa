@@ -24,13 +24,13 @@ export const Navbar: React.FC = () => {
   };
 
   const navLinks = [
-    { label: 'PROTOCOL', href: '#protocol' },
-    { label: 'ARSENAL', href: '#skills' },
-    { label: 'MISSIONS', href: '#projects' },
-    { label: 'ALL REPOS', href: '#repos' },
-    { label: 'ARC DEFENDER', href: '#arc-matrix' },
-    { label: 'DOSSIER', href: '#experience' },
-    { label: 'COMMS', href: '#contact' },
+    { label: 'ABOUT', href: '#protocol' },
+    { label: 'SKILLS', href: '#skills' },
+    { label: 'PROJECTS', href: '#projects' },
+    { label: 'REPOS', href: '#repos' },
+    { label: 'GRID GAME', href: '#arc-matrix' },
+    { label: 'EXPERIENCE', href: '#experience' },
+    { label: 'CONTACT', href: '#contact' },
   ];
 
   return (
@@ -40,10 +40,10 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1.5 text-arc">
             <span className="w-1.5 h-1.5 rounded-full bg-arc animate-ping" />
-            J.A.R.V.I.S. v4.2 ONLINE
+            SYSTEM OS v4.2 ONLINE
           </span>
-          <span>ARMOR: MARK LXXXV</span>
-          <span>POWER CORE: 100% PURE PALLADIUM</span>
+          <span>BUILD: PRODUCTION v2.8</span>
+          <span>STATUS: 100% OPERATIONAL</span>
         </div>
         <div className="flex items-center gap-4">
           <span>COORDINATES: {portfolioData.personal.coordinates}</span>
@@ -52,37 +52,37 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* Main navigation row */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Stark Brand Logo */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+        {/* Brand Logo */}
         <a 
           href="#protocol" 
           onClick={() => sound.playJarvisChirp()}
-          className="flex items-center gap-3 group cursor-pointer"
+          className="flex items-center gap-3 group cursor-pointer shrink-0"
         >
-          {/* Glowing Arc Reactor Emblem */}
-          <div className="w-10 h-10 rounded-full border border-arc/60 bg-slate-950 flex items-center justify-center relative shadow-[0_0_15px_rgba(0,240,255,0.4)] group-hover:shadow-[0_0_25px_rgba(0,240,255,0.8)] transition-all">
+          {/* Glowing Reactor Emblem */}
+          <div className="w-10 h-10 rounded-full border border-arc/60 bg-slate-950 flex items-center justify-center relative shadow-[0_0_15px_rgba(0,240,255,0.4)] group-hover:shadow-[0_0_25px_rgba(0,240,255,0.8)] transition-all shrink-0">
             <div className="w-6 h-6 rounded-full border border-dashed border-amber-400 animate-spin-slow absolute" />
             <div className="w-3 h-3 rounded-full bg-arc shadow-[0_0_10px_#00f0ff] animate-pulse" />
           </div>
           <div>
-            <div className="font-display font-black text-lg tracking-wider text-white group-hover:text-arc transition-colors flex items-center gap-1">
+            <div className="font-display font-black text-lg tracking-wider text-white group-hover:text-arc transition-colors flex items-center gap-1 whitespace-nowrap">
               <span>SINDID ARAFAT</span>
               <span className="text-xs font-mono text-amber-400 font-semibold">[SA]</span>
             </div>
-            <div className="text-[10px] font-mono text-slate-400 tracking-widest uppercase">
-              STARK PROTOCOL // BA & AI
+            <div className="text-[10px] font-mono text-slate-400 tracking-widest uppercase whitespace-nowrap">
+              PRODUCT, BA & AI ENGINEER
             </div>
           </div>
         </a>
 
         {/* Desktop Nav Items */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1">
           {navLinks.map((link, idx) => (
             <a
               key={link.label}
               href={link.href}
               onClick={() => sound.playJarvisChirp()}
-              className="px-3 py-1.5 text-xs font-mono text-slate-300 hover:text-arc hover:bg-arc/10 rounded transition-all border border-transparent hover:border-arc/30"
+              className="px-2.5 py-1.5 text-xs font-mono text-slate-300 hover:text-arc hover:bg-arc/10 rounded transition-all border border-transparent hover:border-arc/30 whitespace-nowrap"
             >
               <span className="text-arc/60 text-[10px] mr-1">0{idx + 1}.</span>
               {link.label}
@@ -91,11 +91,11 @@ export const Navbar: React.FC = () => {
         </nav>
 
         {/* Right Actions: Sound FX Toggle & CV Download */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 shrink-0">
           <button
             onClick={toggleSound}
-            title={audioActive ? 'Mute Interface Audio' : 'Enable Stark Sound Effects'}
-            className={`p-2 rounded-lg border font-mono text-xs flex items-center gap-1.5 transition-all ${
+            title={audioActive ? 'Mute Interface Audio' : 'Enable Interface Sound Effects'}
+            className={`p-2 rounded-lg border font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap ${
               audioActive
                 ? 'bg-cyan-950/40 border-arc text-arc shadow-[0_0_10px_rgba(0,240,255,0.3)]'
                 : 'bg-slate-900 border-slate-700 text-slate-500'
@@ -109,16 +109,16 @@ export const Navbar: React.FC = () => {
             href={portfolioData.personal.cvUrl}
             download="Sindid_Arafat_CV.pdf"
             onClick={() => sound.playRepulsorShot()}
-            className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-mono font-bold text-xs tracking-wider shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all transform hover:scale-105 active:scale-95"
+            className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-mono font-bold text-xs tracking-wider shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all transform hover:scale-105 active:scale-95 whitespace-nowrap"
           >
             <Download className="w-3.5 h-3.5" />
-            <span>CV SCHEMATIC</span>
+            <span>DOWNLOAD CV</span>
           </a>
 
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg border border-slate-700 text-slate-300 hover:text-white"
+            className="lg:hidden p-2 rounded-lg border border-slate-700 text-slate-300 hover:text-white"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -127,7 +127,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#050811] border-b border-arc/30 px-4 pt-2 pb-6 space-y-2 font-mono text-xs animate-in slide-in-from-top-4">
+        <div className="lg:hidden bg-[#050811] border-b border-arc/30 px-4 pt-2 pb-6 space-y-2 font-mono text-xs animate-in slide-in-from-top-4">
           {navLinks.map((link, idx) => (
             <a
               key={link.label}

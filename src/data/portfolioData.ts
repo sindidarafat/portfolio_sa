@@ -8,13 +8,13 @@ export interface Project {
   githubUrl: string;
   liveUrl?: string;
   highlights: string[];
-  markLevel: string; // e.g. "MARK VII", "MARK XLII", "MARK LXXXV"
+  markLevel: string; // e.g. "BUILD v8.5", "RESEARCH v5.0"
 }
 
 export interface SkillCategory {
   id: string;
   title: string;
-  code: string; // e.g. "STARK-SYS-01"
+  code: string; // e.g. "SYS-MOD-01"
   icon: string;
   description?: string;
   skills: { name: string; level: number; tag: string }[];
@@ -23,11 +23,11 @@ export interface SkillCategory {
 export const portfolioData = {
   personal: {
     name: "SINDID ARAFAT",
-    codename: "STARK-ARCHITECT // 001",
+    codename: "SA-ARCHITECT // 001",
     tagline: "Product & Business Analyst | AI/ML & Full-Stack Engineer",
     location: "Dhaka, Bangladesh",
     coordinates: "23.8103° N, 90.4125° E",
-    status: "OPERATIONAL // READY FOR PROTOCOLS",
+    status: "AVAILABLE // OPEN TO OPPORTUNITIES",
     cgpa: "3.70 / 4.00",
     email: "sindidarafat275@gmail.com",
     phone: "+880 1735807816",
@@ -40,7 +40,7 @@ export const portfolioData = {
 
   hudStats: [
     { label: "ACADEMIC MERIT", value: "3.70 CGPA", detail: "BRAC University CSE", color: "arc" },
-    { label: "GITHUB MISSIONS", value: "29 Repos", detail: "AI/ML, Web & Systems", color: "gold" },
+    { label: "GITHUB PROJECTS", value: "29 Repos", detail: "AI/ML, Web & Systems", color: "gold" },
     { label: "WORLD BANK UIHP", value: "National Winner", detail: "ICT Division Bangladesh", color: "crimson" },
     { label: "SCHOLARSHIPS", value: "4x Dean's/VC", detail: "Merit-Based Honors", color: "arc" },
   ],
@@ -66,7 +66,7 @@ export const portfolioData = {
     {
       id: "ai-ml",
       title: "AI, Machine Learning & Research",
-      code: "STARK-NEURAL-09",
+      code: "NEURAL-SYS-09",
       icon: "Cpu",
       description: "Data intelligence, predictive modeling, and cutting-edge neural architectures (KAN, Transformers).",
       skills: [
@@ -83,7 +83,7 @@ export const portfolioData = {
     {
       id: "web-fullstack",
       title: "Web & Full-Stack Development",
-      code: "STARK-REACTOR-WEB",
+      code: "WEB-ENGINE-03",
       icon: "Globe",
       description: "Architecting responsive, performant user interfaces and secure backend API services.",
       skills: [
@@ -117,7 +117,7 @@ export const portfolioData = {
     {
       id: "creative-design",
       title: "Creative Direction & Design Suite",
-      code: "STARK-VISUAL-LAB",
+      code: "VISUAL-LAB-05",
       icon: "Palette",
       description: "Visual branding, event marketing art direction, UI wireframes, and motion graphics production.",
       skills: [
@@ -135,7 +135,7 @@ export const portfolioData = {
     {
       title: "SkillSwap",
       category: "Full-Stack" as const,
-      markLevel: "MARK LXXXV",
+      markLevel: "BUILD v8.5",
       tagline: "Collaborative Skill Bartering & Real-time Community Exchange Platform",
       description: "An end-to-end web platform where users can swap skills, communicate via real-time messaging, and connect with peers without currency transactions. Modeled after modern social peer-to-peer barter economies.",
       businessImpact: "Addresses skill inflation and access barriers by enabling direct barter of developer, design, and business talents with built-in rating mechanics.",
@@ -150,7 +150,7 @@ export const portfolioData = {
     {
       title: "Electrician Finder (Hyperlocal Services)",
       category: "Product" as const,
-      markLevel: "MARK XLII",
+      markLevel: "BUILD v4.2",
       tagline: "Ride-Hailing & On-Demand Utility Booking System for Certified Electricians",
       description: "A tailored web application modeled on Uber and Foodpanda operational workflows to solve urban maintenance problems in Bangladesh by instantly finding, rating, and hiring nearby certified electricians.",
       businessImpact: "Developed under CSE-370 as a full business-technical project: PRD, user journey maps, dispatch logic, and pricing transparency.",
@@ -165,7 +165,7 @@ export const portfolioData = {
     {
       title: "Bank Loan Approval Prediction Engine",
       category: "AI / ML" as const,
-      markLevel: "MARK VII",
+      markLevel: "MODEL v3.7",
       tagline: "Predictive Risk Analytics & Automated Credit Underwriting Classifier",
       description: "An AI/ML machine learning pipeline that evaluates applicant income, credit score histories, asset ratios, and demographic variables to predict loan default risks with high statistical precision.",
       businessImpact: "Reduces manual credit assessment cycle time and mitigates loan default exposure through automated decision trees and ensemble modeling.",
@@ -180,7 +180,7 @@ export const portfolioData = {
     {
       title: "Kolmogorov-Arnold Transformer (KAT)",
       category: "AI / ML" as const,
-      markLevel: "MARK L",
+      markLevel: "RESEARCH v5.0",
       tagline: "Cutting-Edge Neural Splines Meets Multi-Head Attention Architectures",
       description: "Advanced deep learning experimentation exploring Kolmogorov-Arnold Networks (KAN) replacing standard MLPs inside Transformer encoder/decoder blocks for enhanced interpretability and parameter efficiency.",
       businessImpact: "Pioneering mathematical research into next-generation neural architectures that learn activation functions on edges rather than fixed node activations.",
@@ -195,7 +195,7 @@ export const portfolioData = {
     {
       title: "Heart Disease & Weather AI Predictors",
       category: "AI / ML" as const,
-      markLevel: "MARK VI",
+      markLevel: "MODEL v2.6",
       tagline: "Dual Diagnostic AI Pipelines for Clinical Biometrics & Meteorological Forecasts",
       description: "Two clinical and environmental machine learning systems. Heart Disease Predictor detects early cardiovascular vulnerability from patient vital signs; Weather Predictor AI models microclimatic precipitation factors.",
       businessImpact: "Translates complex sensor and diagnostic telemetry into immediate early-warning probabilities for medical clinicians and weather tracking.",
@@ -210,7 +210,7 @@ export const portfolioData = {
     {
       title: "MADMAX Fury Road (3D OpenGL Game)",
       category: "Graphics" as const,
-      markLevel: "MARK III",
+      markLevel: "ENGINE v3.0",
       tagline: "High-Octane 3D Vehicular Combat & Interactive Graphics Engine",
       description: "An arcade combat and obstacle-dodging game built from scratch using C++ and the OpenGL graphics rendering pipeline, complete with dynamic lighting, camera coordinates, and collision physics.",
       businessImpact: "Demonstrates core mastery of the hardware rendering pipeline, vector transformation mathematics, and real-time game loop performance optimization.",
@@ -225,7 +225,7 @@ export const portfolioData = {
     {
       title: "Simon Says 3x3 Matrix & MiniVSFS Systems",
       category: "Systems & Hardware" as const,
-      markLevel: "MARK I",
+      markLevel: "SYSTEM v1.0",
       tagline: "Embedded Microprocessor Engineering & Low-Level File System Simulator",
       description: "A hardware 3x3 LED matrix physical game running on Arduino Uno (C++) combined with MiniVSFS, a low-level C file system image generator that simulates inode tables and block allocation.",
       businessImpact: "Proves root-level computer science competence: understanding memory registers, micro-controllers, disk sectors, and bare-metal hardware execution.",
@@ -240,7 +240,7 @@ export const portfolioData = {
     {
       title: "SmartOffice & CapSite Product Suite",
       category: "Product" as const,
-      markLevel: "MARK IX",
+      markLevel: "SUITE v2.9",
       tagline: "Agile Task Management & Workplace Resource Intelligence Suite",
       description: "Modern web tools including Cap Task Board and SmartOffice for sprint velocity tracking, task status boards, and self-assessment evaluations.",
       businessImpact: "Engineered specifically to solve team productivity visibility, sprint backlogs, and workflow accountability.",

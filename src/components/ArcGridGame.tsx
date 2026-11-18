@@ -42,7 +42,7 @@ export const ArcGridGame: React.FC = () => {
   // Mode: 'matrix' (Heatmap viewer) or 'combat' (Arcade game)
   const [mode, setMode] = useState<'matrix' | 'combat'>('matrix');
   const [selectedYear, setSelectedYear] = useState<'2026' | '2025' | '2024' | 'ALL'>('2026');
-  const [colorTheme, setColorTheme] = useState<'arc' | 'ironman' | 'matrix' | 'nanotech'>('arc');
+  const [colorTheme, setColorTheme] = useState<'cyan' | 'crimson' | 'matrix' | 'violet'>('cyan');
   
   // Custom cell hover
   const [hoveredCell, setHoveredCell] = useState<{ cell: Cell; x: number; y: number } | null>(null);
@@ -160,14 +160,14 @@ export const ArcGridGame: React.FC = () => {
 
     if (level === 0) return 'bg-[#161b22] border border-[#21262d]/60 hover:border-cyan-500/40';
 
-    if (colorTheme === 'arc') {
+    if (colorTheme === 'cyan') {
       switch (level) {
         case 1: return 'bg-[#003847] border border-[#005c75] shadow-[0_0_4px_rgba(0,240,255,0.2)]';
         case 2: return 'bg-[#00708f] border border-[#009bb8] shadow-[0_0_6px_rgba(0,240,255,0.4)]';
         case 3: return 'bg-[#00b4d8] border border-[#38d8f7] shadow-[0_0_8px_rgba(0,240,255,0.6)]';
         case 4: return 'bg-[#00f0ff] border border-white shadow-[0_0_12px_rgba(0,240,255,0.9)]';
       }
-    } else if (colorTheme === 'ironman') {
+    } else if (colorTheme === 'crimson') {
       switch (level) {
         case 1: return 'bg-[#4a0404] border border-[#7f1d1d]';
         case 2: return 'bg-[#991b1b] border border-[#b91c1c]';
@@ -183,7 +183,7 @@ export const ArcGridGame: React.FC = () => {
         case 4: return 'bg-[#39d353] border border-emerald-200 shadow-[0_0_8px_#39d353]';
       }
     } else {
-      // Nanotech violet
+      // Cyber violet
       switch (level) {
         case 1: return 'bg-[#2e1065] border border-[#4c1d95]';
         case 2: return 'bg-[#5b21b6] border border-[#7c3aed]';
@@ -280,12 +280,12 @@ export const ArcGridGame: React.FC = () => {
   useEffect(() => {
     if (arcCharge >= 100 && !unibeamReady) {
       setUnibeamReady(true);
-      setAnnouncement("⚡ UNIBEAM FULLY CHARGED! PRESS [FIRE UNIBEAM] OR [SPACE] TO OBLITERATE GRID!");
+      setAnnouncement("⚡ OVERDRIVE FULLY CHARGED! PRESS [FIRE OVERDRIVE] OR [ENTER] TO CLEAR GRID!");
       sound.playTargetLock();
     }
   }, [arcCharge, unibeamReady]);
 
-  // Repulsor blast action on cell
+  // Pulse blast action on cell
   const fireRepulsorAt = (week: number, day: number) => {
     setReticle({ week, day });
     setLaserEffect({ targetWeek: week, targetDay: day });
@@ -308,7 +308,7 @@ export const ArcGridGame: React.FC = () => {
         setAnnouncement("⚡ OVERCHARGE ACTIVATED! 5 THREATS PURGED!");
       } else if (hitPowerUp.type === 'unibeam') {
         setArcCharge(100);
-        setAnnouncement("💥 DIRECT ARC RECHARGE! UNIBEAM ARMED!");
+        setAnnouncement("💥 DIRECT CORE RECHARGE! OVERDRIVE ARMED!");
       } else {
         setAnnouncement("🛡️ GRID DEFENSE BUFFER DEPLOYED!");
       }
@@ -339,7 +339,7 @@ export const ArcGridGame: React.FC = () => {
 
       if ((commitsSecured + 1) % 10 === 0) {
         setWave(w => w + 1);
-        setAnnouncement(`LEVEL UP: WAVE ${wave + 1} // ULTRON DRONES MULTIPLYING!`);
+        setAnnouncement(`LEVEL UP: WAVE ${wave + 1} // ROGUE BUGS MULTIPLYING!`);
         sound.playArcPulse();
       }
     } else {
@@ -348,7 +348,7 @@ export const ArcGridGame: React.FC = () => {
     }
   };
 
-  // Fire Unibeam Overload!
+  // Fire Overdrive Blast!
   const triggerUnibeam = () => {
     if (!unibeamReady && arcCharge < 100) return;
     setUnibeamActive(true);
@@ -377,7 +377,7 @@ export const ArcGridGame: React.FC = () => {
     setPowerUps([]);
     setArcCharge(15);
     setUnibeamReady(false);
-    setAnnouncement(`💥 UNIBEAM PROTOCOL EXECUTED! ${enemyCount} ROGUE THREATS ANNIHILATED! (+${bonus} PTS)`);
+    setAnnouncement(`💥 OVERDRIVE PROTOCOL EXECUTED! ${enemyCount} ROGUE BUGS ANNIHILATED! (+${bonus} PTS)`);
 
     setTimeout(() => {
       setUnibeamActive(false);
@@ -442,20 +442,20 @@ export const ArcGridGame: React.FC = () => {
           <div className="flex items-center gap-3 mb-2">
             <span className="px-2.5 py-0.5 rounded text-xs font-mono font-bold tracking-wider bg-arc/20 text-arc border border-arc/40 flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-arc animate-ping" />
-              STARK HUD // TELEMETRY
+              LIVE HUD // TELEMETRY
             </span>
             <span className="text-xs font-mono text-slate-400">
-              TACTICAL GRID DEFENDER
+              INTERACTIVE GRID DEFENDER
             </span>
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white font-display flex items-center gap-3">
-            <span>GITHUB MATRIX & ARC DEFENDER</span>
+            <span>GITHUB MATRIX & GRID DEFENDER</span>
             <span className="text-xs font-mono px-2 py-1 rounded bg-slate-800 text-amber-400 border border-amber-500/30">
-              v2.8 MARK-LXXXV
+              v2.8 INTERACTIVE
             </span>
           </h2>
           <p className="text-slate-400 text-sm max-w-2xl mt-1 font-sans">
-            Interactive visualization of GitHub contribution commits across all active cycles. Switch years, design custom commit art, or initialize the <strong>Arc Defender Combat Protocol</strong> to protect the repository grid from Ultron anomalies!
+            Interactive visualization of GitHub contribution commits across all active cycles. Switch years, design custom commit art, or initialize the <strong>Grid Defender Arcade</strong> to protect the repository grid from rogue bugs!
           </p>
         </div>
 
@@ -483,7 +483,7 @@ export const ArcGridGame: React.FC = () => {
                 className="px-4 py-2 rounded text-xs font-mono font-bold tracking-wider bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white shadow-[0_0_20px_rgba(220,38,38,0.5)] flex items-center gap-2 border border-amber-400/50 transition-all transform hover:scale-105 active:scale-95"
               >
                 <Play className="w-3.5 h-3.5 fill-current" />
-                INITIALIZE ARC DEFENDER GAME
+                PLAY GRID DEFENDER GAME
               </button>
             </>
           ) : (
@@ -522,7 +522,7 @@ export const ArcGridGame: React.FC = () => {
             <div className="flex items-center gap-2">
               <span className={`w-2 h-2 rounded-full ${mode === 'combat' ? 'bg-red-500 animate-ping' : 'bg-arc animate-pulse'}`} />
               <span className="font-bold text-white tracking-wider">
-                {mode === 'combat' ? 'COMBAT ENGAGEMENT // SECTOR ULTRON' : `${selectedYear} CONTRIBUTION OVERVIEW`}
+                {mode === 'combat' ? 'COMBAT ENGAGEMENT // BUG SWARM' : `${selectedYear} CONTRIBUTION OVERVIEW`}
               </span>
             </div>
             <span className="hidden sm:inline text-slate-500">|</span>
@@ -555,7 +555,7 @@ export const ArcGridGame: React.FC = () => {
               {/* Theme selector */}
               <div className="flex items-center gap-1 ml-2 border-l border-slate-700 pl-3">
                 <span className="text-slate-500 text-[10px]">THEME:</span>
-                {(['arc', 'ironman', 'matrix', 'nanotech'] as const).map(theme => (
+                {(['cyan', 'crimson', 'matrix', 'violet'] as const).map(theme => (
                   <button
                     key={theme}
                     onClick={() => {
@@ -566,7 +566,7 @@ export const ArcGridGame: React.FC = () => {
                     className={`w-4 h-4 rounded-full border transition-all ${
                       colorTheme === theme ? 'scale-125 border-white ring-2 ring-arc/50' : 'opacity-60 border-transparent hover:opacity-100'
                     } ${
-                      theme === 'arc' ? 'bg-cyan-400' : theme === 'ironman' ? 'bg-red-500' : theme === 'matrix' ? 'bg-emerald-400' : 'bg-purple-400'
+                      theme === 'cyan' ? 'bg-cyan-400' : theme === 'crimson' ? 'bg-red-500' : theme === 'matrix' ? 'bg-emerald-400' : 'bg-purple-400'
                     }`}
                   />
                 ))}
@@ -610,17 +610,17 @@ export const ArcGridGame: React.FC = () => {
                   onClick={triggerUnibeam}
                   className="px-2.5 py-0.5 rounded bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-extrabold text-[11px] animate-pulse shadow-[0_0_15px_#00f0ff]"
                 >
-                  ⚡ FIRE UNIBEAM [SPACE]
+                  ⚡ FIRE OVERDRIVE [ENTER]
                 </button>
               )}
             </div>
           </div>
         )}
 
-        {/* Arc Reactor Energy Bar (Active in Combat or Heatmap) */}
+        {/* Energy Core Bar (Active in Combat or Heatmap) */}
         <div className="px-5 pt-3 pb-2 flex items-center justify-between gap-4 border-b border-slate-800/80 bg-slate-900/30 text-xs font-mono">
           <div className="flex items-center gap-2">
-            <span className="text-slate-400">ARC REACTOR CORE:</span>
+            <span className="text-slate-400">ENERGY CORE:</span>
             <div className="w-36 sm:w-64 h-3 bg-slate-950 rounded-full overflow-hidden border border-arc/30 p-0.5 relative">
               <div
                 className={`h-full rounded-full transition-all duration-300 ${
@@ -762,7 +762,7 @@ export const ArcGridGame: React.FC = () => {
         {mode === 'combat' && (
           <div className="p-3 bg-slate-950/80 border-t border-red-500/20 text-xs font-mono text-slate-400 flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <span><strong>HOW TO DEFEND:</strong> Click or [SPACE] to fire Repulsor ray at red anomalies.</span>
+              <span><strong>HOW TO DEFEND:</strong> Click or [SPACE] to fire Pulse Cannon at red anomalies.</span>
               <span><strong>CONTROLS:</strong> Mouse aim or [WASD / Arrow Keys].</span>
               <span><strong>COMBOS:</strong> Chain quick hits to boost score multiplier up to 10x!</span>
             </div>
@@ -774,7 +774,7 @@ export const ArcGridGame: React.FC = () => {
               className="px-3 py-1 rounded bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center gap-1"
             >
               <Crosshair className="w-3.5 h-3.5" />
-              FIRE REPULSOR
+              FIRE PULSE
             </button>
           </div>
         )}
