@@ -103,9 +103,9 @@ export const GithubReposExplorer: React.FC = () => {
             {/* Top row */}
             <div>
               <div className="flex items-start justify-between gap-2 mb-2">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 min-w-0 flex-1">
                   <Terminal className="w-4 h-4 text-arc shrink-0" />
-                  <h4 className="font-mono text-sm font-bold text-white group-hover:text-arc transition-colors truncate max-w-[200px]">
+                  <h4 className="font-mono text-sm font-bold text-white group-hover:text-arc transition-colors truncate">
                     {repo.name}
                   </h4>
                 </div>

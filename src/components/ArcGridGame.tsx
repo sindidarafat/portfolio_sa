@@ -597,12 +597,12 @@ export const ArcGridGame: React.FC = () => {
 
         {/* Combat Announcement Banner */}
         {mode === 'combat' && (
-          <div className="bg-red-950/40 border-b border-red-500/30 px-5 py-2 flex items-center justify-between text-xs font-mono text-red-200">
+          <div className="bg-red-950/40 border-b border-red-500/30 px-4 sm:px-5 py-2 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-red-200">
             <span className="flex items-center gap-2">
-              <Zap className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+              <Zap className="w-3.5 h-3.5 text-amber-400 animate-pulse shrink-0" />
               {announcement}
             </span>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <span>COMMITS SECURED: <strong className="text-arc">{commitsSecured}</strong></span>
               {unibeamReady && (
                 <button
@@ -617,10 +617,10 @@ export const ArcGridGame: React.FC = () => {
         )}
 
         {/* Energy Core Bar (Active in Combat or Heatmap) */}
-        <div className="px-5 pt-3 pb-2 flex items-center justify-between gap-4 border-b border-slate-800/80 bg-slate-900/30 text-xs font-mono">
-          <div className="flex items-center gap-2">
+        <div className="px-4 sm:px-5 pt-3 pb-2 flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 bg-slate-900/30 text-xs font-mono">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-slate-400">ENERGY CORE:</span>
-            <div className="w-36 sm:w-64 h-3 bg-slate-950 rounded-full overflow-hidden border border-arc/30 p-0.5 relative">
+            <div className="w-32 sm:w-64 h-3 bg-slate-950 rounded-full overflow-hidden border border-arc/30 p-0.5 relative">
               <div
                 className={`h-full rounded-full transition-all duration-300 ${
                   arcCharge >= 100 

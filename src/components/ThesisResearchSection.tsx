@@ -366,7 +366,7 @@ export const ThesisResearchSection: React.FC = () => {
               </div>
 
               <div className="overflow-x-auto rounded-xl border border-slate-800">
-                <table className="w-full text-left border-collapse text-xs sm:text-sm">
+                <table className="w-full text-left border-collapse text-xs sm:text-sm whitespace-nowrap">
                   <thead>
                     <tr className="bg-slate-950 border-b border-slate-800 font-mono text-[11px] text-slate-400 uppercase">
                       <th className="py-3 px-4">Dataset</th>

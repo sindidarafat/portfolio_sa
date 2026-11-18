@@ -86,7 +86,7 @@ export const CrixusWelcomeModal: React.FC<CrixusWelcomeModalProps> = ({
       <div className="flex flex-col items-start gap-2">
         {/* Compact HUD Speech Bubble — Appears after Iron-Man lands (< 1/4 screen) */}
         {landed && (
-          <div className="pointer-events-auto w-full rounded-2xl bg-[#070d1c]/95 backdrop-blur-xl border-2 border-arc/55 shadow-[0_0_35px_rgba(0,240,255,0.28)] p-4 relative animate-bubble-pop hud-corner-box">
+          <div className="pointer-events-auto w-full max-h-[55vh] overflow-y-auto rounded-2xl bg-[#070d1c]/95 backdrop-blur-xl border-2 border-arc/55 shadow-[0_0_35px_rgba(0,240,255,0.28)] p-3.5 sm:p-4 relative animate-bubble-pop hud-corner-box">
             {/* Close / Minimize */}
             <button
               type="button"
@@ -166,7 +166,7 @@ export const CrixusWelcomeModal: React.FC<CrixusWelcomeModalProps> = ({
             {/* Stylized Full-Body Flying Iron-Man SVG */}
             <svg
               viewBox="0 0 110 130"
-              className="w-20 h-24 sm:w-24 sm:h-28 drop-shadow-[0_0_18px_rgba(0,240,255,0.55)] transition-transform group-hover:scale-105"
+              className="w-16 h-20 sm:w-24 sm:h-28 drop-shadow-[0_0_18px_rgba(0,240,255,0.55)] transition-transform group-hover:scale-105"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >

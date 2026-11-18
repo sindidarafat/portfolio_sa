@@ -430,7 +430,7 @@ export const Hero: React.FC = () => {
                   return (
                     <div
                       key={`${energyLevel}-${idx}`}
-                      className={`absolute w-1 h-7 sm:h-8 left-1/2 top-2 -translate-x-1/2 origin-[50%_96px] sm:origin-[50%_120px] transition-all duration-300 ${stage.coilClass}`}
+                      className={`absolute w-1 h-7 sm:h-8 left-1/2 top-2 -translate-x-1/2 origin-[50%_92px] sm:origin-[50%_116px] transition-all duration-300 ${stage.coilClass}`}
                       style={{ transform: `rotate(${deg}deg)` }}
                     />
                   );
@@ -489,7 +489,7 @@ export const Hero: React.FC = () => {
               </div>
 
               {/* Dynamic Click Output Indicator */}
-              <div className={`absolute -bottom-8 px-3.5 py-1 rounded-full border text-[10px] font-mono tracking-wider whitespace-nowrap transition-all duration-300 ${stage.badgeClass}`}>
+              <div className={`absolute -bottom-8 px-3 py-1 rounded-full border text-[9px] sm:text-[10px] font-mono tracking-wider whitespace-nowrap transition-all duration-300 ${stage.badgeClass}`}>
                 {energyLevel === 300
                   ? '⚡ 300% MAX OVERDRIVE // CLICK TO RESET'
                   : `CLICK TO POWER UP // ${energyLevel}% ${stage.label}`}
@@ -539,21 +539,21 @@ export const Hero: React.FC = () => {
 
           {/* Diagnostic Readout Box below core — Reacts Live to Power Stage! */}
           <div className={`mt-4 w-full max-w-sm bg-slate-950/85 border rounded-xl p-4 font-mono text-xs text-slate-400 space-y-1.5 shadow-xl transition-all duration-500 ${stage.diagBorder}`}>
-            <div className="flex justify-between text-slate-300 border-b border-slate-800 pb-1.5">
+            <div className="flex justify-between gap-2 text-slate-300 border-b border-slate-800 pb-1.5">
               <span>SYSTEM DIAGNOSTIC</span>
-              <span className={`font-bold ${stage.diagText}`}>{stage.diagnostic}</span>
+              <span className={`font-bold text-right ${stage.diagText}`}>{stage.diagnostic}</span>
             </div>
-            <div className="flex justify-between">
-              <span>PRIMARY FOCUS:</span>
-              <span className="text-white">Product &amp; Business Analysis</span>
+            <div className="flex justify-between gap-2">
+              <span className="shrink-0">PRIMARY FOCUS:</span>
+              <span className="text-white text-right">Product &amp; Business Analysis</span>
             </div>
-            <div className="flex justify-between">
-              <span>CORE ARCHITECTURE:</span>
-              <span className="text-amber-400">Full-Stack &amp; AI/ML Research</span>
+            <div className="flex justify-between gap-2">
+              <span className="shrink-0">CORE ARCHITECTURE:</span>
+              <span className="text-amber-400 text-right">Full-Stack &amp; AI/ML Research</span>
             </div>
-            <div className="flex justify-between">
-              <span>CURRENT ROLE:</span>
-              <span className="text-emerald-400">Data &amp; Strategy Intern @ CAP</span>
+            <div className="flex justify-between gap-2">
+              <span className="shrink-0">CURRENT ROLE:</span>
+              <span className="text-emerald-400 text-right">Data &amp; Strategy Intern @ CAP</span>
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="border-t border-arc/20 bg-[#03060d] py-12 px-4 sm:px-6 lg:px-8 text-xs font-mono text-slate-400 relative">
+    <footer className="border-t border-arc/20 bg-[#03060d] pt-12 pb-20 sm:pb-12 px-4 sm:px-6 lg:px-8 text-xs font-mono text-slate-400 relative">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         
         {/* Left Branding */}

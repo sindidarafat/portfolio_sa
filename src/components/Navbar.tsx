@@ -71,25 +71,25 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
       </div>
 
       {/* Main navigation row */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
         {/* Brand Logo */}
         <a
           href="#protocol"
           onClick={(e) => handleNavClick(e, '#protocol')}
-          className="flex items-center gap-2.5 sm:gap-3 group cursor-pointer shrink-0"
+          className="flex items-center gap-2 sm:gap-3 group cursor-pointer shrink-0 min-w-0"
         >
           {/* Glowing Reactor Emblem */}
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-arc/60 bg-slate-950 flex items-center justify-center relative shadow-[0_0_15px_rgba(0,240,255,0.4)] group-hover:shadow-[0_0_25px_rgba(0,240,255,0.8)] transition-all shrink-0">
-            <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full border border-dashed border-amber-400 animate-spin-slow absolute" />
-            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-arc shadow-[0_0_10px_#00f0ff] animate-pulse" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-arc/60 bg-slate-950 flex items-center justify-center relative shadow-[0_0_15px_rgba(0,240,255,0.4)] group-hover:shadow-[0_0_25px_rgba(0,240,255,0.8)] transition-all shrink-0">
+            <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full border border-dashed border-amber-400 animate-spin-slow absolute" />
+            <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-arc shadow-[0_0_10px_#00f0ff] animate-pulse" />
           </div>
-          <div>
-            <div className="font-display font-black text-base sm:text-lg tracking-wider text-white group-hover:text-arc transition-colors flex items-center gap-1 whitespace-nowrap">
+          <div className="min-w-0">
+            <div className="font-display font-black text-sm sm:text-lg tracking-wider text-white group-hover:text-arc transition-colors flex items-center gap-1 whitespace-nowrap">
               <span>SINDID ARAFAT</span>
-              <span className="text-xs font-mono text-amber-400 font-semibold">[SA]</span>
+              <span className="hidden sm:inline text-xs font-mono text-amber-400 font-semibold">[SA]</span>
             </div>
-            <div className="text-[9px] sm:text-[10px] font-mono text-slate-400 tracking-widest uppercase whitespace-nowrap">
-              PRODUCT, BA & AI ENGINEER
+            <div className="text-[8px] sm:text-[10px] font-mono text-slate-400 tracking-wider sm:tracking-widest uppercase whitespace-nowrap">
+              PRODUCT, BA &amp; AI ENGINEER
             </div>
           </div>
         </a>
