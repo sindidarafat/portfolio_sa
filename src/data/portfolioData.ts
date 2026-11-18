@@ -24,7 +24,7 @@ export const portfolioData = {
   personal: {
     name: "SINDID ARAFAT",
     codename: "SA-ARCHITECT // 001",
-    tagline: "Product & Business Analyst | AI/ML & Full-Stack Engineer",
+    tagline: "Product and Business Analyst | Full-Stack Engineer | AI/ML Researcher",
     location: "Dhaka, Bangladesh",
     coordinates: "23.8103° N, 90.4125° E",
     status: "DATA & STRATEGY INTERN @ CAP",

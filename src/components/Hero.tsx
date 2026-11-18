@@ -42,9 +42,13 @@ export const Hero: React.FC = () => {
                 {portfolioData.personal.name}
               </span>
             </h1>
-            <p className="text-lg sm:text-xl font-mono text-amber-400 font-semibold tracking-wide flex items-center gap-2">
-              <Zap className="w-5 h-5 text-amber-400 fill-current animate-pulse" />
-              <span>Product & Business Analyst // AI/ML & Full-Stack Engineer</span>
+            <p className="text-base sm:text-lg font-mono text-amber-400 font-semibold tracking-wide flex flex-wrap items-center gap-2">
+              <Zap className="w-5 h-5 text-amber-400 fill-current animate-pulse shrink-0" />
+              <span>Product and Business Analyst</span>
+              <span className="text-slate-500 px-1">|</span>
+              <span>Full-Stack Engineer</span>
+              <span className="text-slate-500 px-1">|</span>
+              <span>AI/ML Researcher</span>
             </p>
           </div>
 
@@ -206,7 +210,7 @@ export const Hero: React.FC = () => {
             <div className="absolute -inset-6 rounded-full border border-arc/10 animate-ping pointer-events-none" />
           </div>
 
-          {/* Diagnostic Readout Box below reactor */}
+          {/* Diagnostic Readout Box below core */}
           <div className="mt-12 w-full max-w-sm bg-slate-950/80 border border-slate-800 rounded-xl p-4 font-mono text-xs text-slate-400 space-y-1.5 shadow-xl">
             <div className="flex justify-between text-slate-300 border-b border-slate-800 pb-1.5">
               <span>SYSTEM DIAGNOSTIC</span>
@@ -214,15 +218,15 @@ export const Hero: React.FC = () => {
             </div>
             <div className="flex justify-between">
               <span>PRIMARY FOCUS:</span>
-              <span className="text-white">Business Analysis & AI</span>
+              <span className="text-white">Product & Business Analysis</span>
             </div>
             <div className="flex justify-between">
               <span>CORE ARCHITECTURE:</span>
-              <span className="text-amber-400">Full-Stack & Neural ML</span>
+              <span className="text-amber-400">Full-Stack & AI/ML Research</span>
             </div>
             <div className="flex justify-between">
-              <span>ACTIVE DEPLOYMENT:</span>
-              <span className="text-emerald-400">Ready for Vercel Cloud</span>
+              <span>CURRENT ROLE:</span>
+              <span className="text-emerald-400">Data & Strategy Intern @ CAP</span>
             </div>
           </div>
         </div>
