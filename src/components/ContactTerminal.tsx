@@ -51,7 +51,7 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
       lines: [
         'Welcome! I am Crixus — Sindid Arafat’s personal assistant.',
         'Subject: Sindid Arafat | Product & Business Analyst | Data & Strategy Intern @ CAP (Dhaka)',
-        'LinkedIn: linkedin.com/in/sindid-arafat-1a593233b | GitHub: github.com/sindidarafat (29 Repos)',
+        'LinkedIn: linkedin.com/in/sindid-arafat-1a593233b | GitHub: github.com/sindidarafat (30 Repos)',
       ],
       accent: 'cyan',
     },
@@ -146,7 +146,7 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
           '• experience / cap   — CAP Internship, BRAC Computer Club (BUCC) & One Academy',
           '• education / cgpa   — BRAC University CSE (3.69/4.00), HSC & SSC (5.00/5.00)',
           '• skills / strengths — SQL, Excel, Power BI, Python, AI/ML, MERN, Figma, BA & Leadership',
-          '• projects / repos   — Featured builds & all 29 GitHub repositories',
+          '• projects / repos   — Featured builds & all 30 GitHub repositories',
           '• awards / bizception— UIHP Inter-Uni Winner, BIZCEPTION Semi-Finalist, Scholarships',
           '• certificates       — View all 7 verified certificates & recognitions',
           '• linkedin / contact — Direct LinkedIn, GitHub, Email, Phone & CV download',
@@ -355,7 +355,7 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
           'Education: BSc CSE, BRAC University (CGPA 3.69/4.00 | 4x Dean’s/VC List)',
           'Top Honors: UIHP Innovation Hub Inter-Uni Winner (National Qualifier) | BIZCEPTION Semi-Finalist | Duke of Edinburgh Bronze',
           'Core Stack: SQL, Excel, Power BI, Python, Scikit-learn, PyTorch, React, Node.js, PHP, Figma, Jira',
-          'Portfolio: 29 GitHub Repos | 7 Verified Certificates | Direct Email: sindidarafat275@gmail.com',
+          'Portfolio: 30 GitHub Repos | 7 Verified Certificates | Direct Email: sindidarafat275@gmail.com',
         ],
         accent: 'cyan',
       };
@@ -397,21 +397,18 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
   ];
 
   return (
-    <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
-      {/* Background radial */}
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-arc/5 rounded-full blur-[140px] pointer-events-none" />
-
-      {/* Header */}
-      <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-arc/30 text-xs font-mono text-arc mb-3">
-          <TerminalIcon className="w-3.5 h-3.5 text-arc" />
-          <span>TRANSMISSION CHANNEL // DIRECT CONTACT & CRIXUS AI</span>
+    <section id="contact" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto section-divider">
+      {/* Clean Header */}
+      <div className="max-w-2xl mb-14">
+        <div className="text-xs font-mono uppercase tracking-[0.2em] text-cyan-400 font-semibold mb-2">
+          Get in Touch
         </div>
-        <h2 className="text-3xl sm:text-5xl font-black font-display text-white tracking-tight">
-          INITIALIZE DIRECT CONTACT PROTOCOL
+        <h2 className="text-3xl sm:text-4xl font-display text-white tracking-normal">
+          Contact &amp; Crixus Assistant
         </h2>
-        <p className="text-slate-400 text-sm sm:text-base mt-2 font-sans">
-          Have an engineering venture, product/analyst role, AI research partnership, or collaboration? Send a direct email below or ask <strong>Crixus</strong> at the terminal!
+        <div className="h-[2px] w-16 rounded-full bg-gradient-to-r from-red-500 via-amber-400 to-cyan-400 mt-3 mb-3" />
+        <p className="text-slate-400 text-sm sm:text-base font-sans leading-relaxed">
+          Have a product/business analyst role, engineering project, or research collaboration in mind? Send a message directly to my inbox or query <strong>Crixus</strong> below.
         </p>
       </div>
 
@@ -419,29 +416,29 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
         {/* Left Column: Direct Information & Social Cards (5 cols) */}
         <div className="lg:col-span-5 flex flex-col">
-          <div className="p-6 rounded-2xl bg-[#090e1c]/90 border border-slate-800 backdrop-blur-md hud-corner-box space-y-5 flex-1 flex flex-col justify-between">
-            <div className="space-y-5">
-              <h3 className="text-xl font-bold font-display text-white border-b border-slate-800 pb-3 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-arc" />
-                <span>DIRECT CONTACT DOSSIER</span>
+          <div className="p-6 rounded-2xl clean-surface space-y-5 flex-1 flex flex-col justify-between">
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold font-display text-white border-b border-white/[0.08] pb-3 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-cyan-400" />
+                <span>Direct Contact</span>
               </h3>
 
               {/* Email item with copy button */}
-              <div className="flex items-center justify-between gap-2 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-arc/40 transition-all">
+              <div className="flex items-center justify-between gap-2 p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.07] hover:border-cyan-400/40 transition-colors">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-10 h-10 rounded-lg bg-arc/10 border border-arc/30 flex items-center justify-center text-arc shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-400/25 flex items-center justify-center text-cyan-300 shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div className="min-w-0">
-                    <div className="text-[10px] font-mono text-slate-400 uppercase">DIRECT EMAIL</div>
-                    <div className="text-xs sm:text-sm font-mono font-bold text-white select-all truncate">
+                    <div className="text-[11px] font-mono text-slate-400">Email</div>
+                    <div className="text-xs sm:text-sm font-mono font-semibold text-white select-all truncate">
                       {portfolioData.personal.email}
                     </div>
                   </div>
                 </div>
                 <button
                   onClick={copyEmail}
-                  className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-arc transition-all shrink-0"
+                  className="p-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-slate-300 hover:text-cyan-300 transition-colors shrink-0"
                   title="Copy email to clipboard"
                 >
                   {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -449,46 +446,43 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
               </div>
 
               {/* Phone item */}
-              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80">
-                <div className="w-10 h-10 rounded-lg bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
+              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.07]">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-400/25 flex items-center justify-center text-amber-300 shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[10px] font-mono text-slate-400 uppercase">TELEMETRY VOICE / WHATSAPP</div>
-                  <div className="text-xs sm:text-sm font-mono font-bold text-white">
+                  <div className="text-[11px] font-mono text-slate-400">Phone / WhatsApp</div>
+                  <div className="text-xs sm:text-sm font-mono font-semibold text-white">
                     {portfolioData.personal.phone}
                   </div>
                 </div>
               </div>
 
-              {/* Coordinates / Location */}
-              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80">
-                <div className="w-10 h-10 rounded-lg bg-red-400/10 border border-red-400/30 flex items-center justify-center text-red-400 shrink-0">
+              {/* Location */}
+              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.07]">
+                <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 flex items-center justify-center text-slate-300 shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[10px] font-mono text-slate-400 uppercase">LOCATION & BASE</div>
-                  <div className="text-xs sm:text-sm font-mono font-bold text-white">
+                  <div className="text-[11px] font-mono text-slate-400">Location</div>
+                  <div className="text-xs sm:text-sm font-mono font-semibold text-white">
                     {portfolioData.personal.location}
-                  </div>
-                  <div className="text-[10px] font-mono text-slate-500">
-                    {portfolioData.personal.coordinates}
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* External Portals — Prominent Icons */}
+            {/* External Portals — Large & Clean */}
             <div className="grid grid-cols-3 gap-3 pt-2">
               <a
                 href={portfolioData.personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playJarvisChirp()}
-                className="p-4 rounded-xl bg-slate-950 hover:bg-slate-900 border-2 border-slate-700 hover:border-arc shadow-[0_0_12px_rgba(0,240,255,0.1)] hover:shadow-[0_0_20px_rgba(0,240,255,0.35)] text-center flex flex-col items-center gap-2 transition-all text-white group"
+                className="p-4 rounded-xl bg-white/[0.04] hover:bg-white/[0.09] border border-white/15 hover:border-cyan-400/50 text-center flex flex-col items-center gap-2 transition-all text-white group"
               >
-                <GithubIcon className="w-8 h-8 text-white group-hover:text-arc transition-colors" />
-                <span className="text-xs font-mono font-bold tracking-wider">GITHUB</span>
+                <GithubIcon className="w-7 h-7 text-white group-hover:text-cyan-300 transition-colors" />
+                <span className="text-xs font-mono font-bold">GitHub</span>
               </a>
 
               <a
@@ -496,143 +490,140 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playJarvisChirp()}
-                className="p-4 rounded-xl bg-[#0a192f] hover:bg-[#0d2547] border-2 border-[#0a66c2]/70 hover:border-[#38bdf8] shadow-[0_0_12px_rgba(10,102,194,0.2)] hover:shadow-[0_0_20px_rgba(56,189,248,0.4)] text-center flex flex-col items-center gap-2 transition-all text-white group"
+                className="p-4 rounded-xl bg-[#0a66c2]/15 hover:bg-[#0a66c2]/25 border border-[#38bdf8]/40 hover:border-[#38bdf8] text-center flex flex-col items-center gap-2 transition-all text-white group"
               >
-                <LinkedinIcon className="w-8 h-8 text-[#38bdf8] group-hover:text-white transition-colors" />
-                <span className="text-xs font-mono font-bold tracking-wider">LINKEDIN</span>
+                <LinkedinIcon className="w-7 h-7 text-[#38bdf8]" />
+                <span className="text-xs font-mono font-bold">LinkedIn</span>
               </a>
 
               <a
                 href={portfolioData.personal.cvUrl}
                 download="Sindid_Arafat_CV.pdf"
                 onClick={() => sound.playJarvisChirp()}
-                className="p-4 rounded-xl bg-slate-950 hover:bg-slate-900 border-2 border-amber-500/50 hover:border-amber-400 shadow-[0_0_12px_rgba(251,191,36,0.12)] hover:shadow-[0_0_20px_rgba(251,191,36,0.35)] text-center flex flex-col items-center gap-2 transition-all text-white group"
+                className="p-4 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/35 hover:border-amber-400 text-center flex flex-col items-center gap-2 transition-all text-white group"
               >
-                <FileText className="w-8 h-8 text-amber-400 group-hover:text-amber-300 transition-colors" />
-                <span className="text-xs font-mono font-bold tracking-wider">CV (PDF)</span>
+                <FileText className="w-7 h-7 text-amber-400" />
+                <span className="text-xs font-mono font-bold">CV (PDF)</span>
               </a>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Encrypted Transmission Form (7 cols) */}
+        {/* Right Column: Clean Email Form (7 cols) */}
         <div className="lg:col-span-7 flex flex-col">
-          <div className="p-6 sm:p-8 rounded-2xl bg-[#0b1021]/90 border border-arc/30 backdrop-blur-md hud-corner-box shadow-[0_0_30px_rgba(0,240,255,0.08)] flex-1 flex flex-col justify-between">
-            <div className="flex flex-wrap items-center justify-between gap-2 pb-4 mb-6 border-b border-slate-800">
+          <div className="p-6 sm:p-8 rounded-2xl clean-surface flex-1 flex flex-col justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-4 mb-6 border-b border-white/[0.08]">
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold font-display text-white">
-                  TRANSMIT DIRECT MESSAGE
+                  Send a Direct Message
                 </h3>
-                <p className="text-xs font-mono text-slate-400 mt-0.5">
-                  DISPATCH PROTOCOL // DELIVERS DIRECTLY TO SINDID ARAFAT
+                <p className="text-xs font-sans text-slate-400 mt-0.5">
+                  Delivers straight to {portfolioData.personal.email}
                 </p>
               </div>
-              <span className="text-xs font-mono px-2.5 py-1 rounded bg-slate-900 border border-arc/30 text-arc">
-                SECURE 256-BIT
+              <span className="text-xs font-mono px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-400/25 text-emerald-300">
+                Direct Inbox Delivery
               </span>
             </div>
 
             {submitted ? (
-              <div className="py-12 text-center space-y-4 font-mono">
-                <div className="w-14 h-14 rounded-full bg-emerald-500/20 border-2 border-emerald-400 text-emerald-400 mx-auto flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.3)]">
-                  <Check className="w-7 h-7 animate-pulse" />
+              <div className="py-12 text-center space-y-4">
+                <div className="w-14 h-14 rounded-full bg-emerald-500/15 border border-emerald-400/50 text-emerald-400 mx-auto flex items-center justify-center">
+                  <Check className="w-7 h-7" />
                 </div>
                 <h4 className="text-lg font-bold font-display text-white">
-                  EMAIL SENT TO SINDID ARAFAT!
+                  Email Sent to Sindid Arafat
                 </h4>
-                <p className="text-xs font-sans text-slate-300 max-w-md mx-auto leading-relaxed">
-                  Your message has been delivered to <strong className="text-arc">{portfolioData.personal.email}</strong> with subject <strong>&ldquo;Email from Portfolio&rdquo;</strong>. Thank you for reaching out!
+                <p className="text-xs sm:text-sm font-sans text-slate-300 max-w-md mx-auto leading-relaxed">
+                  Your message has been delivered to <strong className="text-cyan-300">{portfolioData.personal.email}</strong> with subject <strong>&ldquo;Email from Portfolio&rdquo;</strong>. Thank you for reaching out!
                 </p>
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
-                  className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-arc/40 text-arc text-xs font-mono font-bold transition-all"
+                  className="px-4 py-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 text-white text-xs font-mono font-semibold transition-all"
                 >
-                  SEND ANOTHER MESSAGE
+                  Send Another Message
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 {errorMsg && (
-                  <div className="p-3.5 rounded-xl bg-red-950/60 border border-red-500/50 text-xs font-sans text-red-200 space-y-2">
+                  <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-400/35 text-xs font-sans text-red-200 space-y-2">
                     <div className="flex items-start gap-2">
                       <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
                       <span>{errorMsg}</span>
                     </div>
                     <a
                       href={`mailto:${portfolioData.personal.email}?subject=${encodeURIComponent('Email from Portfolio')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-mono text-xs font-bold"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-500 hover:bg-red-400 text-white font-mono text-xs font-bold"
                     >
                       <Mail className="w-3.5 h-3.5" />
-                      OPEN IN EMAIL APP INSTEAD
+                      Open in Email App Instead
                     </a>
                   </div>
                 )}
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="text-xs font-mono text-slate-300">
-                      IDENTIFIER / YOUR NAME *
-                    </label>
+                  <div className="space-y-1.5">
+                    <label htmlFor="contact-name" className="text-xs font-mono text-slate-300">Your Name *</label>
                     <input
+                      id="contact-name"
                       type="text"
                       name="name"
                       required
                       disabled={sending}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. Alex Rahman / Sarah Jenkins"
-                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm font-sans text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors disabled:opacity-50"
+                      placeholder="e.g. Alex Rahman"
+                      className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm font-sans text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors disabled:opacity-50"
                     />
                   </div>
 
-                  <div className="space-y-1">
-                    <label className="text-xs font-mono text-slate-300">
-                      COMM CHANNEL / YOUR EMAIL *
-                    </label>
+                  <div className="space-y-1.5">
+                    <label htmlFor="contact-email" className="text-xs font-mono text-slate-300">Your Email *</label>
                     <input
+                      id="contact-email"
                       type="email"
                       name="email"
                       required
                       disabled={sending}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="e.g. collaborator@enterprise.com"
-                      className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm font-sans text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors disabled:opacity-50"
+                      placeholder="e.g. you@company.com"
+                      className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm font-sans text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors disabled:opacity-50"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-xs font-mono text-slate-300">
-                    TRANSMISSION PAYLOAD / MESSAGE *
-                  </label>
+                <div className="space-y-1.5">
+                  <label htmlFor="contact-message" className="text-xs font-mono text-slate-300">Message *</label>
                   <textarea
+                    id="contact-message"
                     name="message"
                     required
                     disabled={sending}
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Describe your project, role, requirements, or proposed collaboration..."
-                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm font-sans text-white placeholder-slate-600 focus:outline-none focus:border-arc transition-colors resize-none disabled:opacity-50"
+                    placeholder="Share details about your role, project, or collaboration..."
+                    className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm font-sans text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors resize-none disabled:opacity-50"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={sending}
-                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-red-600 via-amber-600 to-cyan-500 hover:from-red-500 hover:to-cyan-400 text-white font-mono font-bold text-xs tracking-wider shadow-[0_0_25px_rgba(220,38,38,0.4)] flex items-center justify-center gap-2 transition-all transform hover:scale-[1.01] active:scale-[0.99] border border-amber-300/40 disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full py-3.5 px-6 rounded-xl bg-white hover:bg-cyan-300 text-slate-950 font-mono font-bold text-xs tracking-wide flex items-center justify-center gap-2 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {sending ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>SENDING TO {portfolioData.personal.email.toUpperCase()}...</span>
+                      <span>Sending to {portfolioData.personal.email}...</span>
                     </>
                   ) : (
                     <>
                       <Send className="w-4 h-4" />
-                      <span>TRANSMIT ENCRYPTED MESSAGE // DISPATCH</span>
+                      <span>Send Message</span>
                     </>
                   )}
                 </button>
@@ -642,22 +633,19 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
         </div>
       </div>
 
-      {/* Row 2: BIGGER, VISUALLY APPEALING CRIXUS INTERACTIVE CLI TERMINAL (AT THE VERY END OF THE WEBSITE) */}
-      <div id="crixus-terminal" className="mt-12 rounded-2xl bg-[#040711] border-2 border-arc/50 shadow-[0_0_45px_rgba(0,240,255,0.16)] overflow-hidden hud-corner-box">
-        {/* Terminal Header Bar */}
-        <div className="px-5 py-3.5 bg-gradient-to-r from-slate-950 via-[#0a1328] to-slate-950 border-b border-arc/30 flex flex-wrap items-center justify-between gap-3">
+      {/* Row 2: Clean, Spacious Crixus Interactive CLI Terminal */}
+      <div id="crixus-terminal" className="mt-10 rounded-2xl clean-surface overflow-hidden">
+        <div className="px-5 py-3.5 bg-white/[0.03] border-b border-white/[0.08] flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444]" />
-              <span className="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_8px_#fbbf24]" />
-              <span className="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
             </div>
-            <div className="h-4 w-px bg-slate-700 hidden sm:block" />
-            <div>
-              <div className="text-sm sm:text-base font-display font-bold text-white tracking-wider flex items-center gap-2">
-                <span className="text-arc">CRIXUS</span>
-                <span className="text-slate-400 text-xs font-mono">// INTERACTIVE ASSISTANT CLI</span>
-              </div>
+            <div className="h-4 w-px bg-white/15 hidden sm:block" />
+            <div className="text-sm sm:text-base font-display font-bold text-white flex items-center gap-2">
+              <span className="text-cyan-300">Crixus</span>
+              <span className="text-slate-400 text-xs font-mono font-normal">· Personal Assistant CLI</span>
             </div>
           </div>
 
@@ -669,10 +657,10 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
                   sound.playJarvisChirp();
                   onOpenCertificates();
                 }}
-                className="px-3 py-1.5 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/50 text-amber-300 text-xs font-mono font-bold flex items-center gap-1.5 transition-all"
+                className="px-3 py-1.5 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/35 text-amber-300 text-xs font-mono font-semibold flex items-center gap-1.5 transition-colors"
               >
                 <Award className="w-3.5 h-3.5" />
-                <span>OPEN CERTIFICATES PAGE</span>
+                <span>Certificates Page</span>
               </button>
             )}
             {onReplayWelcome && (
@@ -682,26 +670,24 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
                   sound.playJarvisChirp();
                   onReplayWelcome();
                 }}
-                className="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-arc/40 text-arc text-xs font-mono font-bold flex items-center gap-1.5 transition-all"
+                className="px-3 py-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 text-slate-200 text-xs font-mono font-semibold flex items-center gap-1.5 transition-colors"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>CRIXUS INTRO</span>
+                <RotateCcw className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Crixus Intro</span>
               </button>
             )}
           </div>
         </div>
 
-        {/* Quick-Tap Command Bar */}
-        <div className="px-5 py-3 bg-slate-950/90 border-b border-slate-800/90 flex items-center gap-2 flex-wrap">
-          <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider mr-1">
-            QUICK QUERIES:
-          </span>
+        {/* Quick Query Bar */}
+        <div className="px-5 py-3 bg-white/[0.015] border-b border-white/[0.07] flex items-center gap-2 flex-wrap">
+          <span className="text-xs font-mono text-slate-400 mr-1">Quick queries:</span>
           {quickCommands.map(cmd => (
             <button
               key={cmd}
               type="button"
               onClick={() => runCommand(cmd)}
-              className="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-arc/20 border border-slate-700 hover:border-arc text-xs font-mono text-slate-200 hover:text-arc transition-all"
+              className="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-cyan-400/15 border border-white/10 hover:border-cyan-400/40 text-xs font-mono text-slate-200 hover:text-cyan-300 transition-colors"
             >
               {cmd}
             </button>
@@ -711,33 +697,33 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
         {/* Expanded Scrollable Terminal Output Area */}
         <div
           ref={terminalScrollRef}
-          className="h-[340px] sm:h-[400px] overflow-y-auto p-5 sm:p-6 space-y-4 bg-[radial-gradient(ellipse_at_top,rgba(0,240,255,0.05),transparent_70%)]"
+          className="h-[340px] sm:h-[400px] overflow-y-auto p-5 sm:p-6 space-y-4 bg-[#07090e]"
         >
           {terminalHistory.map((item, idx) => (
             <div
               key={idx}
-              className="rounded-xl bg-slate-950/80 border border-slate-800/90 p-4 space-y-2 shadow-sm"
+              className="rounded-xl bg-white/[0.03] border border-white/[0.07] p-4 space-y-2"
             >
               <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-mono">
-                <span className="text-amber-400 font-bold">crixus@sindid-portfolio:~$</span>
-                <span className="text-arc font-semibold break-all">{item.cmd}</span>
+                <span className="text-amber-300 font-semibold">crixus@portfolio:~$</span>
+                <span className="text-cyan-300 font-medium break-all">{item.cmd}</span>
               </div>
 
               {item.title && (
                 <div
-                  className={`text-xs sm:text-sm font-display font-bold tracking-wide pt-1 ${
+                  className={`text-xs sm:text-sm font-display font-bold pt-0.5 ${
                     item.accent === 'amber'
-                      ? 'text-amber-400'
+                      ? 'text-amber-300'
                       : item.accent === 'emerald'
                         ? 'text-emerald-400'
-                        : 'text-arc'
+                        : 'text-cyan-300'
                   }`}
                 >
                   {item.title}
                 </div>
               )}
 
-              <div className="pl-3 border-l-2 border-arc/40 space-y-1.5 text-xs sm:text-sm font-sans text-slate-200 leading-relaxed break-words">
+              <div className="pl-3 border-l-2 border-cyan-400/35 space-y-1.5 text-xs sm:text-sm font-sans text-slate-300 leading-relaxed break-words">
                 {item.lines.map((line, i) => (
                   <div key={i}>{line}</div>
                 ))}
@@ -749,23 +735,23 @@ export const ContactTerminal: React.FC<ContactTerminalProps> = ({
         {/* Command Input Row */}
         <form
           onSubmit={handleCommandSubmit}
-          className="px-5 py-4 bg-slate-950 border-t border-arc/30 flex items-center gap-3"
+          className="px-5 py-3.5 bg-white/[0.02] border-t border-white/[0.08] flex items-center gap-3"
         >
-          <span className="text-amber-400 font-mono font-bold text-sm shrink-0">
+          <span className="text-cyan-400 font-mono font-bold text-sm shrink-0">
             crixus &gt;
           </span>
           <input
             type="text"
             value={terminalInput}
             onChange={(e) => setTerminalInput(e.target.value)}
-            placeholder="Ask Crixus anything or type a command (e.g. about, experience, bizception, certificates, linkedin)..."
+            placeholder="Ask Crixus anything or type a command (e.g. about, thesis, experience, bizception, certificates)..."
             className="w-full bg-transparent text-white focus:outline-none placeholder-slate-500 text-sm font-sans"
           />
           <button
             type="submit"
-            className="px-4 py-2 rounded-lg bg-arc hover:bg-cyan-300 text-slate-950 font-mono font-bold text-xs tracking-wider transition-all shrink-0"
+            className="px-4 py-2 rounded-lg bg-white hover:bg-cyan-300 text-slate-950 font-mono font-bold text-xs transition-colors shrink-0"
           >
-            RUN
+            Run
           </button>
         </form>
       </div>

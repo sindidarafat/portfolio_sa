@@ -445,35 +445,24 @@ export const ArcGridGame: React.FC = () => {
   const dayLabels = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
 
   return (
-    <section id="arc-matrix" className="py-16 px-4 md:px-8 relative max-w-7xl mx-auto">
-      {/* Background glow and HUD framing */}
-      <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-gradient-to-b from-arc/10 to-transparent blur-3xl pointer-events-none" />
-
-      {/* Header bar */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-arc/20">
+    <section id="arc-matrix" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 relative max-w-7xl mx-auto section-divider">
+      {/* Clean Header bar */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8">
         <div>
-          <div className="flex items-center gap-3 mb-2">
-            <span className="px-2.5 py-0.5 rounded text-xs font-mono font-bold tracking-wider bg-arc/20 text-arc border border-arc/40 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-arc animate-ping" />
-              LIVE HUD // TELEMETRY
-            </span>
-            <span className="text-xs font-mono text-slate-400">
-              INTERACTIVE GRID DEFENDER
-            </span>
+          <div className="text-xs font-mono uppercase tracking-[0.2em] text-cyan-400 font-semibold mb-2">
+            Activity &amp; Interactive Mini-Game
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white font-display flex items-center gap-3">
-            <span>GITHUB MATRIX & GRID DEFENDER</span>
-            <span className="text-xs font-mono px-2 py-1 rounded bg-slate-800 text-amber-400 border border-amber-500/30">
-              v2.8 INTERACTIVE
-            </span>
+          <h2 className="text-3xl sm:text-4xl tracking-normal text-white font-display">
+            GitHub Matrix &amp; Grid Defender
           </h2>
-          <p className="text-slate-400 text-sm max-w-2xl mt-1 font-sans">
-            Interactive visualization of GitHub contribution commits across all active cycles. Switch years, design custom commit art, or initialize the <strong>Grid Defender Arcade</strong> to protect the repository grid from rogue bugs!
+          <div className="h-[2px] w-16 rounded-full bg-gradient-to-r from-red-500 via-amber-400 to-cyan-400 mt-3 mb-3" />
+          <p className="text-slate-400 text-sm sm:text-base max-w-2xl font-sans leading-relaxed">
+            All-time GitHub contributions across 2024–2026. Inspect commits by year, paint custom pixel art, or play <strong>Grid Defender</strong> right on the heatmap!
           </p>
         </div>
 
         {/* View & Game Mode Selector */}
-        <div className="flex items-center gap-3 flex-wrap">
+        <div className="flex items-center gap-2.5 flex-wrap">
           {mode === 'matrix' ? (
             <>
               <button
@@ -481,79 +470,72 @@ export const ArcGridGame: React.FC = () => {
                   setIsPaintMode(!isPaintMode);
                   sound.playJarvisChirp();
                 }}
-                className={`px-3 py-1.5 rounded text-xs font-mono flex items-center gap-1.5 transition-all border ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-mono font-semibold flex items-center gap-1.5 transition-all border ${
                   isPaintMode
-                    ? 'bg-amber-500/20 text-amber-300 border-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.3)]'
-                    : 'bg-slate-900/80 text-slate-300 border-slate-700 hover:border-slate-500'
+                    ? 'bg-amber-500/20 text-amber-300 border-amber-400/60'
+                    : 'bg-white/[0.04] text-slate-300 border-white/10 hover:border-white/25 hover:text-white'
                 }`}
               >
                 <Sparkles className="w-3.5 h-3.5" />
-                {isPaintMode ? 'PAINT MODE ACTIVE' : 'DRAW COMMIT ART'}
+                {isPaintMode ? 'Paint Mode Active' : 'Draw Commit Art'}
               </button>
 
               <button
                 onClick={startGame}
-                className="px-4 py-2 rounded text-xs font-mono font-bold tracking-wider bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white shadow-[0_0_20px_rgba(220,38,38,0.5)] flex items-center gap-2 border border-amber-400/50 transition-all transform hover:scale-105 active:scale-95"
+                className="px-4 py-2 rounded-xl text-xs font-mono font-bold bg-white hover:bg-cyan-300 text-slate-950 flex items-center gap-2 transition-all transform hover:scale-[1.02]"
               >
                 <Play className="w-3.5 h-3.5 fill-current" />
-                PLAY GRID DEFENDER GAME
+                Play Grid Defender
               </button>
             </>
           ) : (
             <div className="flex items-center gap-2">
               <button
                 onClick={stopGame}
-                className="px-3 py-1.5 rounded text-xs font-mono bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 flex items-center gap-1.5"
+                className="px-3.5 py-2 rounded-xl text-xs font-mono bg-white/[0.05] hover:bg-white/[0.1] text-slate-200 border border-white/15 flex items-center gap-1.5"
               >
                 <Eye className="w-3.5 h-3.5" />
-                RETURN TO HEATMAP
+                Back to Heatmap
               </button>
               <button
                 onClick={startGame}
-                className="px-3 py-1.5 rounded text-xs font-mono bg-red-600/30 text-red-300 border border-red-500/50 hover:bg-red-600/40 flex items-center gap-1.5"
+                className="px-3.5 py-2 rounded-xl text-xs font-mono bg-red-500/20 text-red-200 border border-red-400/40 hover:bg-red-500/30 flex items-center gap-1.5"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
-                RESTART MISSION
+                Restart
               </button>
             </div>
           )}
         </div>
       </div>
 
-      {/* Main HUD Terminal Card */}
-      <div className={`mt-6 rounded-xl border relative transition-all duration-300 ${
+      {/* Main Matrix Card */}
+      <div className={`rounded-2xl border relative transition-all duration-300 ${
         unibeamActive 
-          ? 'border-white bg-cyan-950/90 shadow-[0_0_80px_#00f0ff]' 
+          ? 'border-white bg-cyan-950/90 shadow-[0_0_60px_rgba(34,211,238,0.6)]' 
           : mode === 'combat' 
-            ? 'border-red-500/40 bg-[#090d19]/90 shadow-[0_0_35px_rgba(220,38,38,0.25)]' 
-            : 'border-arc/30 bg-[#0a0f1d]/90 shadow-[0_0_30px_rgba(0,240,255,0.1)]'
+            ? 'border-red-500/45 bg-[#0c101a]/95 shadow-[0_0_30px_rgba(239,68,68,0.16)]' 
+            : 'border-white/[0.08] bg-[#0d1117]/95'
       }`}>
         
-        {/* Top telemetry status bar inside card */}
-        <div className="px-5 py-3 border-b border-arc/20 bg-slate-950/60 rounded-t-xl flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <span className={`w-2 h-2 rounded-full ${mode === 'combat' ? 'bg-red-500 animate-ping' : 'bg-arc animate-pulse'}`} />
-              <span className="font-bold text-white tracking-wider">
-                {mode === 'combat'
-                  ? 'COMBAT ENGAGEMENT // BUG SWARM'
-                  : selectedYear === 'ALL'
-                    ? 'ALL-TIME CONTRIBUTION OVERVIEW (2024 – 2026)'
-                    : `${selectedYear} CONTRIBUTION OVERVIEW`}
-              </span>
-            </div>
-            <span className="hidden sm:inline text-slate-500">|</span>
-            <span className="text-slate-400 hidden sm:inline">
-              COORDINATES: <span className="text-arc">23.8103° N, 90.4125° E</span>
+        {/* Clean Card Header Strip */}
+        <div className="px-5 py-3.5 border-b border-white/[0.08] bg-white/[0.02] rounded-t-2xl flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
+          <div className="flex items-center gap-2.5">
+            <span className={`w-2 h-2 rounded-full ${mode === 'combat' ? 'bg-red-500 animate-ping' : 'bg-emerald-400'}`} />
+            <span className="font-semibold text-white">
+              {mode === 'combat'
+                ? 'Grid Defender · Active Wave'
+                : selectedYear === 'ALL'
+                  ? 'All-Time Contributions (2024 – 2026)'
+                  : `${selectedYear} Contributions`}
             </span>
           </div>
 
           {/* Right side options: Theme selector or Game Stats */}
           {mode === 'matrix' ? (
             <div className="flex items-center gap-2 flex-wrap">
-              {/* Theme selector */}
               <div className="flex items-center gap-1.5">
-                <span className="text-slate-500 text-[10px]">THEME:</span>
+                <span className="text-slate-400 text-[11px]">Palette:</span>
                 {(['cyan', 'crimson', 'matrix', 'violet'] as const).map(theme => (
                   <button
                     key={theme}
@@ -563,7 +545,7 @@ export const ArcGridGame: React.FC = () => {
                     }}
                     title={`Theme: ${theme}`}
                     className={`w-4 h-4 rounded-full border transition-all ${
-                      colorTheme === theme ? 'scale-125 border-white ring-2 ring-arc/50' : 'opacity-60 border-transparent hover:opacity-100'
+                      colorTheme === theme ? 'scale-125 border-white ring-2 ring-cyan-400/50' : 'opacity-65 border-transparent hover:opacity-100'
                     } ${
                       theme === 'cyan' ? 'bg-cyan-400' : theme === 'crimson' ? 'bg-red-500' : theme === 'matrix' ? 'bg-emerald-400' : 'bg-purple-400'
                     }`}
@@ -572,24 +554,23 @@ export const ArcGridGame: React.FC = () => {
               </div>
             </div>
           ) : (
-            /* Combat Mode Telemetry Stats */
-            <div className="flex items-center gap-6 flex-wrap">
+            <div className="flex items-center gap-5 flex-wrap">
               <div className="flex items-center gap-1.5 text-white">
                 <Trophy className="w-3.5 h-3.5 text-amber-400" />
-                <span>SCORE: <strong className="text-amber-400 text-sm">{score}</strong></span>
+                <span>Score: <strong className="text-amber-300 text-sm">{score}</strong></span>
               </div>
-              <div className="flex items-center gap-1.5 text-slate-400">
-                <span>BEST: <strong className="text-white">{highScore}</strong></span>
+              <div className="text-slate-400">
+                Best: <strong className="text-white">{highScore}</strong>
               </div>
               <div className="flex items-center gap-1.5">
                 <Flame className={`w-3.5 h-3.5 ${combo > 1 ? 'text-red-400 animate-bounce' : 'text-slate-500'}`} />
                 <span className={combo > 1 ? 'text-red-400 font-bold' : 'text-slate-400'}>
-                  {combo}x COMBO
+                  {combo}x Combo
                 </span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Shield className="w-3.5 h-3.5 text-arc" />
-                <span className="text-slate-300">WAVE {wave}</span>
+                <Shield className="w-3.5 h-3.5 text-cyan-400" />
+                <span className="text-slate-300">Wave {wave}</span>
               </div>
             </div>
           )}
@@ -597,54 +578,49 @@ export const ArcGridGame: React.FC = () => {
 
         {/* Combat Announcement Banner */}
         {mode === 'combat' && (
-          <div className="bg-red-950/40 border-b border-red-500/30 px-4 sm:px-5 py-2 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-red-200">
+          <div className="bg-red-500/10 border-b border-red-500/25 px-4 sm:px-5 py-2 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-red-200">
             <span className="flex items-center gap-2">
               <Zap className="w-3.5 h-3.5 text-amber-400 animate-pulse shrink-0" />
               {announcement}
             </span>
             <div className="flex flex-wrap items-center gap-3">
-              <span>COMMITS SECURED: <strong className="text-arc">{commitsSecured}</strong></span>
+              <span>Secured: <strong className="text-cyan-300">{commitsSecured}</strong></span>
               {unibeamReady && (
                 <button
                   onClick={triggerUnibeam}
-                  className="px-2.5 py-0.5 rounded bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-extrabold text-[11px] animate-pulse shadow-[0_0_15px_#00f0ff]"
+                  className="px-2.5 py-0.5 rounded bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-[11px] animate-pulse"
                 >
-                  ⚡ FIRE OVERDRIVE [ENTER]
+                  ⚡ Fire Overdrive [Enter]
                 </button>
               )}
             </div>
           </div>
         )}
 
-        {/* Energy Core Bar (Active in Combat or Heatmap) */}
-        <div className="px-4 sm:px-5 pt-3 pb-2 flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 bg-slate-900/30 text-xs font-mono">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-slate-400">ENERGY CORE:</span>
-            <div className="w-32 sm:w-64 h-3 bg-slate-950 rounded-full overflow-hidden border border-arc/30 p-0.5 relative">
-              <div
-                className={`h-full rounded-full transition-all duration-300 ${
-                  arcCharge >= 100 
-                    ? 'bg-gradient-to-r from-cyan-400 via-amber-300 to-white animate-pulse shadow-[0_0_15px_#00f0ff]' 
-                    : 'bg-gradient-to-r from-blue-600 via-cyan-500 to-arc'
-                }`}
-                style={{ width: `${arcCharge}%` }}
-              />
+        {/* Energy Charge Bar (Shown cleanly during Combat Mode or Overcharged) */}
+        {mode === 'combat' && (
+          <div className="px-4 sm:px-5 pt-3 pb-2.5 flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.06] bg-black/20 text-xs font-mono">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-slate-400">Overdrive Charge:</span>
+              <div className="w-32 sm:w-56 h-2.5 bg-slate-900 rounded-full overflow-hidden border border-white/10">
+                <div
+                  className={`h-full rounded-full transition-all duration-300 ${
+                    arcCharge >= 100
+                      ? 'bg-gradient-to-r from-cyan-400 via-amber-300 to-white animate-pulse'
+                      : 'bg-cyan-400'
+                  }`}
+                  style={{ width: `${arcCharge}%` }}
+                />
+              </div>
+              <span className={`font-semibold ${arcCharge >= 100 ? 'text-amber-300' : 'text-cyan-300'}`}>
+                {arcCharge}%
+              </span>
             </div>
-            <span className={`font-bold ${arcCharge >= 100 ? 'text-amber-300 animate-pulse' : 'text-arc'}`}>
-              {arcCharge}% {arcCharge >= 100 ? 'OVERCHARGED' : 'STABLE'}
-            </span>
+            <div className="text-slate-400 text-[11px]">
+              336+ commits tracked across 2024–2026
+            </div>
           </div>
-
-          <div className="text-slate-400 text-[11px]">
-            {selectedYear === 'ALL'
-              ? '336+ contributions across 2024–2026 (All-Time)'
-              : selectedYear === '2026'
-                ? '60 contributions in 2026'
-                : selectedYear === '2025'
-                  ? '184 contributions in 2025'
-                  : '92 contributions in 2024'}
-          </div>
-        </div>
+        )}
 
         {/* The GitHub Matrix Canvas / Grid Area + Compact Right-Side Year Strip */}
         <div className="p-4 md:p-6 relative" ref={gridContainerRef}>

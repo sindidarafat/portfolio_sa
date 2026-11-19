@@ -27,8 +27,8 @@ export default {
         }
       },
       fontFamily: {
-        display: ['"Orbitron"', 'sans-serif'],
-        sans: ['"Roboto"', 'sans-serif'],
+        display: ['"Archivo Black"', 'sans-serif'],
+        sans: ['Georgia', '"Times New Roman"', 'serif'],
         mono: ['"Barlow"', 'sans-serif'],
       },
       keyframes: {

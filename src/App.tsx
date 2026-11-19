@@ -84,10 +84,7 @@ export function App() {
         onReopen={() => setWelcomeOpen(true)}
       />
 
-      <div className="relative min-h-screen text-slate-100 flex flex-col font-sans selection:bg-arc selection:text-black overflow-x-hidden">
-        {/* Sci-fi Scanline Overlay */}
-        <div className="fixed inset-0 scanlines pointer-events-none z-40 opacity-30" />
-
+      <div className="relative min-h-screen text-slate-100 flex flex-col font-sans selection:bg-cyan-400 selection:text-slate-950 overflow-x-hidden">
         {/* Navigation HUD */}
         <Navbar currentPage={currentPage} onNavigate={navigateTo} />
 
